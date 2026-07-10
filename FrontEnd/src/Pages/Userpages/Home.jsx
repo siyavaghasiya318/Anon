@@ -1,0 +1,40 @@
+import React from 'react'
+import Slider from '../../Components/UserComponents/Slider'
+import Categories from '../../Components/UserComponents/Categories'
+import BestSeller from '../../Components/UserComponents/BestSeller'
+import Products from '../../Components/UserComponents/Products'
+import NewProducst from '../../Components/UserComponents/NewProducst'
+import RecomandedPro from '../../Components/UserComponents/RecomandedPro'
+import Testimonial from '../../Components/UserComponents/Services/Testimonial'
+import Collection from '../../Components/UserComponents/Services/Collection'
+import Service from '../../Components/UserComponents/Services/Service'
+import TotalProducts from '../../Components/UserComponents/AllCategories/TotalProducts'
+
+
+function Home() {
+  return (
+    <div className='w-[90%] m-auto'>
+        <Slider/>
+        <TotalProducts/>
+        <div className="flex mt-20 gap-10">
+          <div className="w-[40%]">
+            <Categories/>
+            <BestSeller/>
+          </div>
+          <div className="">
+            <div className="w-full"><Products/></div>
+            <div className="w-full"><NewProducst/></div>
+            <div className="w-full"><RecomandedPro/></div>
+          </div>
+        </div>
+        <div className="flex my-20 w-full m-auto">
+          <div className="w-[45%]"><Testimonial/></div>
+          <div className="w-full mx-10 "><Collection/></div>
+          <div className="w-[45%]"><Service/></div>
+          <div></div>
+        </div>
+    </div>
+  )
+}
+
+export default Home
