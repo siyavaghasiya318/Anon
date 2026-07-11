@@ -10,7 +10,8 @@ export const UserContext = createContext()
 export const UserProvider = ({ children }) => {
 
 
-
+    
+    
     const [Isopen, SetIsopen] = useState(false)
     const [islogin, Setislogin] = useState("login")
     const [Auth, SetAuth] = useState(false)

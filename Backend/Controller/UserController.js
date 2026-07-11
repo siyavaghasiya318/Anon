@@ -397,7 +397,7 @@ export const verifyOtp = async (req, res) => {
                 success: false
             })
         }
-
+        
         res.json({
             message: "OTP Verified",
             success: true

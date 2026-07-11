@@ -30,7 +30,7 @@ const corsOrigin = [
 
 app.use(cors({
     origin: corsOrigin,
-    credentials: true
+    credentials:true
 }))
 
 
