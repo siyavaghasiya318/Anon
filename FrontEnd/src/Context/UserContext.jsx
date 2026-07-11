@@ -105,7 +105,7 @@ export const UserProvider = ({ children }) => {
 
     const emailsent = async () => {
         try {
-            const { data } = await axios.post("http://localhost:5000/api/user/email", { email })
+            const { data } = await axios.post("https://anon-ksvj.onrender.com/api/user/email", { email })
             if (data.success) {
                 setSelect("otpGenerate")
             }
@@ -117,7 +117,7 @@ export const UserProvider = ({ children }) => {
     }
     const sendOtp = async () => {
         try {
-            const { data } = await axios.post("http://localhost:5000/api/user/otp", { email, otp }, { withCredentials: true })
+            const { data } = await axios.post("https://anon-ksvj.onrender.com/api/user/otp", { email, otp }, { withCredentials: true })
             console.log(data, "otp");
             if (data.success) {
                 setSelect("resetPassword")
@@ -131,7 +131,7 @@ export const UserProvider = ({ children }) => {
 
     const ResetPassword = async () => {
         try {
-            const { data } = await axios.post("http://localhost:5000/api/user/resetpassword", { email, password }, { withCredentials: true })
+            const { data } = await axios.post("https://anon-ksvj.onrender.com/api/user/resetpassword", { email, password }, { withCredentials: true })
             console.log(data, "otp");
             if (data.success) {
                 toast.success(data.message)
@@ -221,7 +221,7 @@ export const UserProvider = ({ children }) => {
 
         try {
 
-            const { data } = await axios.post("http://localhost:5000/api/useraddress/address", addressForm, { withCredentials: true })
+            const { data } = await axios.post("https://anon-ksvj.onrender.com/api/useraddress/address", addressForm, { withCredentials: true })
             // console.log(data);
 
             if (data.success) {
@@ -248,7 +248,7 @@ export const UserProvider = ({ children }) => {
 
     const GetAddress = async () => {
         try {
-            const { data } = await axios.get("http://localhost:5000/api/useraddress/getaddress", { withCredentials: true })
+            const { data } = await axios.get("https://anon-ksvj.onrender.com/api/useraddress/getaddress", { withCredentials: true })
             // console.log(data.address);
             setShowAddress(data.address)
 
@@ -260,7 +260,7 @@ export const UserProvider = ({ children }) => {
 
     const RemoveAddress = async (addressid) => {
         try {
-            const { data } = await axios.delete("http://localhost:5000/api/useraddress/delete", { data: { addressid }, withCredentials: true })
+            const { data } = await axios.delete("https://anon-ksvj.onrender.com/api/useraddress/delete", { data: { addressid }, withCredentials: true })
             // console.log(data);
             if (data.success) {
                 GetAddress();
@@ -414,7 +414,7 @@ export const UserProvider = ({ children }) => {
 
         try {
 
-            const { data } = await axios.post("http://localhost:5000/api/product/addproduct", ProductData, { withCredentials: true })
+            const { data } = await axios.post("https://anon-ksvj.onrender.com/api/product/addproduct", ProductData, { withCredentials: true })
             if (data.success) {
                 toast.success(data.message)
                 setSubmitLoading(flase)
@@ -525,7 +525,7 @@ export const UserProvider = ({ children }) => {
 
     const GetProducts = async () => {
         try {
-            const { data } = await axios.get("http://localhost:5000/api/product/getproducts", { withCredentials: true })
+            const { data } = await axios.get("https://anon-ksvj.onrender.com/api/product/getproducts", { withCredentials: true })
             setGetProducts(data.product)
 
         } catch (error) {
@@ -558,7 +558,7 @@ const HandlePassword = (e) => {
 
     const NewPassword = async () => {
         try {
-            const { data } = await axios.put("http://localhost:5000/api/user/changepassword", passwordData, { withCredentials: true })
+            const { data } = await axios.put("https://anon-ksvj.onrender.com/api/user/changepassword", passwordData, { withCredentials: true })
 
             if (data.success) {
                 toast.success(data.message);
@@ -585,7 +585,7 @@ const HandlePassword = (e) => {
         try {
 
 
-            const { data } = await axios.post(`http://localhost:5000/api/user/${islogin}`, UserForm, { withCredentials: true })
+            const { data } = await axios.post(`https://anon-ksvj.onrender.com/api/user/${islogin}`, UserForm, { withCredentials: true })
             // console.log(data);
 
             if (data.success) {
@@ -615,7 +615,7 @@ const HandlePassword = (e) => {
 
     const GetProfile = async () => {
         try {
-            const { data } = await axios.get("http://localhost:5000/api/user/getprofile", { withCredentials: true })
+            const { data } = await axios.get("https://anon-ksvj.onrender.com/api/user/getprofile", { withCredentials: true })
 
             if (data.success) {
                 SetProfile(data.user)
@@ -631,7 +631,7 @@ const HandlePassword = (e) => {
 
     const UpdateUser = async (item) => {
         try {
-            const { data } = await axios.put("http://localhost:5000/api/user/updateuser", { withCredentials: true })
+            const { data } = await axios.put("https://anon-ksvj.onrender.com/api/user/updateuser", { withCredentials: true })
             // console.log(data);
             SetUserForm({
                 name: item.name,
@@ -645,7 +645,7 @@ const HandlePassword = (e) => {
     }
     const UserLogout = async () => {
         try {
-            const { data } = await axios.post("http://localhost:5000/api/user/logout", {}, { withCredentials: true })
+            const { data } = await axios.post("https://anon-ksvj.onrender.com/api/user/logout", {}, { withCredentials: true })
             // console.log(data);
 
             SetshowUsers(data.users)
@@ -662,7 +662,7 @@ const HandlePassword = (e) => {
 
     const Userdelete = async (item) => {
         try {
-            const { data } = await axios.delete("http://localhost:5000/api/user/deleteuser", { withCredentials: true })
+            const { data } = await axios.delete("https://anon-ksvj.onrender.com/api/user/deleteuser", { withCredentials: true })
             // console.log(data);
 
         } catch (error) {
@@ -687,7 +687,7 @@ const HandlePassword = (e) => {
 
         try {
 
-            const { data } = await axios.post("http://localhost:5000/api/seller/registerseller", Seller, { withCredentials: true })
+            const { data } = await axios.post("https://anon-ksvj.onrender.com/api/seller/registerseller", Seller, { withCredentials: true })
 
             if (data.success) {
                 navigate('/seller')
@@ -716,7 +716,7 @@ const HandlePassword = (e) => {
 
     const GetSellerdetails = async () => {
         try {
-            const { data } = await axios.get("http://localhost:5000/api/seller/getseller", { withCredentials: true })
+            const { data } = await axios.get("https://anon-ksvj.onrender.com/api/seller/getseller", { withCredentials: true })
 
 
             if (data.success) {
@@ -733,7 +733,7 @@ const HandlePassword = (e) => {
 
     const GetAllUsers = async () => {
         try {
-            const { data } = await axios.get("http://localhost:5000/api/user/getusers", { withCredentials: true })
+            const { data } = await axios.get("https://anon-ksvj.onrender.com/api/user/getusers", { withCredentials: true })
             SetAllUsers(data.users)
 
         } catch (error) {
@@ -743,7 +743,7 @@ const HandlePassword = (e) => {
 
     const GetAllSellers = async () => {
         try {
-            const { data } = await axios.get("http://localhost:5000/api/user/getsellers", { withCredentials: true })
+            const { data } = await axios.get("https://anon-ksvj.onrender.com/api/user/getsellers", { withCredentials: true })
             SetAllSellers(data.users)
 
         } catch (error) {
@@ -764,7 +764,7 @@ const HandlePassword = (e) => {
     const CartProduct = async (productid, size) => {
 
         try {
-            const { data } = await axios.post("http://localhost:5000/api/cart/addcart", { productid, size }, { withCredentials: true })
+            const { data } = await axios.post("https://anon-ksvj.onrender.com/api/cart/addcart", { productid, size }, { withCredentials: true })
             
             GetCartProduct()
             if (data.success) {
@@ -784,7 +784,7 @@ const HandlePassword = (e) => {
 
     // const GetCartProduct = async() => {
     //     try {
-    //         const { data } = await axios.get("http://localhost:5000/api/cart/getcart", { withCredentials: true })
+    //         const { data } = await axios.get("https://anon-ksvj.onrender.com/api/cart/getcart", { withCredentials: true })
     //         // console.log(data.cart);
 
     //         const cartItem = data.cart[0].item.map((item) => {
@@ -813,7 +813,7 @@ const HandlePassword = (e) => {
         try {
 
             const { data } = await axios.get(
-                "http://localhost:5000/api/cart/getcart",
+                "https://anon-ksvj.onrender.com/api/cart/getcart",
                 { withCredentials: true }
             );
 
@@ -858,7 +858,7 @@ const HandlePassword = (e) => {
 
     const DecQuentity = async (productid, size) => {
         try {
-            const { data } = await axios.post("http://localhost:5000/api/cart/decrease", { productid, size }, { withCredentials: true })
+            const { data } = await axios.post("https://anon-ksvj.onrender.com/api/cart/decrease", { productid, size }, { withCredentials: true })
             
                if(data.success){
                  GetCartProduct()
@@ -874,7 +874,7 @@ const HandlePassword = (e) => {
     //order 
     const Checkoutdata = async () => {
         try {
-            const { data } = await axios.post("http://localhost:5000/api/order/checkout", { addressId: selectedAddressid, paymentMethod }, { withCredentials: true })
+            const { data } = await axios.post("https://anon-ksvj.onrender.com/api/order/checkout", { addressId: selectedAddressid, paymentMethod }, { withCredentials: true })
             if (data.success) {
                 navigate("/profile")
                 GetMyOrderItem()
@@ -889,7 +889,7 @@ const HandlePassword = (e) => {
 
     const GetMyOrderItem = async () => {
         try {
-            const { data } = await axios.get("http://localhost:5000/api/order/myorders", { withCredentials: true })
+            const { data } = await axios.get("https://anon-ksvj.onrender.com/api/order/myorders", { withCredentials: true })
             // console.log("myorders", data.orders);
 
             setfetchOrder(data.orders)
@@ -901,7 +901,7 @@ const HandlePassword = (e) => {
 
     const GetAllOrders = async () => {
         try {
-            const { data } = await axios.get("http://localhost:5000/api/order/getorder", { withCredentials: true })
+            const { data } = await axios.get("https://anon-ksvj.onrender.com/api/order/getorder", { withCredentials: true })
             setShowAllOrders(data.orderdata)
 
         } catch (error) {
@@ -911,7 +911,7 @@ const HandlePassword = (e) => {
 
     const UpdateOrderStatus = async (orderid, orderstatus) => {
         try {
-            const { data } = await axios.put("http://localhost:5000/api/order/update", { orderid, orderstatus }, { withCredentials: true })
+            const { data } = await axios.put("https://anon-ksvj.onrender.com/api/order/update", { orderid, orderstatus }, { withCredentials: true })
             if (data.success) {
                 GetAllOrders()
             }
@@ -923,7 +923,7 @@ const HandlePassword = (e) => {
 
     const GetSellerProducts = async () => {
         try {
-            const { data } = await axios.get("http://localhost:5000/api/product/products", { withCredentials: true })
+            const { data } = await axios.get("https://anon-ksvj.onrender.com/api/product/products", { withCredentials: true })
             setGetSellerProducts(data.products)
 
             console.log("GetSellerProducts", data.products);
