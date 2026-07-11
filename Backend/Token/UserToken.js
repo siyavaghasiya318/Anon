@@ -1,4 +1,6 @@
 import jwt from "jsonwebtoken"
+import dotenv from "dotenv"
+dotenv.config()
 
 export const GenerateToken = (res,id, role)=>{
     try {
@@ -17,4 +19,5 @@ export const GenerateToken = (res,id, role)=>{
         
     }
 }
+    console.log("GenerateToken Secret:", process.env.JWT_SECERETE);
     

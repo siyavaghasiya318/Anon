@@ -24,19 +24,19 @@ function UserProducts({category, gender}) {
 
             <div className=""></div>
             <div className="mb-30">
-                <div className="grid grid-cols-4 gap-6">
+                <div className="grid grid-cols-4 gap-6 ">
                     {filteredProducts?.map((item) => {
                         return (
-                            <div className="group border border-gray-200 rounded-2xl">
-                                <div className="group-hover:shadow-2xl group-duration-300 transition-all">
-                                    <div className=" px-3 py-2  overflow-hidden">
+                            <div className="group border border-red-200   rounded-2xl  ">
+                                <div className="group-hover:shadow-2xl h-full rounded-2xl  group-duration-300 transition-all">
+                                    <div className=" px-3 py-2 ">
                                         <div className="relative overflow-hidden  flex flex-col justify-between">
-                                            <div className="group-hover:hidden  w-full h-full py-3 flex flex-col justify-center items-center m-auto "><img src={item?.images[0]} className="object-cover w-full h-full rounded-lg" alt="" /></div>
-                                            <div className="hidden group-hover:block  w-full h-full py-3 flex flex-col justify-center items-center m-auto"><img src={item?.images[1]} className="object-cover w-full h-full rounded-lg" alt="" /></div>
+                                            <div className="group-hover:hidden  w-full h-55 py-3 flex flex-col justify-center items-center m-auto "><img src={item?.images[0]} className="object-cover w-full h-full rounded-lg" alt="" /></div>
+                                            <div className="hidden group-hover:block w-full h-55 py-3 flex flex-col justify-center items-center m-auto"><img src={item?.images[1]} className="object-cover w-full h-full rounded-lg" alt="" /></div>
                                             <div className="absolute top-2 flex flex-col gap-1 right-[-50px] group-hover:right-[0px] transition-all duration-500">
                                                 <p className="border border-gray-200 bg-white p-1 text-[18px] rounded-sm shadow-2xl"><IoIosHeartEmpty /></p>
                                                 <Link to={`/productdetail/${item._id}`} className="border border-gray-200 bg-white p-1 text-[18px] rounded-sm shadow-2xl "><IoEyeOutline /></Link>
-                                                <p className="border border-gray-200 bg-white p-1 text-[18px] rounded-sm shadow-2xl"><IoBagAddOutline /></p>
+                                                <p onClick={() => CartProduct(item._id,selectedSize)} className="border border-gray-200 cursor-pointer bg-white p-1 text-[18px] rounded-sm shadow-2xl"><IoBagAddOutline /></p>
                                             </div>
                                         </div>
                                         <div className="flex justify-between w-full font- items-center text-[12px] font-semibold">

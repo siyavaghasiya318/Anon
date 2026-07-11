@@ -59,11 +59,19 @@ function UserNavbar() {
 
 
 
-            <div>
+            <div className="">
               {Profile ?
                 (<Link to='/profile' className="bg-[#FF8F9C] font-semibold  text-white border w-10 h-10 flex flex-col  pt-1 items-center rounded-full text-xl">{Profile.name.charAt(0)}</Link>)
                 :
                 (<div onClick={() => SetIsopen(true)} className='bg-[#FF8F9C] cursor-pointer text-white text-[18px] rounded-full px-6 py-2 font-semibold'>Login</div>)
+              }
+            </div>
+
+             <div className="border">
+              {Profile?.role == "seller" || Profile?.role == "admin" ?
+                (<Link to={`/${Profile?.role}`}> {Profile?.role} Panel</Link>)
+                :
+                ("")
               }
             </div>
 

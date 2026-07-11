@@ -54,7 +54,7 @@ export const Addcart = async (req, res) => {
         cart.subtotal = subtotal
 
 
-
+        
         const tax = subtotal * 0.05
         const total = subtotal + tax
 
@@ -97,6 +97,8 @@ export const GetCartProduct = async (req, res) => {
             })
         }
 
+
+
         res.status(200).json({
             message: "FetchCart",
             success: true,
@@ -116,7 +118,7 @@ export const DecreaseQuentity = async (req, res) => {
         const { productid, size } = req.body
         const userid = req.user.id
 
-        
+
 
         let cart = await Cart.findOne({ user: userid })
 
@@ -134,10 +136,14 @@ export const DecreaseQuentity = async (req, res) => {
         //         message: "Product Not Found",
         //         success: false
         //     })
-        // }
+        // }    
 
 
-        const existingItem = await cart.item.find((item) => item.productid.toString() === productid.toString() && item.size === size)
+        const existingItem = await cart.item.find(
+            (item) =>
+                item.productid.toString() === productid.toString() &&
+                item.size === size
+        )
 
         if (existingItem.quentity > 1) {
             existingItem.quentity -= 1
@@ -172,7 +178,7 @@ export const DecreaseQuentity = async (req, res) => {
 
         res.status(200).json({
             message: "Quentity dec",
-            success: false
+            success: true
         })
 
     } catch (error) {

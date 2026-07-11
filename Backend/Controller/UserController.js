@@ -93,6 +93,65 @@ export const UserLogin = async (req, res) => {
     }
 }
 
+export const NewPassword = async (req, res) => {
+    try {
+        const { currentpassword, newpassword } = req.body
+        console.log(currentpassword, newpassword);
+        const userid = req.user.id
+        
+        
+        if (!currentpassword || !newpassword) {
+            return res.status(400).json({
+                message: "All fill required",
+                success: false
+            })
+        }
+
+        const user = await User.findById(userid);
+
+        if (!user) {
+            return res.status(404).json({
+                message: "User not found",
+                success: false
+            });
+        }
+
+        const comparepass = await bcrypt.compare(
+            currentpassword,
+            user.password
+        );
+
+        if (!comparepass) {
+            return res.status(400).json({
+                message: "Your Current Password is Incorrect",
+                success: false
+            });
+        }
+
+        const hashPassword = await bcrypt.hash(newpassword, 10);
+
+
+        user.password = hashPassword;
+
+        await user.save();
+
+
+        return res.status(200).json({
+            message: "Password Updated Successfully",
+            success: true
+        });
+
+
+
+    } catch (error) {
+        console.log("NewPassword error", error);
+        return res.status(500).json({
+            message: "Inetrnal Server error",
+            success: false
+        })
+    }
+}
+
 export const UpdateUser = async (req, res) => {
     try {
         const { name, email, password } = req.body
@@ -102,6 +161,8 @@ export const UpdateUser = async (req, res) => {
                 success: false
             })
         }
+        console.log(name, email, password);
+
 
         const userid = await User.findById(req.user.id)
         console.log(userid);
@@ -123,6 +184,8 @@ export const UpdateUser = async (req, res) => {
         })
     }
 }
+
+
 
 export const GetProfile = async (req, res) => {
 
@@ -278,7 +341,7 @@ export const forgorPassword = async (req, res) => {
 
         await user.save();
         await transporter.sendMail({
-            
+
             from: process.env.USER_EMAIL,
             to: email,
             subject: "Password Reset OTP",
@@ -310,8 +373,8 @@ export const forgorPassword = async (req, res) => {
 export const verifyOtp = async (req, res) => {
     try {
         const { email, otp } = req.body
-        console.log(email,otp, "backendemailotp");
-        
+        console.log(email, otp, "backendemailotp");
+
         const user = await User.findOne({ email })
 
         if (!user) {
@@ -353,8 +416,8 @@ export const resetPassword = async (req, res) => {
     try {
         const { email, password } = req.body
 
-       
-        
+
+
         const user = await User.findOne({ email })
 
         if (!user) {
@@ -373,7 +436,7 @@ export const resetPassword = async (req, res) => {
         await user.save()
 
         console.log("Password Updated Successfully", email, password);
-        
+
 
         res.status(200).json({
             message: "Password Updated Successfully",

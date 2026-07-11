@@ -71,7 +71,7 @@ export const UserProvider = ({ children }) => {
     // cart
     const [fetchCart, setFetchCart] = useState([])
     const [calculate, setCalculate] = useState([])
-    const [selectedSize, setselectedSize] = useState("")
+    const [selectedSize, setselectedSize] = useState(null)
 
     // checkout
     const [paymentMethod, setPaymentMethod] = useState("cod")
@@ -92,49 +92,50 @@ export const UserProvider = ({ children }) => {
         password: ""
     })
 
+    const [passwordData, setPasswordData] = useState({
+        currentpassword: "",
+        newpassword: ""
+    });
+
     const [email, setEmail] = useState("")
     const [otp, setOtp] = useState("")
-    const[password,setpassword] = useState("")
+    const [password, setpassword] = useState("")
     const [select, setSelect] = useState("login")
 
-    console.log(password);
-    
-    console.log(email);
 
-
-    const emailsent = async() => {
+    const emailsent = async () => {
         try {
-            const { data } = await axios.post("http://localhost:5000/api/user/email", {email})
-            if(data.success){
+            const { data } = await axios.post("http://localhost:5000/api/user/email", { email })
+            if (data.success) {
                 setSelect("otpGenerate")
             }
-            
+
         } catch (error) {
             console.log("emailsent error", error);
             toast.error(error?.response?.data?.message || "Something went wrong");
         }
     }
-    const sendOtp = async() => {
+    const sendOtp = async () => {
         try {
-            const { data } = await axios.post("http://localhost:5000/api/user/otp", {email, otp}, {withCredentials:true})
-            console.log(data,"otp");  
-            if(data.success){
+            const { data } = await axios.post("http://localhost:5000/api/user/otp", { email, otp }, { withCredentials: true })
+            console.log(data, "otp");
+            if (data.success) {
                 setSelect("resetPassword")
             }
-            
+
         } catch (error) {
             console.log("sendOtp error", error);
             toast.error(error?.response?.data?.message || "Something went wrong");
         }
     }
 
-    const ResetPassword = async() => {
+    const ResetPassword = async () => {
         try {
-            const { data } = await axios.post("http://localhost:5000/api/user/resetpassword", {email,password}, {withCredentials:true})
-            console.log(data,"otp");  
-            if(data.success){   
-                 toast.success(data.message)
-                 setSelect("login")
+            const { data } = await axios.post("http://localhost:5000/api/user/resetpassword", { email, password }, { withCredentials: true })
+            console.log(data, "otp");
+            if (data.success) {
+                toast.success(data.message)
+                setSelect("login")
             }
             toast.success(data.message)
         } catch (error) {
@@ -211,6 +212,9 @@ export const UserProvider = ({ children }) => {
         })
 
     }
+
+
+
 
     const UserAddressSubmit = async (e) => {
         e.preventDefault()
@@ -541,7 +545,30 @@ export const UserProvider = ({ children }) => {
 
 
 
-    //  userform
+
+// New Password
+const HandlePassword = (e) => {
+    setPasswordData({
+        ...passwordData,
+        [e.target.name]: e.target.value
+    });
+    console.log(passwordData);
+    
+};
+
+    const NewPassword = async () => {
+        try {
+            const { data } = await axios.put("http://localhost:5000/api/user/changepassword", passwordData, { withCredentials: true })
+
+            if (data.success) {
+                toast.success(data.message);
+            }
+        } catch (error) {
+            console.log("NewPassword error", error.response.data.message);
+        }
+    }
+
+//  userform
     const Handlechange = (e) => {
         const { name, value } = e.target
 
@@ -550,10 +577,8 @@ export const UserProvider = ({ children }) => {
             [name]: value
         }
         )
+
     }
-
-
-
     const FromSubmit = async (e) => {
         e.preventDefault()
 
@@ -568,12 +593,12 @@ export const UserProvider = ({ children }) => {
                 GetProfile()
                 GetAllUsers()
                 GetSellerdetails()
-                GetMyOrderItem()
                 UserAddressSubmit()
                 SetIsopen(false)
                 GetAllOrders()
                 GetSellerProducts()
                 GetAllSellers()
+
             }
 
             SetUserForm({
@@ -601,6 +626,8 @@ export const UserProvider = ({ children }) => {
         }
 
     }
+
+
 
     const UpdateUser = async (item) => {
         try {
@@ -668,7 +695,6 @@ export const UserProvider = ({ children }) => {
                 GetProfile()
                 GetAllOrders()
                 GetSellerProducts()
-
             }
 
             SetSeller({
@@ -739,11 +765,12 @@ export const UserProvider = ({ children }) => {
 
         try {
             const { data } = await axios.post("http://localhost:5000/api/cart/addcart", { productid, size }, { withCredentials: true })
-
+            
             GetCartProduct()
             if (data.success) {
                 GetCartProduct()
                 navigate("/cart")
+                setselectedSize(null)
             }
 
         } catch (error) {
@@ -830,11 +857,13 @@ export const UserProvider = ({ children }) => {
     };
 
     const DecQuentity = async (productid, size) => {
-        // console.log("desproductid", productid);
         try {
             const { data } = await axios.post("http://localhost:5000/api/cart/decrease", { productid, size }, { withCredentials: true })
-            GetCartProduct()
-            CartProduct()
+            
+               if(data.success){
+                 GetCartProduct()
+               }
+
 
         } catch (error) {
             console.log("DecQuentity error:", error.response.data.message);
@@ -848,6 +877,8 @@ export const UserProvider = ({ children }) => {
             const { data } = await axios.post("http://localhost:5000/api/order/checkout", { addressId: selectedAddressid, paymentMethod }, { withCredentials: true })
             if (data.success) {
                 navigate("/profile")
+                GetMyOrderItem()
+                GetCartProduct()
             }
         } catch (error) {
             console.log("Checkoutdata error", error?.response?.data?.message)
@@ -935,8 +966,10 @@ export const UserProvider = ({ children }) => {
             setTag,
             badge,
             setBadge,
+            // Reset(NewPassword)
+            HandlePassword, passwordData, setPasswordData, NewPassword,
             // OTP
-            email, setEmail, select, setSelect,emailsent,setOtp,sendOtp,ResetPassword,setpassword,
+            email, setEmail, select, setSelect, emailsent, setOtp, sendOtp, ResetPassword, setpassword,
             // UserAddres 
             UserAddChange, addressForm, setAddressForm, UserAddressSubmit, showAddress, RemoveAddress, selectedAddressid,
 

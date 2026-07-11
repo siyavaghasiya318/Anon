@@ -17,7 +17,7 @@ function Home() {
         <Slider/>
         <TotalProducts/>
         <div className="flex mt-20 gap-10">
-          <div className="w-[40%]">
+          <div className="w-[40%] sticky top-0 h-screen">
             <Categories/>
             <BestSeller/>
           </div>
@@ -27,7 +27,7 @@ function Home() {
             <div className="w-full"><RecomandedPro/></div>
           </div>
         </div>
-        <div className="flex my-20 w-full m-auto">
+        <div className="flex my-20 w-full mt-40">
           <div className="w-[45%]"><Testimonial/></div>
           <div className="w-full mx-10 "><Collection/></div>
           <div className="w-[45%]"><Service/></div>

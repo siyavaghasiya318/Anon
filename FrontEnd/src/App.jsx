@@ -28,44 +28,100 @@ import CustomerOrders from './Components/SellerComponents/CustomerOrders'
 import Allproducts from './Components/UserComponents/AllCategories/Allproducts'
 import CartProduct from './Components/UserComponents/AllCategories/CartProduct'
 import Checkoutpage from './Pages/Userpages/Checkoutpage'
+import PublickRoute from './Components/MainLayouts/PublickRoute'
 
 function App() {
+
+
 
   return (
     <>
       <Routes>
 
-        <Route element={<MainLayout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/category/:category/:gender" element={<Category />} />
-          {/* <Route path="/category/:category" element={<Category />} /> */}
-          <Route path="/category/:category/:gender/:subcategory" element={<Allproducts />} />
-          <Route path="/productdetail/:id" element={<ProductDetail />} />
-          <Route path="/profile" element={<UserProfile />} />
-          <Route path="/cart" element={<CartProduct />} />
-          <Route path="/checkout" element={<Checkoutpage />} />
-        </Route>
 
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route index element={<Dashboard />} />
-          <Route path="user" element={<Users />} />
-          <Route path="orders" element={<Orders />} />
-          <Route path="sellers" element={<Seller />} />
-          <Route path="products" element={<Inventory />} />
-        </Route>
+          <Route path="/" element={<MainLayout />}>
+            <Route index element={<Home />} />
+            <Route path="category/:category/:gender" element={<Category />} />
+            {/* <Route path="/category/:category" element={<Category />} /> */}
+            <Route path="category/:category/:gender/:subcategory" element={<Allproducts />} />
+            <Route path="productdetail/:id" element={<ProductDetail />} />
+            <Route path="profile" element={<UserProfile />} />
+            <Route path="cart" element={<CartProduct />} />
+            <Route path="checkout" element={<Checkoutpage />} />
+          </Route>
 
-        <Route path="/seller" element={<SellerLayout/>}>
-          <Route index element={<SellerDashboard />} />
-          <Route path="products" element={<SellerProducts/>}/>
-          <Route path="products/add" element={<AddProducts/>}/>
-          <Route path="profile" element={<SellerProfile/>}/>
-          <Route path="order" element={<CustomerOrders/>}/>
-        </Route>
-        
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="user" element={<Users />} />
+            <Route path="orders" element={<Orders />} />
+            <Route path="sellers" element={<Seller />} />
+            <Route path="products" element={<Inventory />} />
+          </Route>
+
+          <Route path="/seller" element={<SellerLayout />}>
+            <Route index element={<SellerDashboard />} />
+            <Route path="products" element={<SellerProducts />} />
+            <Route path="products/add" element={<AddProducts />} />
+            <Route path="profile" element={<SellerProfile />} />
+            <Route path="order" element={<CustomerOrders />} />
+          </Route>
+
 
       </Routes>
 
-      <Toaster />
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
+        gutter={10}
+        toastOptions={{
+          duration: 3000,
+          style: {
+            background: "#ffffff",
+            color: "#1a1a1a",
+            padding: "12px 20px",
+            borderRadius: "10px",
+            fontSize: "14px",
+            fontWeight: 600,
+            boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
+            borderLeft: "4px solid #ff8f9c",
+            display: "flex",
+            alignItems: "center",
+            gap: "10px",
+          },
+          success: {
+            duration: 2500,
+            iconTheme: {
+              primary: "#ff8f9c",
+              secondary: "#ffffff",
+            },
+            style: {
+              background: "#ffffff",
+              borderLeft: "4px solid #ff8f9c",
+            },
+          },
+          error: {
+            duration: 3000,
+            iconTheme: {
+              primary: "#ff5b5b",
+              secondary: "#ffffff",
+            },
+            style: {
+              background: "#ffffff",
+              borderLeft: "4px solid #ff5b5b",
+            },
+          },
+          loading: {
+            iconTheme: {
+              primary: "#ff8f9c",
+              secondary: "#ffffff",
+            },
+            style: {
+              background: "#ffffff",
+              borderLeft: "4px solid #ff8f9c",
+            },
+          },
+        }}
+      />
     </>
   )
 }

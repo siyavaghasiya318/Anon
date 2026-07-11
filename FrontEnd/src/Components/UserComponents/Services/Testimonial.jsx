@@ -3,7 +3,7 @@ import React from 'react'
 function Testimonial() {
   return (
     <>
-        <div className="border leading-12 border-b-gray-200 text-gray-700 border-t-0 border-x-0  font-bold text-[22px]">New Producst</div>
+        <div className="border  leading-12 border-b-gray-200 text-gray-700 border-t-0 border-x-0  font-bold text-[22px]">New Producst</div>
         <div className="border border-gray-200 rounded-lg mt-5 p-7">
             <img src="https://e-commerce-web-page-8gyt.vercel.app/assets/testimonial-1-TwRg8cDT.jpg" className="m-auto rounded-full w-20" alt="" />
             <div className="flex flex-col gap-2 mt-5 text-center">

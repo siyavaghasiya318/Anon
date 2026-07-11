@@ -3,7 +3,7 @@ import { UserContext } from '../../../Context/UserContext'
 import { MdLogout } from "react-icons/md";
 import { MdDashboard } from "react-icons/md";
 import { accountdetail } from '../../../assets/CategoryList';
-import { IoEye } from "react-icons/io5";
+import { IoEye, IoEyeOff } from "react-icons/io5";
 import { IoSave } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
 import { FaEdit } from "react-icons/fa";
@@ -16,17 +16,17 @@ import Order from './Order';
 
 
 function UserProfile() {
-  const { Profile, UserLogout, HandleSeller, Seller, SellerSubmit } = useContext(UserContext)
+  const { Profile, UserLogout, HandleSeller, Seller, SellerSubmit, HandlePassword, passwordData, currentpassword, newpassword, setPasswordData, NewPassword } = useContext(UserContext)
   const [selectedPage, SetSelectedPage] = useState("dashboard")
   const [isOpen, setIsOpen] = useState(false)
-  const [showPass, setShowPass] = useState(false)
-
+  const [showCurrentPass, setShowCurrentPass] = useState(false);
+  const [showNewPass, setShowNewPass] = useState(false);
   const updateref = useRef(null)
 
   return (
-    <div className="w-[70%] m-auto mt-20 mb-30">
-      <div className="flex">
-        <div className="w-[30%] ps-5 py-2 text-gray-500  border-e">
+    <div className="w-[70%] m-auto mt-10 mb-30">
+      <div className="flex ">
+        <div className="w-[30%]  sticky top-0 h-screen ps-5 pt-10 text-gray-500  border-e">
           <div className="">
             <div className="text-[21px] font-bold px-5">My Account</div>
             <hr className="my-5" />
@@ -38,8 +38,8 @@ function UserProfile() {
                   <div
                     key={item.name}
                     className={`flex cursor-pointer items-center gap-3 rounded-md px-5 py-2 ${isActive
-                        ? "bg-[#ff909d] text-white"
-                        : "hover:bg-gray-100 text-gray-500"
+                      ? "bg-[#ff909d] text-white"
+                      : "hover:bg-gray-100 text-gray-500"
                       }`}
                     onClick={() => {
                       SetSelectedPage(item.name.toLocaleLowerCase());
@@ -54,8 +54,8 @@ function UserProfile() {
 
               <div
                 className={`flex cursor-pointer items-center gap-3 rounded-md px-5 py-2 ${selectedPage === "logout"
-                    ? "bg-[#ff909d] text-white"
-                    : "hover:bg-gray-100 text-gray-500"
+                  ? "bg-[#ff909d] text-white"
+                  : "hover:bg-gray-100 text-gray-500"
                   }`}
                 onClick={UserLogout}
               >
@@ -137,30 +137,66 @@ function UserProfile() {
 
           ) :
             selectedPage == "update password" ? (
-              <div className="p-5  rounded-lg w-105 shadow-sm">
-                <div className="text-[20px] text-gray-500 font-semibold ">Change Password 🔐</div>
+              <div className="p-5 rounded-lg w-105 shadow-sm">
 
-                <div className="flex items-center  justify-between border border-gray-400 mt-5 rounded-md px-5 py-2">
-                  <input type="password" className=" w-fulltext-[16px] outline-0" placeholder="Current Password" name="" id="" />
-                  <i className="text-gray-400 text-[18px]"><IoEye /></i>
+                <div className="text-[20px] text-gray-500 font-semibold">
+                  Change Password 🔐
                 </div>
 
-                <div className="flex items-center  justify-between border border-gray-400 mt-5 rounded-md px-5 py-2">
-                  <input type="text" className=" w-fulltext-[16px] outline-0" placeholder="New Password" name="" id="" />
-                  <i className="text-gray-400 text-[18px]" onClick={() => setShowPass(true)}><IoEye /></i>
+                {/* Current Password */}
+                <div className="flex items-center justify-between border border-gray-400 mt-5 rounded-md px-5 py-2">
+                  <input
+                    type={showCurrentPass ? "text" : "password"}
+                    value={passwordData.currentpassword}
+                    onChange={HandlePassword}
+                    className="w-full text-[16px] outline-0"
+                    placeholder="Current Password"
+                    name="currentpassword"
+                  />
+
+                  <i
+                    className="text-gray-400 text-[18px] cursor-pointer"
+                    onClick={() => setShowCurrentPass(!showCurrentPass)}
+                  >
+                    {showCurrentPass ? <IoEye /> : <IoEyeOff /> }
+                  </i>
                 </div>
 
-                <div className="bg-[#ff909d] py-2 text-center mt-5 w-full text-white rounded-md text-[18px]">Update Password</div>
-                <hr className="my-5" />
-                <div className="text-[15px] text-center text-gray-500">Forgot your current password?</div>
-                <div className="text-[#ff909d] text-center text-[15px] font-semibold hover:underline mt-2">Send Reset Link to Email</div>
+
+                {/* New Password */}
+                <div className="flex items-center justify-between border border-gray-400 mt-5 rounded-md px-5 py-2">
+                  <input
+                    type={showNewPass ? "text" : "password"}
+                    onChange={HandlePassword}
+                    value={passwordData.newpassword}
+                    className="w-full text-[16px] outline-0"
+                    placeholder="New Password"
+                    name="newpassword"
+                  />
+
+                  <i
+                    className="text-gray-400 text-[18px] cursor-pointer"
+                    onClick={() => setShowNewPass(!showNewPass)}
+                  >
+                    {showNewPass ?  <IoEye /> :<IoEyeOff /> }
+                  </i>
+                </div>
+
+
+                <button
+                  onClick={NewPassword}
+                  className="bg-[#ff909d] py-2 text-center mt-5 w-full text-white rounded-md text-[18px]"
+                >
+                  Update Password
+                </button>
+
               </div>
             ) :
               selectedPage == "orders" ? (
                 <Order />
               ) :
                 selectedPage == "my wallet" ? (
-                  <p>my walwlet</p>
+                  <p>Coming Soon...</p>
                 ) :
                   selectedPage == "addresses" ? (
                     <Address />

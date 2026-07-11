@@ -6,7 +6,7 @@ import { products } from '../../assets/CategoryList';
 function NewProducst() {
   return (
     <>
-        <div className="border leading-12 border-b-gray-100 border-t-0 border-x-0 mt-20 font-bold text-[22px]">New Producst</div>
+        <div className="border  leading-12 border-b-gray-100 border-t-0 border-x-0 mt-20 font-bold text-[22px]">New Producst</div>
 
         <div className="grid grid-cols-4 gap-5 mt-5">
             {products.map((item) => {

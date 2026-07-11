@@ -47,13 +47,16 @@ function Allproducts() {
       <div className="border leading-12 border-b-gray-100 border-t-0 border-x-0 mt-20 font-bold text-[22px]"></div>
 
       <div className="grid grid-cols-4 gap-5 mt-5 my-20 px-30 m-auto">
-        {filteredProducts.map((item) => {
-          return (
-            <Link to={`/productdetail/${item._id}` }className="group">
+        {filteredProducts.length == 0 ? 
+        ("coming soon"):
+        (<>
+          {filteredProducts.map((item) => {
+          return (<>
+                <Link to={`/productdetail/${item._id}` }className="group">
               <div className="border border-gray-200 rounded-xl shadow-gray-300 hover:shadow-lg overflow-hidden">
                 <div className="">
-                  <div className="w-full h-full group-hover:hidden transition-all duration-300"><img src={item?.images?.[0]} className="w-full h-full object-cover" alt="" /></div>
-                  <div className="w-full h-full group-hover:block hidden transition-all duration-300"><img src={item?.images?.[1]} className="w-full h-full object-cover" alt="" /></div>
+                  <div className="w-full h-75 group-hover:hidden transition-all duration-300"><img src={item?.images?.[0]} className="w-full h-full object-cover" alt="" /></div>
+                  <div className="w-full h-75 group-hover:block hidden transition-all duration-300"><img src={item?.images?.[1]} className="w-full h-full object-cover" alt="" /></div>
                 </div>
 
 
@@ -72,8 +75,11 @@ function Allproducts() {
                 </div>
               </div>
             </Link>
+            </>
           )
         })}
+        </>)  
+      }
       </div>
     </>
   )

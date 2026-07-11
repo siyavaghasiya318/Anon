@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { IoIosHeartEmpty } from "react-icons/io";
 import { useParams } from 'react-router-dom';
 import { products } from '../../../assets/CategoryList';
@@ -16,6 +16,8 @@ function ProductDetail() {
 
     const productitem = getProducts.find((data) => data._id == id)
 
+
+    
 
 
 
@@ -92,11 +94,11 @@ function ProductDetail() {
                                 <div className="text-sm pt-3 pb-8 text-gray-600">{productitem?.description}</div>
 
                                 <div className="flex items-center gap-5 ">
-                                    <div className="text-white group border border-black   w-45 flex items-center overflow-hidden font-semibold uppercase  cursor-pointer  py-4 bg-[#ff8f9c] rounded-lg">
-                                        <p className="ms-[-30px] hidden group-hover:block border w-fit   group-hover:ms-0  transition-all duration-300  text-[20px]"><BsCart3 /></p>
-                                        <div onClick={() => CartProduct(productitem._id,selectedSize)} className="m-auto w-fit  border  group-hover:ms-10 ">add to cart</div>
+                                    <div className="text-white group  hover:gap-3 hover:m-0 border-black   w-45 flex items-center overflow-hidden font-semibold uppercase  cursor-pointer  py-4 bg-[#ff8f9c] rounded-lg">
+                                        <p className="ms-[-30px] hidden group-hover:block  w-fit   group-hover:ms-5  transition-all duration-300  text-[20px]"><BsCart3 /></p>
+                                        <div onClick={() => {CartProduct(productitem._id,selectedSize), scrollTo(0,0)} } className="flex  flex-col justify-center m-auto group-hover:m-0 group-hover:me-[-50px] w-fit   ">add to cart</div>
                                     </div>
-                                    <div className="bg-[#353434] group px-10 rounded-lg  flex gap-2 items-center overflow-hidden">
+                                    <div className="bg-[#353434] group px-10 rounded-lg  flex items-center overflow-hidden">
                                         <div className="flex items-center gap-2  relative py-2">
                                             <div className="uppercase text-white font-semibold group-hover:translate-x-[1px]  transition-all duration-300 absolute translate-x-[-80px]">Now</div>
                                             <div className="group-hover:translate-x-15 group-hover:translate-y-6   duration-300 group-hover:scale-250 w-10 h-10"><img src={productitem?.images[0]} className="w-full h-full" alt="img" /></div>

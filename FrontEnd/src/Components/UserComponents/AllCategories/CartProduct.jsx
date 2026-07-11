@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { UserContext } from '../../../Context/UserContext'
 import { RiDeleteBinLine } from 'react-icons/ri';
 import { FaMinus, FaPlus } from 'react-icons/fa';
@@ -7,13 +7,19 @@ import { Link } from 'react-router-dom';
 
 const CartProduct = () => {
   const { fetchCart, DecQuentity, CartProduct, navigate, calculate } = useContext(UserContext)
-  // console.log("fetxhcart", fetchCart);
+  
+  const subtotal = fetchCart.reduce((acc, item) => {
+    return acc + item.totalPrice;
+  }, 0);
 
-  const total = fetchCart.reduce((acc, total) => acc + total.price, 0)
-  const tax = total * 0.05
-  const Total = total + tax
- 
- 
+  const tax = subtotal * 0.05;
+
+  const total = subtotal + tax;
+
+  useEffect(() => {
+    scrollTo(0, 0)
+  })
+
 
   return (
     <div className="px-25 my-10">
@@ -37,7 +43,7 @@ const CartProduct = () => {
                     return (
                       <>
                         <div className="bg-white flex text-gray-700 shadow-sm rounded-xl overflow-hidden p-5  gap-6">
-                          <div className="w-28 "><img src={item.images[0]} className="w-full h-full object-cover border border-gray-100 rounded-lg" alt="" /></div>
+                          <Link to={`/productdetail/${item._id}`}  className="w-28 "><img src={item.images[0]} className="w-full h-full object-cover border border-gray-100 rounded-lg" alt="" /></Link>
                           <div className="flex flex-col gap-1 w-full">
 
                             <div className="flex  justify-between items-center">
@@ -52,9 +58,9 @@ const CartProduct = () => {
 
 
                             <button className="flex border w-fit px-3 py-1 items-center gap-4 rounded-md border-gray-200 cursor-pointer ">
-                              <i onClick={() => DecQuentity(item._id, item.size)} className="text-[10px] ">< FaMinus /></i>
+                              <i onClick={() => DecQuentity(item.id, item.size)} className="text-[10px] ">< FaMinus /></i>
                               <div className="">{item.quentity}</div>
-                              <i onClick={() => CartProduct(item._id, item.size)} className="text-[10px] " >< FaPlus /></i>
+                              <i onClick={() => CartProduct(item.id, item.size)} className="text-[10px] " >< FaPlus /></i>
                             </button>
 
                             {/* <p className="text-[13px] text-gray-600 capitalize">{item.shortdescription}</p> */}
@@ -74,7 +80,7 @@ const CartProduct = () => {
 
                 <div className="flex items-center justify-between">
                   <p className="w-20">Subtotal ({fetchCart.length} items)</p>
-                  <p>₹ {calculate?.subtotal.toFixed(2)}</p>
+                  <p>₹ {subtotal.toFixed(2)}</p>
                 </div>
 
                 <div className="flex items-center justify-between">
@@ -85,10 +91,7 @@ const CartProduct = () => {
                 <div className="flex items-center justify-between">
                   <p className="w-20">Shipping </p>
                   <p className="text-green-600 font-semibold">
-                    {Total >= 5000 ?
-                      (<>"Free</>):
-                      (<>₹ 100</>)
-                    }
+                    Free
                   </p>
                 </div>
 
@@ -96,7 +99,7 @@ const CartProduct = () => {
 
                 <div className="flex items-center text-xl font-bold justify-between">
                   <p className="w-20">Total </p>
-                  <p>₹ {Total}</p>
+                  <p>₹ {total.toFixed(2)}</p>
                 </div>
 
                 <Link to="/checkout" className="bg-[#FF8F9C] hover:scale-104 hover:shadow transition-all overflow-hidden duration-300 hover:bg-[#fdecee] hover:text-[#FF8F9C] py-3 mt-6 rounded-2xl  text-center text-white font-bold text-lg ">Proceed to Checkout</Link>

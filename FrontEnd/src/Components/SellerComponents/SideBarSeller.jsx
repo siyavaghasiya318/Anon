@@ -13,7 +13,13 @@ const SideBarSeller = () => {
     return (
         <div>
             <div className="capitalize text-purple-600 text-[25px] font-bold">Seller hub</div>
-            <div className="text-gray-400 text-[10px] py-2 uppercase font-bold flex gap-1"><GoDotFill className="text-green-500 text-[16px]" /><div>{Profile?.role}</div></div>
+            <div className="text-gray-400 text-[10px] py-2  gap-2  uppercase font-bold flex gap-1">
+                    <GoDotFill className="text-green-500 text-[16px]" />
+                    <p className="">{Profile?.role}</p>
+                    <Link to="/" className="bg-rose-400 px-4 uppercase text-[10px] font-bold rounded-full text-white ">view store</Link>
+                </div>
+                <div>
+            </div>
 
             <NavLink to={"/seller"}  className={`flex items-center gap-2 mt-6  w-full  py-3 px-5 rounded-lg text-gray-500 hover:bg-mauve-50 group hover:text-purple-600 ${location.pathname == "/seller" ? "bg-purple-600 text-white" : "text-gray-500"}`}>
                 <FaHome className="text-[20px]  group-hover:scale-110 transition-all duration-300 " />

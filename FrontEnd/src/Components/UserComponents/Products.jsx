@@ -8,7 +8,7 @@ function Products() {
 
   return (
     <>
-        <div className="text-[20px] font-bold text-gray-400 mb-4">All Products</div>
+        <div className="text-[20px] font-bold  text-gray-400 mb-4">All Products</div>
         <div className="grid grid-cols-3 gap-5 w-full">
           {getProducts?.map((item) => {
             return(

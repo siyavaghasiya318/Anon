@@ -1,19 +1,21 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { UserContext } from '../../../Context/UserContext'
+import { FaStar } from 'react-icons/fa';
 
 const Order = () => {
   const { Profile, fetchOrder } = useContext(UserContext)
-  
+  const [rating, setRating] = useState(0);
+
   return (
     <div>
       <div className=" w-95  flex items-center justify-between">
         <div className="font-semibold text-[24px]">My orders </div>
-        <p className="text-sm  text-gray-400">1 total Orders</p>
+        <p className="text-sm  text-gray-400">{fetchOrder.length} total Orders</p>
       </div>
 
 
       {fetchOrder.length === 0 ?
-        (<div className="flex flex-col items-center py-30 m-auto justify-center">Start Shopping</div>) :
+        (<div className="flex flex-col items-center py-30 m-auto justify-center bg-pink-300 text-pink-500 rounded-3xl  font-bold ">Start Shopping</div>) :
         (
           <>
             {fetchOrder.map((items) => {
@@ -56,6 +58,7 @@ const Order = () => {
                             <div className="uppercase font-semibold flex flex-col items-end gap-2">
                               <div className="">Order Status</div>
                               <div className="text-blue-600 w-fit rounded-full uppercase bg-blue-100 px-3 py-1">{items.orderStatus}</div>
+
                               <div className="">Identifier</div>
                               <div className="w-fit  uppercase text-[12px] text-black font-bold"># {pro.productid._id.slice(0, 7)}</div>
 
@@ -65,6 +68,30 @@ const Order = () => {
                         </>
                       )
                     })}
+                    {items.orderStatus === "Delivered" && (
+                      <div className="mt-4 px-15">
+                        <div className="flex items-center gap-1">
+                          {[1, 2, 3, 4, 5].map((star) => (
+                            <FaStar
+                              key={star}
+                              onClick={() => setRating(star)}
+                              className={`text-lg cursor-pointer transition ${star <= rating ? "text-yellow-400" : "text-gray-300"
+                                }`}
+                            />
+                          ))}
+                        </div>
+
+                        <textarea
+                          placeholder="Write your review..."
+                          className="w-full border rounded-lg p-3 mt-3 outline-none resize-none"
+                          rows={2}
+                        />
+
+                        <button className="mt-3 bg-[#ff909d] text-white px-4 text-[12px] py-2 font-bold rounded-lg hover:bg-pink-500">
+                          Submit Review
+                        </button>
+                      </div>
+                    )}
                     <div className=" p-5 flex flex-col  items-end"><button className="bg-[#ff909d] w-fit font-semibold text-sm px-5 py-2 rounded-lg text-white flex flex-col item-end">TRACK PACKAGE 🚚</button></div>
                   </div>
                 </>
