@@ -18,11 +18,11 @@ import { useState } from "react";
 
 
 function UserNavbar() {
-  const { SetIsopen, Isopen, islogin, Setislogin, Profile, search, setsearch, navigate, fetchCart, UserLogout, getProducts } = useContext(UserContext)
+  const { SetIsopen, Isopen, islogin, Setislogin, Profile, search, setsearch, navigate, fetchCart,searchHandleChange, UserLogout, getProducts } = useContext(UserContext)
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-
+  
   return (
     <div className=' m-auto'>
 
@@ -52,8 +52,9 @@ function UserNavbar() {
 
           <div className="border w-full border-gray-200 flex items-center px-5 justify-between gap-5 text-gray-700">
             <input type="search"
-              value={search} onChange={(e) => setsearch(e.target.value)} onKeyDown={(e) => { navigate("/category")
-              }} placeholder='Enter Your Product Name...' className=' w-120 py-2 outline-0' />
+              value={search} onChange={searchHandleChange}
+              placeholder='Enter Your Product Name...' className=' w-120 py-2 outline-0' />
+
             <p className=' text-[20px]'><IoMdSearch /></p>
           </div>
 

@@ -6,7 +6,7 @@ import { UserContext } from '../../Context/UserContext';
 import { Link } from 'react-router-dom';
 
 
-function Categories() {
+function    Categories() {
     const [toggleCategory, setToggleCategory] = useState(true)
     
     return (
@@ -27,8 +27,8 @@ function Categories() {
 
                                 <div className="" onClick={() => setToggleCategory(index)} >
                                     {toggleCategory === index ?
-                                    (<FiMinus className="mt-1 text-sm" />):
-                                    (<FiPlus className="mt-1 text-sm" />)
+                                    (<FiMinus className="mt-1 text-sm cursor-pointer " />):
+                                    (<FiPlus className="mt-1 text-sm cursor-pointer" />)
                                 }
                                 </div>
 
@@ -40,7 +40,7 @@ function Categories() {
                                         
 
                                         { item.items.map((subcategory) => (
-                                                <Link to={`/category/${item.category}/${item.gender}/${subcategory}`}   className="text-sm text-gray-400 flex flex-col font-semibold hover:text-pink-500 cursor-pointer">{subcategory}</Link>
+                                                <Link to={`/category/${item.category}/${item.gender}/${subcategory}`}  onClick={() => window.scrollTo(0,0)} className="text-sm text-gray-400 flex flex-col font-semibold hover:text-pink-500 cursor-pointer">{subcategory}</Link>
                                             ))
                                         }
 

@@ -31,13 +31,13 @@ function UserProducts({ category, gender }) {
 
     return (
         <>
-
+            <div className="text-md text-gray-600 capitalize">found {searchProducts.length} results</div>
             <div className=""></div>
-            <div className="mb-30">
+            <div className="mb-30 mt-5">
                 <div className="grid grid-cols-4 gap-6 ">
-                    {(search ? searchProducts: ilteredProducts)?.map((item) => {
+                    {(search ? searchProducts: filteredProducts)?.map((item) => {
                         return (
-                            <div className="group border border-red-200   rounded-2xl  ">
+                            <div className="group shadow-sm   rounded-2xl  ">
                                 <div className="group-hover:shadow-2xl h-full rounded-2xl  group-duration-300 transition-all">
                                     <div className=" px-3 py-2 ">
                                         <div className="relative overflow-hidden  flex flex-col justify-between">

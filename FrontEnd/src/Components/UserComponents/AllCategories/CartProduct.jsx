@@ -104,7 +104,7 @@ const CartProduct = () => {
 
                 <Link to="/checkout" className="bg-[#FF8F9C] hover:scale-104 hover:shadow transition-all overflow-hidden duration-300 hover:bg-[#fdecee] hover:text-[#FF8F9C] py-3 mt-6 rounded-2xl  text-center text-white font-bold text-lg ">Proceed to Checkout</Link>
 
-                <Link to="/" className="text-[#FF8F9C]  text-center">Continue Shopping</Link>
+                <Link to="/" onClick={() => window.scrollTo(0,0)} className="text-[#FF8F9C]  text-center">Continue Shopping</Link>
 
               </div>
 

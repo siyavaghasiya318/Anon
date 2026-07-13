@@ -91,6 +91,19 @@ export const UserProvider = ({ children }) => {
     const [fetchOrder, setfetchOrder] = useState([])
     const [showAllOrders, setShowAllOrders] = useState([])
 
+    // search 
+    const searchHandleChange = (e) => {
+        const value = e.target.value;
+        setsearch(value);
+            if (value.trim() === "") {
+              navigate("/");
+                return
+            }
+            else {
+              navigate("/category")
+            }
+      }
+
     const navigate = useNavigate()
 
     const imgref = useRef(null)
@@ -988,7 +1001,7 @@ export const UserProvider = ({ children }) => {
             badge,
             setBadge,selectedPage, SetSelectedPage,
             // navbar
-            search, setsearch,
+            search, setsearch,searchHandleChange,
             // Reset(NewPassword)
             HandlePassword, passwordData, setPasswordData, NewPassword,
             // OTP

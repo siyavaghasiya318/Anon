@@ -24,7 +24,7 @@ const Checkout = () => {
                     </div>
 
                     {showAddress.length == 0 ?
-                        (<div className="flex px-10 font-bold text-xl text-[#ff909d] flex-col justify-center items-center border-2 border-gray-200 rounded-2xl">
+                        (<div className="flex px-10 font-bold text-xl py-10 m-5  text-[#ff909d] flex-col justify-center items-center border-2 border-gray-200 rounded-2xl">
                             Plese Add Address
                         </div>) :
                         (
