@@ -21,13 +21,29 @@ const paymentColors = {
 }
 
 const CustomerOrders = () => {
-    const { navigate, showAllOrders ,UpdateOrderStatus} = useContext(UserContext)
+    const { navigate, showAllOrders, UpdateOrderStatus } = useContext(UserContext)
     const [selectedOrder, setSelectedOrder] = useState(null)
+    const [statusFilter, setStatusFilter] = useState("select")
+    const [searchTerm, setSearchTerm] = useState("")
+
+    const filteredOrders = showAllOrders.filter((order) => {
+        const matchesSearch =
+            order._id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            order.address.name.toLowerCase().includes(searchTerm.toLowerCase())
+
+        const matchesStatus =
+            statusFilter === "select" || order.orderStatus === statusFilter
+
+        return matchesSearch && matchesStatus
+    })
+
+    const processingOrders = showAllOrders.filter((order) => order.orderStatus === "Processing").length
+    const shippedOrders = showAllOrders.filter((order) => order.orderStatus === "Shipped").length
+    const deliveredOrders = showAllOrders.filter((order) => order.orderStatus === "Delivered").length
+    const cancelledOrders = showAllOrders.filter((order) => order.orderStatus === "Cancelled").length
 
 
-    console.log("show Order",showAllOrders);
 
-    
 
     return (
         <div className="">
@@ -40,8 +56,8 @@ const CustomerOrders = () => {
             <div className="flex items-center w-full justify-between gap-5 mt-8 text-gray-400">
                 <div className="flex w-full items-center justify-between bg-white p-6 rounded-2xl">
                     <div>
-                        <p className="text-[10px] font-bold uppercase tracking-widest p-2 ">processing</p>
-                        <p className="text-black text-[25px] font-bold">0</p>
+                        <p className="text-[10px] font-bold uppercase tracking-widest  ">processing</p>
+                        <p className="text-black text-[25px] font-bold">{processingOrders}</p>
                     </div>
                     <i className="bg-gradient-to-br from-blue-500 to-indigo-600 w-10 h-10 rounded-xl flex justify-center items-center text-white"><FaBox /></i>
                 </div>
@@ -49,15 +65,17 @@ const CustomerOrders = () => {
                 <div className="flex justify-between items-center w-full bg-white p-6 rounded-2xl">
                     <div>
                         <p className="text-[10px] font-bold uppercase tracking-widest">shipped</p>
-                        <p className="text-black text-[25px] font-bold">0</p>
+                        <p className="text-black text-[25px] font-bold">{shippedOrders}</p>
                     </div>
-                    <i className="bg-gradient-to-br to-orange-500 from-amber-500 w-10 h-10 rounded-xl flex justify-center items-center text-white"><FaBox /></i>
+                    <i className="bg-gradient-to-br from-blue-500 to-indigo-600 w-10 h-10 rounded-xl flex justify-center items-center text-white"><FaBox /></i>
+
+
                 </div>
 
                 <div className="flex justify-between w-full items-center bg-white p-6 rounded-2xl">
                     <div>
                         <p className="text-[10px] font-bold uppercase tracking-widest">completed </p>
-                        <p className="text-black text-[25px] font-bold">0</p>
+                        <p className="text-black text-[25px] font-bold">{deliveredOrders}</p>
                     </div>
                     <i className="bg-gradient-to-br from-emerald-500 to-green-600 w-10 h-10 rounded-xl flex justify-center items-center text-white"><FaBox /></i>
                 </div>
@@ -65,7 +83,7 @@ const CustomerOrders = () => {
                 <div className="flex justify-between w-full items-center bg-white p-6 rounded-2xl">
                     <div>
                         <p className="text-[10px] font-bold uppercase tracking-widest">cancelled </p>
-                        <p className="text-black text-[25px] font-bold">0</p>
+                        <p className="text-black text-[25px] font-bold">{cancelledOrders}</p>
                     </div>
                     <i className="bg-gradient-to-br from-red-500 to-rose-600 w-10 h-10 rounded-xl flex justify-center items-center text-white"><FaBox /></i>
                 </div>
@@ -74,22 +92,27 @@ const CustomerOrders = () => {
             <div className="bg-white rounded-2xl mt-8">
                 <div className="flex items-center gap-5 justify-between text-gray-400 p-5">
                     <div className="  gap-2 bg-[#f8fafc] group hover:outline-2 transition-all duration-200 hover:outline-purple-200 hover:shadow-purple-300 flex rounded-2xl w-full items-center px-5">
-                        <div><IoSearch className="text-[20px] group-hover:text-purple-500 transition-all duration-300" /></div>
-                        <input type="search" className="py-4 outline-0 w-full text-gray-800 font-semibold" placeholder="Search Item.." name="" id="" />
+                        <div><IoSearch className="text-[20px] cursor-pointer  group-hover:text-purple-500 transition-all duration-300" /></div>
+                        <input type="search" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="py-4 outline-0 w-full text-gray-800 font-semibold" placeholder="Search by ID or customer..." name="" id="" />
                     </div>
 
-                    <div className="gap-2 flex bg-[#f8fafc] rounded-2xl group font-bold items-center px-5 hover:outline-2 transition-all w-full duration-300 hover:outline-purple-200 hover:shadow-purple-300">
-                        <div><FaFilter className=" text-gray-300 mt-1 group-hover:text-purple-500" /></div>
-                        <select name="" className="py-4 outline-0 appearance-none w-full text-gray-500 text-[14px] capitalize" id="">
-                            <option value="select" >All Categories</option>
-                            <option value=""></option>
+                    <div className=" flex bg-[#f8fafc] rounded-2xl group font-bold items-center px-5 hover:outline-2 transition-all w-full duration-300 hover:outline-purple-200 hover:shadow-purple-300">
+                        <div><FaFilter className=" text-gray-300 mt-1  group-hover:text-purple-500" /></div>
+                        <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} name="" className="py-4 outline-0 px-5 appearance-none w-full text-gray-500 text-[14px] capitalize" id="">
+                            <option value="select"  >All Status</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Processing">Processing</option>
+                            <option value="Shipped">Shipped</option>
+                            <option value="Delivered">Delivered</option>
+                            <option value="Cancelled">Cancelled</option>
+                            <option value="Return">Return</option>
                         </select>
                     </div>
                 </div>
             </div>
 
             <div className=" bg-white rounded-3xl px-6 pb-6 pt-3 mt-10 text-gray-400 ">
-                {showAllOrders.length == 0 ?
+                {filteredOrders.length == 0 ?
                     (<div className="flex flex-col items-center justify-center h-80">
                         <div className="bg-gray-50  w-20 h-20 rounded-full text-gray-200  flex flex-col justify-center items-center"><FaBoxOpen className="text-[35px]" /></div>
                         <div className="text-[10px] uppercase  font-extrabold tracking-widest ">No orders currently</div>
@@ -110,7 +133,7 @@ const CustomerOrders = () => {
                             </thead>
 
                             <tbody>
-                                {showAllOrders.map((items) => (
+                                {filteredOrders.map((items) => (
                                     <tr key={items._id} className="border-t border-gray-100 hover:bg-gray-50 transition">
                                         <td className="px-8 py-5 font-bold text-gray-700 text-sm">
                                             #{items._id.slice(0, 7)}
@@ -249,13 +272,13 @@ const CustomerOrders = () => {
                                 {selectedOrder?.item.map((product, i) => (
                                     <div key={i} className="flex items-center gap-3 border border-gray-100 rounded-xl p-3">
                                         <img src={product.productid.images[0]}
-                                            className="w-12 h-12 rounded-lg object-cover bg-gray-50"alt=""/>
+                                            className="w-12 h-12 rounded-lg object-cover bg-gray-50" alt="" />
 
                                         <div className="flex-1">
                                             <p className="text-gray-700 font-semibold text-sm">{product.productid.title}</p>
                                             <p className="text-gray-500 text-[12px] uppercase font-semibold"> {product.size}</p>
                                             <p className="text-gray-500 text-[12px] font-semibold">Qty: {product.quentity}</p>
-                                            
+
                                         </div>
 
                                         <p className="text-gray-700 font-bold text-sm">₹{product.productid.price}</p>

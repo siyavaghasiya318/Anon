@@ -1,3 +1,4 @@
+import stripe from "../Config/Stripe.js";
 import { Cart } from "../Model/CartModel.js";
 import Order from "../Model/Ordermodel.js";
 import { Products } from "../Model/ProductModel.js";
@@ -49,59 +50,96 @@ export const CreateOrder = async (req, res) => {
 
         }
 
-        for (const sellerId in sellersOrder) {
-            const items = sellersOrder[sellerId];
+        if (paymentMethod === 'cod') {
+            for (const sellerId in sellersOrder) {
+                const items = sellersOrder[sellerId];
 
-            let subtotal = 0;
+                let subtotal = 0;
 
-            items.forEach((item) => {
-                subtotal += item.totalPrice;
+                items.forEach((item) => {
+                    subtotal += item.totalPrice;
+                })
+
+                const tax = subtotal * 0.05
+                const total = subtotal + tax
+
+                const order = await Order.create({
+                    user: userid,
+                    seller: sellerId,
+                    item: items,
+                    address: {
+                        name: address.name,
+                        phoneno: address.phoneno,
+                        streetaddress: address.streetaddress,
+                        landmark: address.landmark,
+                        city: address.city,
+                        state: address.state,
+                        pincode: address.pincode,
+                        landmark: address.landmark,
+                        label: address.label,
+                        isDefault: address.isDefault,
+                    },
+                    paymentMethod,
+
+                    paymentStatus: paymentMethod === "stripe"
+                        ? "paid"
+                        : "pending",
+
+                    subtotal,
+                    tax,
+                    total,
+                })
+
+
+            }
+            cart.item = []
+            // cart.subtotal = 0
+            cart.total = 0
+
+            await cart.save()
+
+
+            // console.log("created order:", order);
+            return res.status(201).json({
+                success: true,
+                message: "Order created successfully",
+            })
+        }
+
+
+        if(paymentMethod === 'stripe'){
+            const line_item = []
+
+            cart.item.forEach((item)=>{
+                line_item.push({
+                    price_data: {
+                        currency: 'inr',
+                        product_data:{
+                            name: item.productid.title
+                        },
+                        unit_amount: Math.round(item.totalPrice * 100)
+                    },
+                    quantity: item.quentity
+                })
             })
 
-            const tax = subtotal * 0.05
-            const total = subtotal + tax
+            const session = await stripe.checkout.sessions.create({
+                payment_mathod_type: ['card'],
+                mode: "payment",
+                line_item,
 
-            const order = await Order.create({
-                user: userid,
-                seller: sellerId,
-                item: items,
-                address: {
-                    name: address.name,
-                    phoneno: address.phoneno,
-                    streetaddress: address.streetaddress,
-                    landmark: address.landmark,
-                    city: address.city,
-                    state: address.state,
-                    pincode: address.pincode,
-                    landmark: address.landmark,
-                    label: address.label,
-                    isDefault: address.isDefault,
-                },
-                paymentMethod,
+                success_url: 'https://anon-alpha-blond.vercel.app/payment-success',
 
-                paymentStatus: paymentMethod === "stripe"
-                    ? "paid"
-                    : "pending",
+                cancel_url: 'https://anon-alpha-blond.vercel.app/payment-cancel'
 
-                subtotal,
-                tax,
-                total,
+            });
+
+            return res.status(201).json({
+                success: true,
+                url: session.url
             })
-
 
         }
-        cart.item = []
-        // cart.subtotal = 0
-        cart.total = 0
-
-        await cart.save()
-
-
-        // console.log("created order:", order);
-        return res.status(201).json({
-            success: true,
-            message: "Order created successfully",
-        })
 
     } catch (error) {
         console.log("CreateOrder error", error);

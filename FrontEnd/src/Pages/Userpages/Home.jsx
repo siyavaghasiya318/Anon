@@ -9,14 +9,15 @@ import Testimonial from '../../Components/UserComponents/Services/Testimonial'
 import Collection from '../../Components/UserComponents/Services/Collection'
 import Service from '../../Components/UserComponents/Services/Service'
 import TotalProducts from '../../Components/UserComponents/AllCategories/TotalProducts'
+import FashionCard from '../../Components/UserComponents/Services/FashionCard'
 
 
 function Home() {
   return (
-    <div className='w-[90%] m-auto'>
+    <div className='w-[90%] mb-20 m-auto'>
         <Slider/>
         <TotalProducts/>
-        <div className="flex mt-20 gap-10">
+        <div className="flex  gap-10">
           <div className="w-[40%] sticky top-0 h-screen">
             <Categories/>
             <BestSeller/>
@@ -27,12 +28,14 @@ function Home() {
             <div className="w-full"><RecomandedPro/></div>
           </div>
         </div>
-        <div className="flex my-20 w-full mt-40">
-          <div className="w-[45%]"><Testimonial/></div>
-          <div className="w-full mx-10 "><Collection/></div>
-          <div className="w-[45%]"><Service/></div>
+        <div className="flex w-full">
+          <div className="w-[45%] mt-30"><Testimonial/></div>
+          <div className="w-full mx-10 mt-30 "><Collection/></div>
+          <div className="w-[45%] mt-30"><Service/></div>
           <div></div>
         </div>
+
+        <FashionCard/>
     </div>
   )
 }

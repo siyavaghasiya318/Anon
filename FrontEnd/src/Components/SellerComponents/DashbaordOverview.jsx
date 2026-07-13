@@ -1,11 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { performance } from '../../assets/CategoryList'
 import { GoDotFill } from "react-icons/go";
 import { FaBoxOpen, FaCheckCircle } from 'react-icons/fa';
 import { FaTriangleExclamation } from 'react-icons/fa6';
+import { Link } from 'react-router-dom';
+import { UserContext } from '../../Context/UserContext';
 
 
 const DashbaordOverview = () => {
+
+  const { showAllOrders,getSellerProducts } = useContext(UserContext)
+
+  const processingOrders = showAllOrders.filter((order) => order.orderStatus === "Processing").length
+  const shippedOrders = showAllOrders.filter((order) => order.orderStatus === "Shipped").length
+  const deliveredOrders = showAllOrders.filter((order) => order.orderStatus === "Delivered").length
+  const cancelledOrders = showAllOrders.filter((order) => order.orderStatus === "Cancelled").length
   return (
     <div>
       <div className="flex justify-between items-center">
@@ -75,35 +84,87 @@ const DashbaordOverview = () => {
           <div className="flex flex-col gap-5 my-5">
             <div className="bg-green-50 p-5 font-bold rounded-2xl flex  justify-between items-center gap-2 text-green-600">
               <div className="flex items-center gap-3 uppercase text-[11px] "><FaCheckCircle className="text-[16px]" />in stock</div>
-              <div className="text-[18px]">0</div>
+              <div className="text-[18px]">{getSellerProducts.length}</div>
             </div>
 
             <div className="bg-orange-50 p-5 font-bold rounded-2xl flex  justify-between items-center gap-2 text-orange-600">
-              <div className="flex items-center gap-3 uppercase text-[11px] "><FaBoxOpen  className="text-[16px]" />Low Stock</div>
+              <div className="flex items-center gap-3 uppercase text-[11px] "><FaBoxOpen className="text-[16px]" />Low Stock</div>
               <div className="text-[18px]">0</div>
             </div>
 
             <div className="bg-red-50 p-5 font-bold rounded-2xl flex  justify-between items-center gap-2 text-red-600">
-              <div className="flex items-center gap-3 uppercase text-[11px] "><FaTriangleExclamation  className="text-[16px]" />Out of Stock</div>
+              <div className="flex items-center gap-3 uppercase text-[11px] "><FaTriangleExclamation className="text-[16px]" />Out of Stock</div>
               <div className="text-[18px]">0</div>
             </div>
 
-            <div className="text-gray-500 py-4 bg-gray-50 items-center flex flex-col  rounded-2xl w-full cursor-pointer uppercase text-[10px]  font-bold hover:underline ">Management Inventary</div>
+            <Link to="products" onClick={() => window.scrollTo(0,0)} className="text-gray-500 py-4 bg-gray-50 items-center flex flex-col  rounded-2xl w-full cursor-pointer uppercase text-[10px]  font-bold hover:underline ">Management Inventary</Link>
           </div>
         </div>
       </div>
 
-      <div className="flex gap-8 my-10">
-        <div className="flex w-1/2 rounded-3xl p-5 bg-white justify-between items-center">
-          <p className="text-[18px] font-bold">Best Selling Products</p>
-          <p className="text-[12px] uppercase text-blue-500 ">View All</p>
+      <div className="flex gap-8 my-10 ">
+        <div className=" w-1/2  rounded-3xl p-5 bg-white ">
+
+          <div className="flex justify-between items-center ">
+            <p className="text-[18px] font-bold">Best Selling Products</p>
+            <Link to="products" onClick={() => scroll(0, 0)} className="text-[12px] uppercase text-blue-500 font-bold hover:underline ">View All</Link>
+          </div>
+
+          <p className="mt-50 text-center">No data available</p>
         </div>
+
+
         <div className="w-1/2 p-8 bg-white rounded-3xl">
           <p className="text-[18px] font-bold">Order Summary</p>
+          <table className="w-full">
+
+            <thead>
+              <tr className="uppercase text-left border-gray-100 border-b text-gray-400">
+                <th className="px-4  py-5 text-[10px]  font-bold uppercase tracking-widest ">status</th>
+                <th className="px-4 py-5 text-end text-[10px] font-bold uppercase tracking-widest">count</th>
+                <th className="px-4 py-5 text-end text-[10px] font-bold uppercase tracking-widest">trend</th>
+              </tr>
+            </thead>
+
+
+
+            <tbody className="text-gray-600">
+
+              {["Pending", "Processing", "Shipped", "Delivered", "Cancelled", "Return"].map((status) => (
+
+                <tr key={status} className="w-full border-b border-gray-100">
+
+                  <td className="px-4  py-4  text-[11px] font-bold  uppercase">
+                    <div className="flex  items-center gap-2">
+                      <GoDotFill className="text-blue-500" />
+                      {status}
+                    </div>
+                  </td>
+
+                  <td className="px-4 py-4 text-end font-bold">
+                    {
+                      showAllOrders
+                        .filter(order => order.orderStatus === status)
+                        .reduce((total, order) => total + order.item.length, 0)
+                    }
+                  </td>
+
+                  <td className="px-4 py-4 text-end  text-[11px] font-bold text-gray-400 uppercase">
+                    Stable
+                  </td>
+                </tr>
+
+              ))}
+
+            </tbody>
+
+
+          </table>
         </div>
       </div>
     </div>
   )
+
 }
 
 export default DashbaordOverview

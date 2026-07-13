@@ -10,8 +10,8 @@ export const UserContext = createContext()
 export const UserProvider = ({ children }) => {
 
 
-    
-    
+
+
     const [Isopen, SetIsopen] = useState(false)
     const [islogin, Setislogin] = useState("login")
     const [Auth, SetAuth] = useState(false)
@@ -31,7 +31,10 @@ export const UserProvider = ({ children }) => {
     })
     const [showAddress, setShowAddress] = useState([])
     const [isaddress, Setisaddress] = useState(false)
-
+    const [selectedPage, SetSelectedPage] = useState("dashboard")
+    // navbar
+    const [search, setsearch] = useState("")
+    
 
     const [Profile, SetProfile] = useState(null)
 
@@ -77,6 +80,8 @@ export const UserProvider = ({ children }) => {
     // checkout
     const [paymentMethod, setPaymentMethod] = useState("cod")
     const [selectedAddressid, setSelectedAddress] = useState(null)
+    const [showAddressModal, setShowAddressModal] = useState(false);
+
 
 
     // orders
@@ -228,6 +233,7 @@ export const UserProvider = ({ children }) => {
             if (data.success) {
                 toast.success(data.message)
                 Setisaddress(false)
+
             }
 
             setAddressForm({
@@ -252,7 +258,7 @@ export const UserProvider = ({ children }) => {
             const { data } = await axios.get("https://anon-ksvj.onrender.com/api/useraddress/getaddress", { withCredentials: true })
             // console.log(data.address);
             setShowAddress(data.address)
-
+            setShowAddressModal(false)
         } catch (error) {
             console.log(" GetAddress error", error);
             toast.error(error?.response?.data?.message || "Something went wrong");
@@ -265,7 +271,7 @@ export const UserProvider = ({ children }) => {
             // console.log(data);
             if (data.success) {
                 GetAddress();
-
+                toast.success(data.message)
             }
         } catch (error) {
             console.log("RemoveAddress error", error);
@@ -547,15 +553,15 @@ export const UserProvider = ({ children }) => {
 
 
 
-// New Password
-const HandlePassword = (e) => {
-    setPasswordData({
-        ...passwordData,
-        [e.target.name]: e.target.value
-    });
-    console.log(passwordData);
-    
-};
+    // New Password
+    const HandlePassword = (e) => {
+        setPasswordData({
+            ...passwordData,
+            [e.target.name]: e.target.value
+        });
+        console.log(passwordData);
+
+    };
 
     const NewPassword = async () => {
         try {
@@ -563,13 +569,19 @@ const HandlePassword = (e) => {
 
             if (data.success) {
                 toast.success(data.message);
+                setPasswordData({
+                    currentpassword: "",
+                    newpassword: ""
+                })
+                SetSelectedPage("dashboard")
             }
         } catch (error) {
             console.log("NewPassword error", error.response.data.message);
+            toast.error(error?.response?.data?.message);
         }
     }
 
-//  userform
+    //  userform
     const Handlechange = (e) => {
         const { name, value } = e.target
 
@@ -599,7 +611,7 @@ const HandlePassword = (e) => {
                 GetAllOrders()
                 GetSellerProducts()
                 GetAllSellers()
-
+                GetAddress()
             }
 
             SetUserForm({
@@ -766,7 +778,7 @@ const HandlePassword = (e) => {
 
         try {
             const { data } = await axios.post("https://anon-ksvj.onrender.com/api/cart/addcart", { productid, size }, { withCredentials: true })
-            
+
             GetCartProduct()
             if (data.success) {
                 GetCartProduct()
@@ -860,10 +872,10 @@ const HandlePassword = (e) => {
     const DecQuentity = async (productid, size) => {
         try {
             const { data } = await axios.post("https://anon-ksvj.onrender.com/api/cart/decrease", { productid, size }, { withCredentials: true })
-            
-               if(data.success){
-                 GetCartProduct()
-               }
+
+            if (data.success) {
+                GetCartProduct()
+            }
 
 
         } catch (error) {
@@ -875,12 +887,14 @@ const HandlePassword = (e) => {
     //order 
     const Checkoutdata = async () => {
         try {
-            const { data } = await axios.post("https://anon-ksvj.onrender.com/api/order/checkout", { addressId: selectedAddressid, paymentMethod }, { withCredentials: true })
+            const { data } = await axios.post("https://anon-ksvj.onrender.com/api/order/checkout", { addressId: selectedAddressid, paymentMethod, }, { withCredentials: true })
             if (data.success) {
                 navigate("/profile")
                 GetMyOrderItem()
                 GetCartProduct()
             }
+
+            window.location.href = data.url;
         } catch (error) {
             console.log("Checkoutdata error", error?.response?.data?.message)
 
@@ -941,6 +955,7 @@ const HandlePassword = (e) => {
 
     useEffect(() => {
         GetProfile()
+        
         GetSellerdetails()
         GetAllOrders()
         GetSellerProducts()
@@ -966,7 +981,9 @@ const HandlePassword = (e) => {
             ProductSubmit, tag,
             setTag,
             badge,
-            setBadge,
+            setBadge,selectedPage, SetSelectedPage,
+            // navbar
+            search, setsearch,
             // Reset(NewPassword)
             HandlePassword, passwordData, setPasswordData, NewPassword,
             // OTP
@@ -978,7 +995,7 @@ const HandlePassword = (e) => {
             setselectedSize, selectedSize,
 
             // checkout
-            paymentMethod, setPaymentMethod, setSelectedAddress, Checkoutdata,
+            paymentMethod, setPaymentMethod, setSelectedAddress, Checkoutdata, showAddressModal, setShowAddressModal,
             // order
             fetchOrder, showAllOrders, UpdateOrderStatus,
             // seller

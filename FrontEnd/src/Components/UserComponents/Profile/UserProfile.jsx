@@ -16,8 +16,7 @@ import Order from './Order';
 
 
 function UserProfile() {
-  const { Profile, UserLogout, HandleSeller, Seller, SellerSubmit, HandlePassword, passwordData, currentpassword, newpassword, setPasswordData, NewPassword } = useContext(UserContext)
-  const [selectedPage, SetSelectedPage] = useState("dashboard")
+  const { Profile, UserLogout,selectedPage, SetSelectedPage, HandleSeller, Seller, SellerSubmit, HandlePassword, passwordData, currentpassword, newpassword, setPasswordData, NewPassword } = useContext(UserContext)
   const [isOpen, setIsOpen] = useState(false)
   const [showCurrentPass, setShowCurrentPass] = useState(false);
   const [showNewPass, setShowNewPass] = useState(false);
@@ -185,7 +184,7 @@ function UserProfile() {
 
                 <button
                   onClick={NewPassword}
-                  className="bg-[#ff909d] py-2 text-center mt-5 w-full text-white rounded-md text-[18px]"
+                  className="bg-[#ff909d] py-2 text-center outline-0 mt-5 w-full text-white rounded-md text-[18px]"
                 >
                   Update Password
                 </button>
@@ -199,7 +198,7 @@ function UserProfile() {
                   <p>Coming Soon...</p>
                 ) :
                   selectedPage == "addresses" ? (
-                    <Address />
+                    <Address  />
                   ) :
                     selectedPage == "become seller" ? (
                       <div>

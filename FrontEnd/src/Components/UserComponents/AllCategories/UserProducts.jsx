@@ -8,17 +8,28 @@ import { Link } from 'react-router-dom';
 import { UserContext } from '../../../Context/UserContext';
 
 
-function UserProducts({category, gender}) {
+function UserProducts({ category, gender }) {
     console.log(gender);
-    
-    const { getProducts} = useContext(UserContext)
+
+    const { getProducts ,search, setsearch} = useContext(UserContext)
 
 
-    let filteredProducts= getProducts.filter((item) => item.category == category && item.gender == gender) 
-
-    
-
+    let filteredProducts = getProducts.filter((item) => item.category == category && item.gender == gender)
+    // console.log(getProducts);
   
+    // const searchProducts = getProducts.filter((item) => {
+    //   const searchText = search?.toLowerCase() || "";
+  
+    //   return (
+    //     item.title.toLowerCase().includes(searchText) ||
+    //     item.brand?.toLowerCase().includes(searchText) ||
+    //     item.subcategory?.toLowerCase().includes(searchText) ||
+    //     item.tags?.some(tag => tag.toLowerCase().includes(searchText))
+    //   ) 
+    // } )
+
+
+
     return (
         <>
 
@@ -36,7 +47,7 @@ function UserProducts({category, gender}) {
                                             <div className="absolute top-2 flex flex-col gap-1 right-[-50px] group-hover:right-[0px] transition-all duration-500">
                                                 <p className="border border-gray-200 bg-white p-1 text-[18px] rounded-sm shadow-2xl"><IoIosHeartEmpty /></p>
                                                 <Link to={`/productdetail/${item._id}`} className="border border-gray-200 bg-white p-1 text-[18px] rounded-sm shadow-2xl "><IoEyeOutline /></Link>
-                                                <p onClick={() => CartProduct(item._id,selectedSize)} className="border border-gray-200 cursor-pointer bg-white p-1 text-[18px] rounded-sm shadow-2xl"><IoBagAddOutline /></p>
+                                                <p onClick={() => CartProduct(item._id, selectedSize)} className="border border-gray-200 cursor-pointer bg-white p-1 text-[18px] rounded-sm shadow-2xl"><IoBagAddOutline /></p>
                                             </div>
                                         </div>
                                         <div className="flex justify-between w-full font- items-center text-[12px] font-semibold">

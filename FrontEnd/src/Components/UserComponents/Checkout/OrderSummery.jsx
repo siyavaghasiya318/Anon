@@ -11,10 +11,10 @@ const OrderSummery = () => {
 
   return (
     <div className="mt-20">
-      <div className="bg-white h-175 p-8 shadow mt-10 rounded-2xl">
+      <div className="bg-white p-8 shadow mt-10 rounded-2xl">
         <div className="text-[22px] font-extrabold text-gray-800"> Order Summary</div>
 
-        <div className="mt-10 flex flex-col gap-5  no-scrollbar overflow-auto ">
+        <div className="mt-10 flex flex-col max-h-65 gap-5 overflow-auto  no-scrollbar ">
           {fetchCart.map((item) => {
             return (
               <>

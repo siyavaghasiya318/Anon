@@ -87,7 +87,7 @@ export const AddProduct = async (req, res) => {
 export const Getproducts = async(req,res) => {
     try {
 
-        const product = await Products.find({}).populate('seller', 'shopname')
+        const product = await Products.find({}).populate('seller', 'shopname').sort({ createdAt: -1 }).limit(8);
         // console.log("getproductcontroller", product);
         
         res.status(200).json({

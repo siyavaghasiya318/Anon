@@ -12,7 +12,7 @@ function Categories() {
     return (
          
         <>
-            <div className="border p-5 border-gray-200 text-gray-700  rounded-lg">
+            <div className="border p-5   border-gray-200 text-gray-700  rounded-lg">
                 <div className="text-[18px] uppercase font-semibold">Category</div>
                 {categories.map((item, index) => {
                     return (

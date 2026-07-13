@@ -4,15 +4,28 @@ import { UserContext } from '../../Context/UserContext'
 import { Link } from 'react-router-dom'
 
 function Products() {
-  const{getProducts} = useContext(UserContext)
+  const{getProducts,search, setsearch} = useContext(UserContext)
+  // console.log(getProducts);
+  
+  //   const searchProducts = getProducts.filter((item) => {
+  //     const searchText = search.toLowerCase();
+  
+  //     return (
+  //       item.title.toLowerCase().includes(searchText) ||
+  //       item.brand?.toLowerCase().includes(searchText) ||
+  //       item.subcategory?.toLowerCase().includes(searchText) ||
+  //       item.tags?.some(tag => tag.toLowerCase().includes(searchText))
+  //     ) 
+  //   } )
 
+  
   return (
     <>
         <div className="text-[20px] font-bold  text-gray-400 mb-4">All Products</div>
         <div className="grid grid-cols-3 gap-5 w-full">
           {getProducts?.map((item) => {
             return(
-              <Link to={`/productdetail/${item._id}`} >
+              <Link to={`/productdetail/${item._id}`} onClick={() => window.scrollTo(0, 0)} >
                 <div  className="w-full h-30 overflow-hidden hover:shadow-lg shadow-sm -gray-200 rounded-md">
                   <div className="flex gap-3  w-full h-full items-center bg-[#f5f4ef94]">
                     <div className="w-23 "><img src={item?.images[0]} className="w-full h-full object-cover" alt="" /></div>
