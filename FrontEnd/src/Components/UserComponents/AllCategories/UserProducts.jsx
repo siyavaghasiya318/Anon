@@ -15,18 +15,17 @@ function UserProducts({ category, gender }) {
 
 
     let filteredProducts = getProducts.filter((item) => item.category == category && item.gender == gender)
-    // console.log(getProducts);
   
-    // const searchProducts = getProducts.filter((item) => {
-    //   const searchText = search?.toLowerCase() || "";
+    const searchProducts = getProducts.filter((item) => {
+      const searchText = search?.toLowerCase() || "";
   
-    //   return (
-    //     item.title.toLowerCase().includes(searchText) ||
-    //     item.brand?.toLowerCase().includes(searchText) ||
-    //     item.subcategory?.toLowerCase().includes(searchText) ||
-    //     item.tags?.some(tag => tag.toLowerCase().includes(searchText))
-    //   ) 
-    // } )
+      return (
+        item.title.toLowerCase().includes(searchText) ||
+        item.brand?.toLowerCase().includes(searchText) ||
+        item.subcategory?.toLowerCase().includes(searchText) ||
+        item.tags?.some(tag => tag.toLowerCase().includes(searchText))
+      ) 
+    } )
 
 
 
@@ -36,7 +35,7 @@ function UserProducts({ category, gender }) {
             <div className=""></div>
             <div className="mb-30">
                 <div className="grid grid-cols-4 gap-6 ">
-                    {filteredProducts?.map((item) => {
+                    {(search ? searchProducts: ilteredProducts)?.map((item) => {
                         return (
                             <div className="group border border-red-200   rounded-2xl  ">
                                 <div className="group-hover:shadow-2xl h-full rounded-2xl  group-duration-300 transition-all">

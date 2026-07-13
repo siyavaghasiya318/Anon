@@ -10,6 +10,9 @@ export const CreateOrder = async (req, res) => {
         const { addressId, paymentMethod } = req.body
         const userid = req.user.id
 
+        console.log(paymentMethod);
+        
+
         const cart = await Cart.findOne({ user: userid }).populate("item.productid");
 
 
@@ -108,10 +111,13 @@ export const CreateOrder = async (req, res) => {
 
 
         if(paymentMethod === 'stripe'){
-            const line_item = []
+
+            
+
+            const line_items = []
 
             cart.item.forEach((item)=>{
-                line_item.push({
+                line_items.push({
                     price_data: {
                         currency: 'inr',
                         product_data:{
@@ -124,15 +130,21 @@ export const CreateOrder = async (req, res) => {
             })
 
             const session = await stripe.checkout.sessions.create({
-                payment_mathod_type: ['card'],
+                payment_method_types: ['card'],
                 mode: "payment",
-                line_item,
+                line_items,
 
-                success_url: 'https://anon-alpha-blond.vercel.app/payment-success',
+                success_url: 'https://anon-alpha-blond.vercel.app/profile',
 
                 cancel_url: 'https://anon-alpha-blond.vercel.app/payment-cancel'
 
             });
+
+            cart.item = []
+            // cart.subtotal = 0
+            cart.total = 0
+
+            await cart.save()
 
             return res.status(201).json({
                 success: true,

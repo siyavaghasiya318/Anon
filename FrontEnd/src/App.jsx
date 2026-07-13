@@ -42,7 +42,7 @@ function App() {
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Home />} />
             <Route path="category/:category/:gender" element={<Category />} />
-            {/* <Route path="/category/:category" element={<Category />} /> */}
+            <Route path="/category" element={<Category />} />
             <Route path="category/:category/:gender/:subcategory" element={<Allproducts />} />
             <Route path="productdetail/:id" element={<ProductDetail />} />
             <Route path="profile" element={<UserProfile />} />

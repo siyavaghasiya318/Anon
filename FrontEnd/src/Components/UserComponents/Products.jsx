@@ -5,18 +5,6 @@ import { Link } from 'react-router-dom'
 
 function Products() {
   const{getProducts,search, setsearch} = useContext(UserContext)
-  // console.log(getProducts);
-  
-  //   const searchProducts = getProducts.filter((item) => {
-  //     const searchText = search.toLowerCase();
-  
-  //     return (
-  //       item.title.toLowerCase().includes(searchText) ||
-  //       item.brand?.toLowerCase().includes(searchText) ||
-  //       item.subcategory?.toLowerCase().includes(searchText) ||
-  //       item.tags?.some(tag => tag.toLowerCase().includes(searchText))
-  //     ) 
-  //   } )
 
   
   return (

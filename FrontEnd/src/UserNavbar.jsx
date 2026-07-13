@@ -52,7 +52,7 @@ function UserNavbar() {
 
           <div className="border w-full border-gray-200 flex items-center px-5 justify-between gap-5 text-gray-700">
             <input type="search"
-              value={search} onChange={(e) => setsearch(e.target.value)} onKeyDown={(e) => {
+              value={search} onChange={(e) => setsearch(e.target.value)} onKeyDown={(e) => { navigate("/category")
               }} placeholder='Enter Your Product Name...' className=' w-120 py-2 outline-0' />
             <p className=' text-[20px]'><IoMdSearch /></p>
           </div>
