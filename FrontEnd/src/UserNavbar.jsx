@@ -77,7 +77,7 @@ function UserNavbar() {
                 <>
                   <Link to="/profile"
                     onClick={() => setDropdownOpen((prev) => !prev)}
-                    className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-[#FF8F9C] to-[#FF6B7A] font-semibold text-white text-lg shadow-md ring-2 ring-white transition-transform duration-200 hover:scale-105"
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-[#FF8F9C] to-[#f07d8b] font-semibold text-white text-lg shadow-md ring-2 ring-white transition-transform duration-200 hover:scale-105"
                   >
                     {Profile.name.charAt(0).toUpperCase()}
                   </Link>
@@ -91,20 +91,23 @@ function UserNavbar() {
                           className="block px-4 py-2.5 text-sm font-medium capitalize text-gray-700 transition-colors hover:bg-[#FF8F9C]/10 hover:text-[#FF6B7A]">
                           {Profile.role} Panel
                         </Link>
-                      )}
-
-                      <button
+                      )
+                      
+                      (<button
                         onClick={UserLogout}
-                        className="block w-full border-t border-gray-100 px-4 py-2.5 text-left text-sm font-medium text-red-500 transition-colors hover:bg-red-50">
+                        className="block w-full border-t border-gray-100 px-4 py-2.5 text-left text-sm font-medium text-pink-500 transition-colors hover:bg-red-50">
                         Logout
-                      </button>
+                      </button>)
+                      }
+
+                      
                     </div>
                   )}
                 </>
               ) : (
                 <button
                   onClick={() => SetIsopen(true)}
-                  className="rounded-full bg-[#FF8F9C] px-6 py-2 text-[15px] font-semibold text-white shadow-sm transition-all duration-200 hover:bg-[#FF6B7A] active:scale-95">
+                  className="rounded-full bg-[#FF8F9C] px-6 py-2 text-[15px] font-semibold text-white shadow-sm transition-all duration-200 hover:bg-[#f87d8c] hover:shadow hover:shadow-black/30 active:scale-95">
                   Login
                 </button>
               )}

@@ -15,7 +15,7 @@ const Order = () => {
 
 
       {fetchOrder.length === 0 ?
-        (<div className="flex flex-col items-center py-30 m-auto justify-center bg-pink-300 text-pink-500 rounded-3xl  font-bold ">Start Shopping</div>) :
+        (<div className="flex flex-col mt-5 items-center py-30 m-auto justify-center bg-[rgba(251,199,205,0.26)] text-[#f87d8c] rounded-3xl  font-bold ">Start Shopping</div>) :
         (
           <>
             {fetchOrder.map((items) => {
@@ -75,7 +75,7 @@ const Order = () => {
                             <FaStar
                               key={star}
                               onClick={() => setRating(star)}
-                              className={`text-lg cursor-pointer transition ${star <= rating ? "text-yellow-400" : "text-gray-300"
+                              className={`text-lg cursor-pointer transition ${star <= rating ? "text-yellow-300" : "text-gray-200"
                                 }`}
                             />
                           ))}
@@ -83,16 +83,18 @@ const Order = () => {
 
                         <textarea
                           placeholder="Write your review..."
-                          className="w-full border rounded-lg p-3 mt-3 outline-none resize-none"
-                          rows={2}
-                        />
+                          className="w-full border rounded-lg border-gray-200 p-3 mt-3 outline-none resize-none"
+                          rows={2} />
 
-                        <button className="mt-3 bg-[#ff909d] text-white px-4 text-[12px] py-2 font-bold rounded-lg hover:bg-pink-500">
+                        <button className="mt-3 mb-5 bg-[#ff909d] text-white px-4  text-[12px] py-2 font-bold rounded-lg hover:bg-[#f87d8 hover:scale-103 transition-all duration-300 cursor-pointer hover:shadow">
                           Submit Review
                         </button>
                       </div>
                     )}
-                    <div className=" p-5 flex flex-col  items-end"><button className="bg-[#ff909d] w-fit font-semibold text-sm px-5 py-2 rounded-lg text-white flex flex-col item-end">TRACK PACKAGE 🚚</button></div>
+                    {items.orderStatus === "Delivered" ? 
+                    ("")
+                    :(<div className=" p-5 flex flex-col  items-end"><button className="bg-[#ff909d] w-fit font-semibold text-sm px-5 py-2 rounded-lg text-white flex flex-col item-end">TRACK PACKAGE 🚚</button></div>)
+                    }
                   </div>
                 </>
               )

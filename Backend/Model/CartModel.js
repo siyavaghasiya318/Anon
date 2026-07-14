@@ -18,7 +18,7 @@ export const CartSchema = new mongoose.Schema({
                 quentity: {
                     type: Number,
                     default: 0
-                },
+                },  
                 size:{
                     type:String,
                     required:true

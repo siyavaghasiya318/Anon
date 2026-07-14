@@ -394,4 +394,37 @@ export const categories = [
   }
 ]
 
-
+export const blogData = [
+  {
+    id: 1,
+    image: "https://e-commerce-web-page-yekr.vercel.app/assets/blog-1-1VyjGULp.jpg",
+    category: "Fashion",
+    title: "Clothes Retail KPIs 2021 Guide for Clothes...",
+    author: "Mr Admin",
+    date: "Apr 06, 2022",
+  },
+  {
+    id: 2,
+    image: "https://e-commerce-web-page-yekr.vercel.app/assets/blog-2-D2cS1Z-u.jpg",
+    category: "Clothes",
+    title: "Curbside Fashion Trends: How to Win the Pickup...",
+    author: "Mr Robin",
+    date: "Jan 18, 2022",
+  },
+  {
+    id: 3,
+    image: "https://e-commerce-web-page-yekr.vercel.app/assets/blog-3-C8EN_ehn.jpg",
+    category: "Shoes",
+    title: "EBT Vendors: Claim Your Share of SNAP Online...",
+    author: "Mr Selsa",
+    date: "Feb 10, 2022",
+  },
+  {
+    id: 4,
+    image: "https://e-commerce-web-page-yekr.vercel.app/assets/blog-3-C8EN_ehn.jpg",
+    category: "Jewelry",
+    title: "Curbside Fashion Trends: How to Win the Pickup...",
+    author: "Mr Pawar",
+    date: "Mar 15, 2022",
+  },
+];

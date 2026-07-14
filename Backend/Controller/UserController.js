@@ -218,6 +218,9 @@ export const GetProfile = async (req, res) => {
 export const UserLogout = async (req, res) => {
     try {
         res.cookie("token", "", {
+              httpOnly: true,
+            secure: true,
+            sameSite: "none",
             maxAge: 0
         })
 

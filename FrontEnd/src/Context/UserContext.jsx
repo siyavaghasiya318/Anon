@@ -620,6 +620,7 @@ export const UserProvider = ({ children }) => {
             if (data.success) {
                 toast.success(data.message)
                 GetProfile()
+                GetCartProduct()
                 GetAllUsers()
                 GetSellerdetails()
                 UserAddressSubmit()

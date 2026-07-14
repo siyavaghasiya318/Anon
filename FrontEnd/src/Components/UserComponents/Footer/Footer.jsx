@@ -84,6 +84,10 @@ function Footer() {
       </div>
 
       <hr/>
+
+      {/* <div className="flex gap-2 my-5 justify-center items-center">
+        
+      </div> */}
     </div>
   )
 }
