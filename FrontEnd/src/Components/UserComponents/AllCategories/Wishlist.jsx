@@ -1,0 +1,68 @@
+import React from 'react'
+import { useContext } from 'react'
+import { UserContext } from '../../../Context/UserContext'
+import { IoIosHeartEmpty, IoMdHeart } from 'react-icons/io'
+import { FaHeart, FaRegHeart } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
+
+const Wishlist = () => {
+    const { wishlist, setWishlist, WishlistItem } = useContext(UserContext)
+    const isWishlisted = (productId) => {
+        return wishlist.some(
+            (item) => item.productid._id === productId
+        );
+    };
+    // console.log(wishlist);
+
+    return (
+        <div className="p-20">
+            {wishlist.length === 0 ?
+                (<div className="w-full  rounded-3xl py-20  shadow-xl  flex flex-col justify-center items-center">
+                    <div className=" w-80 flex flex-col gap-1 justify-center items-center ">
+                        <div className="text-3xl w-23 h-23 text-[35px] rounded-full bg-[#f78a9521] text-[#FF8F9C] flex flex-col justify-center items-center"><FaRegHeart /></div>
+                        <p className="font-gray-600 font-bold text-[25px]">Your wishlist is waiting!</p>
+                        <p className="text-gray-400 text-center ">Create your dream collection by saving items you love. They'll be right here when you're ready to buy.</p>
+                        <Link to="/" className="rounded-full cursor-pointer px-10 py-2 text-[18px] font-bold uppercase border-2 text-[#FF8F9C] mt-2 border-[#FF8F9C] hover:bg-[#FF8F9C] hover:text-white transition-all duration-300">Start shopping</Link>
+                    </div>
+                </div>) :
+                (<>
+                    <div className="grid grid-cols-5  gap-8 my-20">
+
+                        {wishlist?.map((item) => {
+                            return (
+                                <>
+                                    <div className="rounded-2xl shadow border relative border-gray-200 overflow-hidden">
+                                        <div className="w-full h-60 cursor-pointer"><img src={item.productid.images[0]} className="w-full h-full object-cover" alt="" /></div>
+
+                                        <div className="p-3 gap-1 flex flex-col">
+                                            <p className="uppercase text-[12px] font-bold text-[#FF8F9C]">{item.productid.subcategory}</p>
+                                            <p className="">{item.productid.title}</p>
+                                            <p className="font-semibold">₹{item.productid.price}</p>
+                                        </div>
+                                        <div className="top-2 right-2 absolute">
+                                            {isWishlisted(item.productid._id) ? (
+                                                <FaHeart
+                                                    className="text-red-500 text-xl cursor-pointer"
+                                                    onClick={() => WishlistItem(item.productid._id)}
+                                                />) :
+                                                (<FaRegHeart
+                                                    className="text-xl cursor-pointer"
+                                                    onClick={() => WishlistItem(item.productid._id)}
+                                                />)
+                                            }
+
+                                        </div>
+                                        {/* <i className="top-2 right-2 absolute text-2xl text-[#ff3f56] cursor-pointer"><IoMdHeart /></i> */}
+                                    </div>
+                                </>
+                            )
+                        })}
+
+                    </div>
+                </>)
+            }
+        </div>
+    )
+}
+
+export default Wishlist

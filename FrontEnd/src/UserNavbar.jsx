@@ -18,11 +18,11 @@ import { useState } from "react";
 
 
 function UserNavbar() {
-  const { SetIsopen, Isopen, islogin, Setislogin, Profile, search, setsearch, navigate, fetchCart,searchHandleChange, UserLogout, getProducts } = useContext(UserContext)
+  const { SetIsopen, Isopen, islogin, Setislogin, Profile, search, setsearch, navigate, fetchCart, searchHandleChange, UserLogout, getProducts,wishlist } = useContext(UserContext)
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  
+
   return (
     <div className=' m-auto'>
 
@@ -60,7 +60,12 @@ function UserNavbar() {
 
 
           <div className='flex w-full text-gray-700  gap-6 items-center justify-end'>
-            <p className='text-[20px]' ><FaRegHeart /></p>
+
+            <Link to="/wishlist" className="relative" onClick={() => navigate("/cart")}>
+              <p className='text-[20px] cursor-pointer'><FaRegHeart /></p>
+              <span className="absolute -top-1 -right-2 bg-[#FF8F9C] text-white w-4.5 h-4.5 rounded-full flex items-center justify-center text-[10px] font-semibold">{wishlist.length}</span>
+            </Link>
+
             <div className="relative" onClick={() => navigate("/cart")}>
               <p className='text-[22px] cursor-pointer'><IoBagHandleOutline /></p>
               <span className="absolute -top-1 -right-2
@@ -92,15 +97,15 @@ function UserNavbar() {
                           {Profile.role} Panel
                         </Link>
                       )
-                      
-                      (<button
+
+
+                      }
+                      <button
                         onClick={UserLogout}
                         className="block w-full border-t border-gray-100 px-4 py-2.5 text-left text-sm font-medium text-pink-500 transition-colors hover:bg-red-50">
                         Logout
-                      </button>)
-                      }
+                      </button>
 
-                      
                     </div>
                   )}
                 </>

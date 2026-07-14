@@ -9,18 +9,14 @@ import { UserContext } from '../../../Context/UserContext';
 
 function ProductDetail() {
     const { id } = useParams();
-    const { getProducts ,CartProduct,setselectedSize,selectedSize} = useContext(UserContext)
+    const { getProducts ,CartProduct,setselectedSize,selectedSize,WishlistItem} = useContext(UserContext)
     const[img,setImg] = useState(0)
 
-
-
-    const productitem = getProducts.find((data) => data._id == id)
-
-
+    
     
 
-
-
+    const productitem = getProducts.find((data) => data._id == id)
+    
     return (
         <div className="px-20 my-20">
             <div>
@@ -42,7 +38,7 @@ function ProductDetail() {
                                    
                                     <img src={productitem?.images[img]} alt="" className="hover:scale-120 transition-all duration-500" />
                                    
-                                    <i className="absolute top-5 text-2xl  right-5"><IoIosHeartEmpty /></i>
+                                    <i onClick={() => WishlistItem(productitem._id)} className="absolute top-5 text-2xl  right-5"><IoIosHeartEmpty /></i>
                                 </div>
                             </div>
 

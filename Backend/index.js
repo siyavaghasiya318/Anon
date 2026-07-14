@@ -11,6 +11,7 @@ import ProductRoute from "./Routes/ProductRoute.js"
 import UserAddress from "./Routes/UserAddressRoute.js"
 import CartRoute from "./Routes/CartRoute.js"
 import Orderroute from "./Routes/OrderRoute.js"
+import WishlistRouter from './Routes/WishlistRoute.js'
 
 dotenv.config()
 
@@ -41,6 +42,7 @@ app.use("/api/product", ProductRoute)
 app.use("/api/cart", CartRoute) 
 app.use("/api/useraddress",UserAddress)
 app.use("/api/order",Orderroute)
+app.use("/api/wishlist",WishlistRouter)
 
 app.get("/", (req,res) => {
     res.send("Successfully running")

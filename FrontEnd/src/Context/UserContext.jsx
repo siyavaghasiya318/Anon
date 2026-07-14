@@ -10,8 +10,8 @@ export const UserContext = createContext()
 export const UserProvider = ({ children }) => {
 
 
-    const API = 'https://anon-ksvj.onrender.com/api'
-    // const API = 'http://localhost:5000/api'
+    // const API = 'https://anon-ksvj.onrender.com/api'
+    const API = 'http://localhost:5000/api'
 
 
 
@@ -79,6 +79,9 @@ export const UserProvider = ({ children }) => {
     const [fetchCart, setFetchCart] = useState([])
     const [calculate, setCalculate] = useState([])
     const [selectedSize, setselectedSize] = useState(null)
+
+    // wishlist
+     const[wishlist,setWishlist] = useState([])
 
     // checkout
     const [paymentMethod, setPaymentMethod] = useState("cod")
@@ -673,12 +676,63 @@ export const UserProvider = ({ children }) => {
             console.log("UpdateUser error", error.response.data.message);
         }
     }
+
+
+    const GetCartProduct = async () => {
+        try {
+
+            const { data } = await axios.get(
+                `${API}/cart/getcart`,
+                { withCredentials: true }
+            );
+
+            if (!data.cart || data.cart.length === 0) {
+
+                setFetchCart([]);
+                setCalculate({});
+
+                return;
+            }
+
+            const cart = data.cart[0];
+
+            const cartItem = cart.item.map((item) => {
+
+                const prod = item.productid || {};
+
+                return {
+                    ...prod,
+                    cartId: cart._id,
+                    id: prod._id,
+                    quentity: item.quentity,
+                    size: item.size,
+                    totalPrice: item.totalPrice
+                };
+
+            });
+
+            setCalculate(cart);
+            setFetchCart(cartItem);
+
+
+        } catch (error) {
+
+            console.log(
+                "GetCartProduct error:",
+                error?.response?.data?.message
+            );
+
+        }
+    };
+
+
     const UserLogout = async () => {
         try {
             const { data } = await axios.post(`${API}/user/logout`, {}, { withCredentials: true })
             // console.log(data);
 
             SetshowUsers(data.users)
+            setFetchCart([])
             if (data.success) {
                 SetProfile(null)
                 navigate("/")
@@ -839,52 +893,7 @@ export const UserProvider = ({ children }) => {
     //     }
     // }
 
-    const GetCartProduct = async () => {
-        try {
-
-            const { data } = await axios.get(
-                `${API}/cart/getcart`,
-                { withCredentials: true }
-            );
-
-            if (!data.cart || data.cart.length === 0) {
-
-                setFetchCart([]);
-                setCalculate({});
-
-                return;
-            }
-
-            const cart = data.cart[0];
-
-            const cartItem = cart.item.map((item) => {
-
-                const prod = item.productid || {};
-
-                return {
-                    ...prod,
-                    cartId: cart._id,
-                    id: prod._id,
-                    quentity: item.quentity,
-                    size: item.size,
-                    totalPrice: item.totalPrice
-                };
-
-            });
-
-            setCalculate(cart);
-            setFetchCart(cartItem);
-
-
-        } catch (error) {
-
-            console.log(
-                "GetCartProduct error:",
-                error?.response?.data?.message
-            );
-
-        }
-    };
+    
 
     const DecQuentity = async (productid, size) => {
         try {
@@ -967,6 +976,25 @@ export const UserProvider = ({ children }) => {
         }
     }
 
+    const WishlistItem = async(productid) => {
+        try {
+            const{data} = await axios.post(`${API}/wishlist/wishlistitem/${productid}`, {} ,{ withCredentials: true })   
+            Getwishlist()
+        } catch (error) {
+            console.log("WishlistItem error", error?.response?.data?.message)
+        }
+    }
+    const[heart,setHeart] = useState("")
+
+    const Getwishlist = async() => {
+        try {
+            const{data} = await axios.get(`${API}/wishlist/getwishlist`, { withCredentials: true })
+            setWishlist(data.wishlistitem)
+        } catch (error) {
+            console.log("GetWishlistItem error", error?.response?.data?.message)
+        }
+    }
+   
     // forgetpassword
 
 
@@ -988,6 +1016,7 @@ export const UserProvider = ({ children }) => {
         GetCartProduct()
         GetAddress()
         GetMyOrderItem()
+        Getwishlist()
 
 
     }, [])
@@ -1009,10 +1038,12 @@ export const UserProvider = ({ children }) => {
             email, setEmail, select, setSelect, emailsent, setOtp, sendOtp, ResetPassword, setpassword,
             // UserAddres 
             UserAddChange, addressForm, setAddressForm, UserAddressSubmit, showAddress, RemoveAddress, selectedAddressid,
-
+            // 
+            WishlistItem,
             // cart
             setselectedSize, selectedSize,
-
+            // wishlist
+            wishlist,setWishlist,
             // checkout
             paymentMethod, setPaymentMethod, setSelectedAddress, Checkoutdata, showAddressModal, setShowAddressModal,
             // order

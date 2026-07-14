@@ -29,6 +29,7 @@ import Allproducts from './Components/UserComponents/AllCategories/Allproducts'
 import CartProduct from './Components/UserComponents/AllCategories/CartProduct'
 import Checkoutpage from './Pages/Userpages/Checkoutpage'
 import PublickRoute from './Components/MainLayouts/PublickRoute'
+import Wishlist from './Components/UserComponents/AllCategories/Wishlist'
 
 function App() {
 
@@ -45,6 +46,7 @@ function App() {
             <Route path="/category" element={<Category />} />
             <Route path="category/:category/:gender/:subcategory" element={<Allproducts />} />
             <Route path="productdetail/:id" element={<ProductDetail />} />
+            <Route path="wishlist" element={<Wishlist />} />
             <Route path="profile" element={<UserProfile />} />
             <Route path="cart" element={<CartProduct />} />
             <Route path="checkout" element={<Checkoutpage />} />
