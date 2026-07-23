@@ -10,20 +10,20 @@ import { BiSolidCoupon } from "react-icons/bi";
 import { SiFacebook } from "react-icons/si";
 
 export const navbarIcones = [
-  {icone: <SiFacebook/>},
-  {icone: <IoLogoTwitter/>},
-  {icone: <FaInstagram/>},
-  {icone: <FaLinkedin/>},
+  { icone: <SiFacebook /> },
+  { icone: <IoLogoTwitter /> },
+  { icone: <FaInstagram /> },
+  { icone: <FaLinkedin /> },
 ]
 
 export const sub = [
   {
     gender: "men",
-    items: ["shirt", "tshirt","jeans", "formal", "track"]
+    items: ["shirt", "tshirt", "jeans", "formal", "track"]
   },
   {
     gender: "man",
-    items: ["top", "tshirt", "jeans", "dress","co-ords"],
+    items: ["top", "tshirt", "jeans", "dress", "co-ords"],
   },
 
 ]
@@ -258,7 +258,7 @@ export const products = [
 
 
 export const sidebardetail = [
-  
+
   {
     icon: <HiMiniUserGroup />,
     name: "Users",
@@ -360,37 +360,37 @@ export const categories = [
     img: "https://res.cloudinary.com/dsyfbtvba/image/upload/v1782546921/d1tiitdsyjwvmublvigf.avif",
     name: 'Man',
     gender: "men",
-    category:"clothes",
-    items: ["shirt", "tshirt","jeans", "formal", "track"]
+    category: "clothes",
+    items: ["shirt", "tshirt", "jeans", "formal", "track"]
   },
   {
     img: "https://res.cloudinary.com/dsyfbtvba/image/upload/v1782715882/e5bs4fnzl5fws4nixpim.avif",
     name: "Women",
     gender: "women",
-    category:"clothes",
-    items: ["top", "tshirt", "jeans", "dress","co-ords"]
+    category: "clothes",
+    items: ["top", "tshirt", "jeans", "dress", "co-ords"]
   },
   {
     img: "https://res.cloudinary.com/dsyfbtvba/image/upload/v1782538202/jc7uxxaovjeilkyjgvph.avif",
     name: "Beauty",
     gender: "women",
-    category:"beauty",
-    items: ["lipstick", "makeup", "foundation","perfume"]
+    category: "beauty",
+    items: ["lipstick", "makeup", "foundation", "perfume"]
 
   },
   {
     img: "https://res.cloudinary.com/dsyfbtvba/image/upload/v1782552427/nmk01rsxyra7bivo3qby.avif",
     name: "Footwear",
     gender: "men",
-    category:"footwear",
-    items: ["sportsshoes","formalshoes","snickers",'flipflops','boots',"flipflopsman"]
+    category: "footwear",
+    items: ["sportsshoes", "formalshoes", "snickers", 'flipflops', 'boots', "flipflopsman"]
   },
   {
     img: "https://res.cloudinary.com/dsyfbtvba/image/upload/v1782705022/jmyjm0timwvzwtlyninr.avif",
     gender: "women",
-    category:"footwear",
-    name:"Heels",
-    items: ["heels","flats", "shoes", "flipflops"]
+    category: "footwear",
+    name: "Heels",
+    items: ["heels", "flats", "shoes", "flipflops"]
   }
 ]
 
@@ -421,10 +421,48 @@ export const blogData = [
   },
   {
     id: 4,
-    image: "https://e-commerce-web-page-yekr.vercel.app/assets/blog-3-C8EN_ehn.jpg",
+    image: "https://e-commerce-web-page-yekr.vercel.app/assets/blog-4-d1980xaE.jpg",
     category: "Jewelry",
     title: "Curbside Fashion Trends: How to Win the Pickup...",
     author: "Mr Pawar",
     date: "Mar 15, 2022",
   },
 ];
+
+export const menscategory = [
+  {name:"shirt"},
+  {name:"tshirt"},
+  {name:"Jeans"},
+  {name:"formal trousers"},
+  {name:"track pants & joggers"},
+]
+
+export const womenscategory =[
+  {name: "Top"},
+  {name: "tshirt"},
+  {name: "Jeans"},
+  {name: "dress"},
+  {name: "Co-Ords"}
+]
+
+export const beautycategory =[
+  {name: "Lipstick"},
+  {name: "Eye-Makeup"},
+  {name: "Foundation"},
+  {name: "Perfume"},
+]
+
+export const menfootwear =[
+  {name: "sportsshoes"},
+  {name: "formalshoes"},
+  {name: "snickers"},
+  {name: "flipflopsman"},
+  {name: "boots"},
+]
+
+export const womenfootwear = [
+  {name: "Heels"},
+  {name: "Flats"},
+  {name: "Shoes"},
+  {name: "FlipFlopswomen"},
+]

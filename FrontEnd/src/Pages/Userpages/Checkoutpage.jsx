@@ -8,9 +8,9 @@ const Checkoutpage = () => {
   })
   return (
     <>
-      <div className="flex mx-25 bg-gray-50 gap-10 p-8  m-auto mb-10  ">
-        <div className="w-[50%]"><Checkout /></div>
-        <div className="w-[50%]"><OrderSummery /></div>
+      <div className="md:flex mx-0 lg:mx-25 xs:mx-5 md:mx-10 bg-gray-50 gap-10 xs:p-8 p-4  m-auto mb-10  ">
+        <div className="md:w-[50%]"><Checkout /></div>
+        <div className="md:w-[50%]"><OrderSummery /></div>
       </div>
     </>
   )

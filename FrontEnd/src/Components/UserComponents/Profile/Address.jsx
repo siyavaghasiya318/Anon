@@ -8,7 +8,7 @@ import { RiDeleteBinFill } from "react-icons/ri";
 
 
 const Address = () => {
-    const { isaddress, Setisaddress,UserAddChange, addressForm, showAddress, setAddressForm, UserAddressSubmit,RemoveAddress } = useContext(UserContext)
+    const { isaddress, Setisaddress, UserAddChange, addressForm, showAddress, setAddressForm, UserAddressSubmit, RemoveAddress } = useContext(UserContext)
 
     const addlable = [
         { name: "home", icon: <FaHome /> },
@@ -17,18 +17,18 @@ const Address = () => {
     ]
     return (
         <>
-            <form className="w-105">
-                <div className="flex gap-2 text-gray-500 ">
+            <form className="md:w-105 w-full">
+                <div className="flex justify-between items-center gap-2 text-gray-500 ">
 
-                    <div className="">
-                        <div className="text-[25px] font-semibold text-black">Shipping Addresses</div>
+                    <div className="w-60">
+                        <div className="md:text-[25px] text-[21px] font-semibold text-black">Shipping Addresses</div>
                         <div className="text-sm font-semibold">Manage your delivery locations for faster checkout.</div>
                     </div>
 
                     {!isaddress &&
-                        <div onClick={() => Setisaddress(true)} className="bg-[#ff909d] cursor-pointer text-white px-5 text-center uppercase font-semibold flex items-center justify-center rounded-lg">
-                            <div><FaPlus /></div>
-                            <div >Add new</div>
+                        <div onClick={() => Setisaddress(true)} className="bg-[#ff909d] cursor-pointer text-white px-5 md:px-6 h-fit py-3 md:py-4 md:max-h-none text-center uppercase gap-1 font-semibold flex items-center justify-center rounded-lg">
+                            <div className="text-sm md:text-md"><FaPlus /></div>
+                            <div className=" md:text-md text-xs ">Add new</div>
                         </div>}
                 </div>
 
@@ -48,24 +48,24 @@ const Address = () => {
 
 
                                     (<div>
-                                        <div className="text-gray-700  ">
-                                            {showAddress.map((item ,key=0) => {
-                                                return(
+                                        <div className="text-gray-700 md:mt-2 mt-10">
+                                            {showAddress.map((item, key = 0) => {
+                                                return (
                                                     <div className="p-5 my-5 bg-white shadow hover:shadow-lg rounded-md">
                                                         <div className="flex items-center justify-between">
-                                                            <p className="uppercase font-bold ">{item.lable}</p>
-                                                            <div className="flex gap-5 text-[18px] text-gray-400">
+                                                            <p className="uppercase font-bold md:text-md text-sm">{item.lable}</p>
+                                                            <div className="flex gap-5 text-md md:text-[18px] text-gray-400">
                                                                 <i onClick={() => RemoveAddress(item._id)} className="hover:text-[#FF909D] cursor-pointer"><RiDeleteBinFill /></i>
-                                                                <i className="hover:text-[#FF909D] cursor-pointer"><MdEditLocationAlt  /></i>
+                                                                <i className="hover:text-[#FF909D] cursor-pointer"><MdEditLocationAlt /></i>
                                                             </div>
                                                         </div>
 
                                                         <div className="text-[16px] text-black capitalize mt-2 font-semibold">{item.name}</div>
                                                         <p className="text-[10px] tracking-wider font-semibold text-gray-500">{item.phoneno}</p>
 
-                                                        <div className="capitalize mt-2 flex items-center">{item.streetaddress},  {item.city}, {item.state}</div>
-                                                        <p className="">{item.pincode}</p>
-                                                       
+                                                        <div className="capitalize mt-2 flex items-center md:text-[16px] text-sm">{item.streetaddress},  {item.city}, {item.state}</div>
+                                                        <p className="md:text-[16px] text-sm">{item.pincode}</p>
+
                                                     </div>
                                                 )
                                             })}
@@ -80,22 +80,22 @@ const Address = () => {
 
 
                         ) :
-                        (<div className="flex flex-col  gap-5 text-gray-400 text-sm w-full font-semibold">
-                            <i onClick={() => Setisaddress(false)} className="w-full flex justify-end text-gray-500 text-[18px] cursor-pointer"><RxCross2 /></i>
+                        (<div className="flex  flex-col  gap-5 text-gray-400 text-sm w-full   font-semibold mt-5">
+                            {/* <i onClick={() => Setisaddress(false)} className="w-full hidden md:block flex justify-end text-gray-500 text-[18px] cursor-pointer "><RxCross2 /></i> */}
                             <div className="flex items-center w-full">
                                 <div className="text-black text-[20px] font-semibold">Add New Address</div>
                             </div>
 
 
-                            <div className="flex gap-5 font-bold">
-                                <div className="flex flex-col gap-1">
+                            <div className="flex gap-5  font-bold">
+                                <div className="flex flex-col   gap-1">
                                     <div className="uppercase text-[10px] font-extrabold ">Full Name</div>
-                                    <div className="font-normal"><input type="text" onChange={UserAddChange} name="name" value={addressForm.name} className='py-2 px-2 bg-gray-100 text-black capitalize  rounded-md' placeholder='Receiver Name' id="" /></div>
+                                    <div className="font-normal"><input type="text" onChange={UserAddChange} name="name" value={addressForm.name} className='py-2 w-41 sm:w-full px-2 bg-gray-100 text-black capitalize rounded-md' placeholder='Receiver Name' id="" /></div>
                                 </div>
 
-                                <div className="flex flex-col gap-1">
+                                <div className="flex flex-col  gap-1">
                                     <div className="uppercase text-[10px] font-extrabold">Phone number  </div>
-                                    <div className="font-normal"><input type="text" onChange={UserAddChange} name="phoneno" value={addressForm.phoneno} className='py-2 px-2   bg-gray-100  text-black rounded-md' placeholder='Receiver Name' id="" /></div>
+                                    <div className="font-normal"><input type="text" onChange={UserAddChange} name="phoneno" value={addressForm.phoneno} className='py-2 w-42 sm:w-full px-2   bg-gray-100  text-black rounded-md' placeholder='Receiver Name' id="" /></div>
                                 </div>
                             </div>
 
@@ -181,8 +181,9 @@ const Address = () => {
 
                             <div className="flex gap-5 justify-end">
                                 <button onClick={() => Setisaddress(false)} className="text-[12px] uppercase px-5 py-1 cursor-pointer rounded-lg hover:bg-gray-50 hover:text-gray-700 font-extrabold">cancel</button>
-                                <button type="submit" onClick={UserAddressSubmit} className="text-white bg-slate-600 cursor-pointer px-8 py-3 rounded-lg uppercase font-bold ">save address</button>
+                                <button type="submit" onClick={UserAddressSubmit} className="text-white bg-slate-600 cursor-pointer  px-8 py-3 rounded-lg uppercase font-bold ">save address</button>
                             </div>
+                            
 
                         </div>)}
                 </div>

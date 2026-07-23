@@ -19,12 +19,12 @@ export const AddProduct = async (req, res) => {
         const seller = await Seller.findOne({user:req.user.id})
 
     
-        // console.log("sellerproductcontroller",seller);
+        
   
         
 
         if(!seller){
-            res.json({
+           return res.status(400).json({
                 message: "Seller not found",
                 success: false
             })
@@ -87,7 +87,7 @@ export const AddProduct = async (req, res) => {
 export const Getproducts = async(req,res) => {
     try {
 
-        const product = await Products.find({}).populate('seller', 'shopname').sort({ createdAt: -1 }).limit(8);
+        const product = await Products.find({}).populate('seller', 'shopname').sort({ createdAt: -1 })
         // console.log("getproductcontroller", product);
         
         res.status(200).json({

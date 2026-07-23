@@ -11,11 +11,11 @@ function Category() {
   const{search} = useContext(UserContext)
 
   return (
-    <div className="px-20">
+    <div className="px-3 sm:px-5 md:px-10 lg:px-20">
         <Image/>
 
-        <div className="w-full flex gap-10 mt-20">
-          {search ? (""): (<div className="w-[25%] "><ProductFilter/></div>)}
+        <div className=" md:flex gap-10 mt-20">
+          {search ? (""): (<div className="w-[22%] "><ProductFilter/></div>)}
           <div className=" w-full"><UserProducts category={category} gender={gender}/></div>
         </div>
     </div>

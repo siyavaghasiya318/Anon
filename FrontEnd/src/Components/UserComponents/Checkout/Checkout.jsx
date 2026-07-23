@@ -10,21 +10,21 @@ const Checkout = () => {
     return (
         <>
             <div className="text-gray-700">
-                <p className="text-[30px] text-gray-800 font-bold tracking-wider text-shadow-2xs">Checkout</p>
+                <p className="md:text-[30px] xs:px-0 px-5 text-[25px] text-gray-800 font-bold tracking-wider text-shadow-2xs">Checkout</p>
 
                 <div className="mt-8 flex flex-col gap-4 rounded-2xl shadow bg-white">
 
-                    <div className="flex items-center justify-between px-8 pt-8 pb-2 ">
-                        <p className="text-[22px] font-extrabold text-gray-800">Shipping Address</p>
+                    <div className="xs:flex  items-center justify-between px-8 md:pt-8 pt-5 pb-2 ">
+                        <p className="lg:text-[22px] md:text-lg text-md sm:text-[20px] font-extrabold text-gray-800">Shipping Address</p>
                         <div onClick={() => setShowAddressModal(true)}
-                            className="flex items-center gap-1.5 text-[#ff909d] font-bold text-sm cursor-pointer">
-                            <FaPlus className="text-[11px] mt-0.5" />
-                            Add New
+                            className="flex items-center gap-1.5 xs:mt-0 mt-3 text-[#ff909d] font-bold lg:text-sm text-xs cursor-pointer">
+                            <FaPlus className="lg:text-[11px] text-[10px] mt-0.5" />
+                            <p >Add New</p>
                         </div>
                     </div>
 
                     {showAddress.length == 0 ?
-                        (<div className="flex px-10 font-bold text-xl py-10 m-5  text-[#ff909d] flex-col justify-center items-center border-2 border-gray-200 rounded-2xl">
+                        (<div className="flex px-10 font-bold text-md md:text-lg lg:text-xl py-10 xs:m-5 mt-0 mx-5 mb-5  text-[#ff909d] flex-col justify-center items-center border-2 border-gray-200 rounded-2xl">
                             Plese Add Address
                         </div>) :
                         (
@@ -54,15 +54,15 @@ const Checkout = () => {
                 </div>
 
 
-                <div className="bg-white p-8 shadow mt-10 rounded-2xl">
-                    <div className="text-[22px] font-extrabold text-gray-800">
+                <div className="bg-white p-8 shadow md:mt-10 mt-8 rounded-2xl">
+                    <div className="lg:text-[22px] md:text-lg text-[20px] font-extrabold text-gray-800">
                         Payment Method
                     </div>
 
-                    <div className="grid grid-cols-2 gap-5 mt-8">
+                    <div className="grid grid-cols-1  lg:grid-cols-2 gap-5 mt-8">
 
                         <div onClick={() => setPaymentMethod("cod")}
-                            className={`border-2 rounded-xl p-5 cursor-pointer transition-all duration-300 ${paymentMethod === "cod"
+                            className={`border-2  rounded-xl p-5 cursor-pointer  transition-all duration-300 ${paymentMethod === "cod"
                                 ? "border-[#ff909d] bg-[#fff5f6]"
                                 : "border-gray-100"
                                 }`}>
@@ -70,13 +70,13 @@ const Checkout = () => {
                             <div className="flex justify-between mb-5">
                                 <i className="text-[22px] text-[#ff909d]"><BsCashCoin /></i>
 
-                                <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${paymentMethod === "cod"
+                                <div className={`lg:w-5 w-4 lg:h-5 h-4 rounded-full border-2 flex items-center justify-center ${paymentMethod === "cod"
                                     ? "border-[#ff909d]"
                                     : "border-gray-300"
                                     }`}>
 
                                     {paymentMethod === "cod" && (
-                                        <div className="w-2.5 h-2.5 rounded-full bg-[#ff909d]" />
+                                        <div className="lg:w-2.5 w-2 h-2 lg:h-2.5 rounded-full bg-[#ff909d]" />
                                     )}
                                 </div>
                             </div>
@@ -101,11 +101,11 @@ const Checkout = () => {
                                 <i className="text-[22px] text-gray-500"><FaRegCreditCard /></i>
 
                                 <div
-                                    className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${paymentMethod === "stripe"
+                                    className={`lg:w-5 w-4 lg:h-5 h-4 rounded-full border-2 flex items-center justify-center ${paymentMethod === "stripe"
                                         ? "border-[#ff909d]"
                                         : "border-gray-300"}`}>
 
-                                    {paymentMethod === "stripe" && (<div className="w-2.5 h-2.5 rounded-full bg-[#ff909d]" />)}
+                                    {paymentMethod === "stripe" && (<div className="lg:w-2.5 w-2 h-2 lg:h-2.5 rounded-full bg-[#ff909d]" />)}
                                 </div>
                             </div>
 

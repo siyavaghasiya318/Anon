@@ -21,7 +21,6 @@ export const CartSchema = new mongoose.Schema({
                 },  
                 size:{
                     type:String,
-                    required:true
                 },
                 totalPrice: {
                     type: Number,

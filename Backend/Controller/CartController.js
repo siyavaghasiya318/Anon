@@ -7,12 +7,17 @@ export const Addcart = async (req, res) => {
         const { productid, size, quentity = 1 } = req.body
         const userid = req.user.id
 
-        if (!size) {
+        const product = await Products.findOne({_id:productid})
+
+        if (product.size.length > 0 && !size) {
             return res.status(404).json({
                 message: "Size is reqired",
                 success: false,
             })
         }
+        
+        
+        
 
         const newProductid = await Products.findById(productid)
         if (!newProductid) {
@@ -84,6 +89,7 @@ export const GetCartProduct = async (req, res) => {
 
         const cart = await Cart.find({ user: userid }).populate("item.productid")
 
+        
         if (!userid) {
             return res.status(400).json({
                 message: "user not found",
@@ -131,12 +137,7 @@ export const DecreaseQuentity = async (req, res) => {
         }
 
         const product = await Products.findById(productid)
-        // if (!product) {
-        //     return res.status(404).json({
-        //         message: "Product Not Found",
-        //         success: false
-        //     })
-        // }    
+       
 
 
         const existingItem = await cart.item.find(

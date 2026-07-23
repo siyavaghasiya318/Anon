@@ -10,9 +10,9 @@ const OrderSummery = () => {
 
 
   return (
-    <div className="mt-20">
+    <div className="md:mt-20 mt-10">
       <div className="bg-white p-8 shadow mt-10 rounded-2xl">
-        <div className="text-[22px] font-extrabold text-gray-800"> Order Summary</div>
+        <div className="lg:text-[22px] md:text-lg text-[20px] font-extrabold text-gray-800"> Order Summary</div>
 
         <div className="mt-10 flex flex-col max-h-65 gap-5 overflow-auto  no-scrollbar ">
           {fetchCart.map((item) => {
@@ -20,17 +20,17 @@ const OrderSummery = () => {
               <>
                 <div className="flex gap-5">
 
-                  <div className="w-15 "><img src={item.images[0]} className="w-full h-full object-cover  rounded-lg overflow-hidden" alt="" /></div>
+                  <div className="w-15 h-full md:w-12 md:h-15 lg:w-15 lg:h-full "><img src={item.images[0]} className="w-full h-full object-cover  rounded-lg overflow-hidden" alt="" /></div>
 
-                  <div className="flex flex-col gap-1">
-                    <p className="font-bold text-sm ">{item.title}</p>
+                  <div className="flex flex-col gap-1 md:gap-0 lg:gap-1">
+                    <p className="font-bold text-sm md:text-xs lg:text-sm">{item.title}</p>
 
                     <div className="flex gap-2 items-center">
-                      <div className="text-xs font-bold text-gray-400 flex items-center gap-2">QTY: {item.quentity} <GoDotFill className="text-gray-300 text-[10px]" /></div>
-                      <div className="text-sm font-extrabold text-[#FF8F9C]">₹{item.totalPrice}</div>
+                      <div className="text-xs font-bold text-gray-400 flex items-center gap-2 md:text-[10px] lg:text-xs">QTY: {item.quentity} <GoDotFill className="text-gray-300 text-[10px]" /></div>
+                      <div className="text-sm font-extrabold text-[#FF8F9C] md:text-xs lg:text-sm">₹{item.totalPrice}</div>
                     </div>
 
-                    <div className="text-xs font-bold text-gray-400 uppercase">{item.size}</div>
+                    <div className="text-xs md:text-[10px] lg:text-sm font-bold text-gray-400 uppercase">{item.size}</div>
                   </div>
 
                 </div>
@@ -58,12 +58,12 @@ const OrderSummery = () => {
           </div>
 
           <div className="flex justify-between items-center ">
-            <p className="uppercase text-gray-400  font-extrabold text-[16px] tracking-wider">net total</p>
-            <p className="text-3xl font-extrabold tracking-tighter ">₹ {calculate?.total}</p>
+            <p className="uppercase text-gray-400  font-extrabold text-[16px] md:text-sm lg:text-md tracking-wider">net total</p>
+            <p className="text-2xl font-extrabold tracking-tighter lg:text-3xl">₹ {calculate?.total}</p>
           </div>
         </div>
         
-        <button onClick={Checkoutdata} className="bg-gray-900 w-full py-4 tracking-widest my-5 cursor-pointer rounded-lg text-white font-bold uppercase ">complete order</button>
+        <button onClick={Checkoutdata} className="bg-gray-900 w-full py-3 lg:py-4 text-sm lg:text-md tracking-widest my-5 cursor-pointer rounded-lg text-white font-bold uppercase ">complete order</button>
 
       </div>
     </div>

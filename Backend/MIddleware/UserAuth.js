@@ -8,7 +8,6 @@ const AuthUser = (req,res,next) => {
         
         if(!token){
             return res.status(400).json({
-                message: "token not found",
                 success: false
             })
         }

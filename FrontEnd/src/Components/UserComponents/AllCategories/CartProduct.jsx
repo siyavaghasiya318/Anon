@@ -11,20 +11,19 @@ const CartProduct = () => {
   const subtotal = fetchCart.reduce((acc, item) => {
     return acc + item.totalPrice;
   }, 0);
-
+  
+  
   const tax = subtotal * 0.05;
 
   const total = subtotal + tax;
 
-  useEffect(() => {
-    scrollTo(0, 0)
-  })
-
+  
 
   return (
-    <div className="px-25 my-10">
-      <div className="p-8 flex gap-10 py-10 bg-gray-50 rounded-2xl  border-e-red-800">
-        {fetchCart.length == 0 ?
+    <div className="lg:px-25  xs:px-15 md:px-20 my-5 xs:my-10">
+      <div className="p-8 lg:flex gap-10 py-10 bg-gray-50 rounded-2xl  border-e-red-800">
+        {fetchCart.length === 0 ?
+        
           (<>
             <div className="flex gap-5 flex-col justify-end py-10 h-80  w-2/3 items-center bg-white rounded-2xl shadow-sm m-auto" >
               <div className="text-[100px] relative  text-[#FF8F9C]"><MdShoppingBag />
@@ -35,32 +34,32 @@ const CartProduct = () => {
             </div>
           </>) :
           (<>
-            <div className="w-[70%] ">
+            <div className="lg:w-[70%] w-full">
               <>
-                <p className="text-gray-700  font-bold text-[30px] p-10 text-shadow-2xs">Shopping Cart</p>
-                <div className="  rounded-2xl flex flex-col gap-5 px-10 ">
+                <p className="text-gray-700  font-bold md:text-[30px] md:p-10 p-5 text-[22px] xs:text-[27px] text-shadow-2xs">Shopping Cart</p>
+                <div className="  rounded-2xl flex flex-col gap-5 md:px-10 sm:px-6 px-4">
                   {fetchCart.map((item) => {
                     return (
                       <>
-                        <div className="bg-white flex text-gray-700 shadow-sm rounded-xl overflow-hidden p-5  gap-6">
-                          <Link to={`/productdetail/${item._id}`}  className="w-28 "><img src={item.images[0]} className="w-full h-full object-cover border border-gray-100 rounded-lg" alt="" /></Link>
-                          <div className="flex flex-col gap-1 w-full">
+                        <div className="bg-white flex text-gray-700 shadow-sm rounded-xl overflow-hidden md:p-3 lg:p-5 p-2  gap-6">
+                          <Link to={`/productdetail/${item._id}`}  className="lg:w-28 md:w-24 md:h-27 sm:w-21 sm:h-22 xs:w-18 xs:h-19 w-15  h-16 flex flex-col justify-center m-auto"><img src={item.images[0]} className="w-full h-full object-cover border border-gray-100 rounded-lg" alt="" /></Link>
+                          <div className="flex flex-col xs:gap-1 w-full">
 
                             <div className="flex  justify-between items-center">
-                              <p className="font-bold text  truncate w-55">{item.title}</p>
-                              <i className="text-[#FF8F9C] text-[18px]">< RiDeleteBinLine /></i>
+                              <p className="font-bold lg:text-md md:text-sm sm:text-sm text-xs truncate w-30 xs:w-45 sm:w-55">{item.title}</p>
+                              <i className="text-[#FF8F9C] sm:text-md lg:text-[18px] text-sm">< RiDeleteBinLine /></i>
                             </div>
 
-                            <p className="text-gray-500 px-3 py-1  w-fit bg-gray-100 rounded-full font-semibold text-sm">size : <span className="text-[10px] uppercase">{item.size}</span></p>
+                            <p className="text-gray-500 lg:px-3 px-2 lg:py-1  w-fit bg-gray-100 rounded-full font-semibold text-[10px] sm:text-[12px] md:text-[13px] lg:text-sm">size : <span className="text-[10px] uppercase">{item.size}</span></p>
 
-                            <p className="text-[#FF8F9C] text-[18px] font-extrabold ">₹ {item.totalPrice.toFixed(2)}</p>
+                            <p className="text-[#FF8F9C] md:text-md sm:text-sm text-xs lg:text-[18px] font-extrabold ">₹ {item.totalPrice.toFixed(2)}</p>
 
 
 
-                            <button className="flex border w-fit px-3 py-1 items-center gap-4 rounded-md border-gray-200 cursor-pointer ">
-                              <i onClick={() => DecQuentity(item.id, item.size)} className="text-[10px] ">< FaMinus /></i>
-                              <div className="">{item.quentity}</div>
-                              <i onClick={() => CartProduct(item.id, item.size)} className="text-[10px] " >< FaPlus /></i>
+                            <button className="flex border mt-1 w-fit px-2 sm:px-3 lg:py-1 items-center sm:gap-4 gap-2 rounded-md border-gray-200 cursor-pointer ">
+                              <i onClick={() => DecQuentity(item.id, item.size)} className="lg:text-[10px] text-[7px]">< FaMinus /></i>
+                              <div className="lg:text-md md:text-sm sm:text-xs text-xs">{item.quentity}</div>
+                              <i onClick={() => CartProduct(item.id, item.size)} className="lg:text-[10px] text-[7px] " >< FaPlus /></i>
                             </button>
 
                             {/* <p className="text-[13px] text-gray-600 capitalize">{item.shortdescription}</p> */}
@@ -74,8 +73,8 @@ const CartProduct = () => {
             </div>
 
 
-            <div className="w-[30%]  text-gray-700">
-              <div className="bg-white mt-30 p-6 flex flex-col gap-3 shadow-sm rounded-2xl">
+            <div className="lg:w-[30%] w-full  text-gray-700">
+              <div className="bg-white lg:mt-30 mt-20 p-6 flex flex-col gap-3 shadow-sm rounded-2xl">
                 <p className="text-gray-700  font-bold text-[25px] text-shadow-2xs">Order Summary </p>
 
                 <div className="flex items-center justify-between">

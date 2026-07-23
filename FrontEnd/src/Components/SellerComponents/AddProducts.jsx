@@ -54,7 +54,7 @@ const AddProducts = () => {
               <option value="Select">Select </option>
               <option value="clothes">Clothes</option>
               <option value="beauty">Beauty</option>
-              <option value="footwear">Footear</option>
+              <option value="footwear">Footear</option> 
             </select>
           </div>
 
@@ -96,8 +96,8 @@ const AddProducts = () => {
                   <option value="shirt">Shirts</option>
                   <option value="tshirt">T-shirt</option>
                   <option value="jeans">Jeans</option>
-                  <option value="formal">Formal Trousers</option>
-                  <option value="track">Track Pants & Joggers</option>
+                  <option value="formal trousers">Formal Trousers</option>
+                  <option value="track pants & joggers">Track Pants & Joggers</option>
                 </select>) :
 
                 productFrom.category == "beauty" ?

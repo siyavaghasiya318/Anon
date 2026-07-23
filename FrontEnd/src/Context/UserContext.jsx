@@ -632,6 +632,7 @@ export const UserProvider = ({ children }) => {
                 GetSellerProducts()
                 GetAllSellers()
                 GetAddress()
+                Getwishlist()
             }
 
             SetUserForm({
@@ -733,6 +734,7 @@ export const UserProvider = ({ children }) => {
 
             SetshowUsers(data.users)
             setFetchCart([])
+            setWishlist([])
             if (data.success) {
                 SetProfile(null)
                 navigate("/")
@@ -852,7 +854,7 @@ export const UserProvider = ({ children }) => {
 
             GetCartProduct()
             if (data.success) {
-                GetCartProduct()
+                GetCartProduct()    
                 navigate("/cart")
                 setselectedSize(null)
             }
@@ -980,6 +982,7 @@ export const UserProvider = ({ children }) => {
         try {
             const{data} = await axios.post(`${API}/wishlist/wishlistitem/${productid}`, {} ,{ withCredentials: true })   
             Getwishlist()
+            toast.success(data.message)
         } catch (error) {
             console.log("WishlistItem error", error?.response?.data?.message)
         }
@@ -995,10 +998,9 @@ export const UserProvider = ({ children }) => {
         }
     }
    
-    // forgetpassword
 
-
-
+    
+    
 
     useEffect(() => {
         GetProfile()
