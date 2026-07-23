@@ -24,7 +24,9 @@ const Forgotpassword = () => {
                             </div>
                             <form action="" onSubmit={(e) => { e.preventDefault(); emailsent() }} className="px-6 pt-5 flex flex-col  gap-3 ">
                                 <input value={email}  onChange={(e) => setEmail(e.target.value)}   type="email" placeholder="Email" className="border border-gray-300 outline-0 rounded-sm px-4 py-2 w-full" />
-                                <button type='submit' className="bg-[#ff8f9c] my-5 py-2 rounded-sm w-full text-white font-semibold mt-5">Send OTP</button>
+                                
+                                <button type='submit' className="bg-[#ff8f9c] py-2 rounded-sm w-full text-white font-semibold mt-5">Send OTP</button>
+                                <p className="text-sm text-[#ff8f9c] cursor-pointer text-center" onClick={() => setSelect("login")}>Back to login page</p>
                             </form>
                         </div>
                     </div>
@@ -41,8 +43,9 @@ const Forgotpassword = () => {
                                 <input   type="email" value={email} placeholder="Email" className="border border-gray-300 outline-0 rounded-sm px-4 py-2 w-full" />
                                 <input  type="" value={otp} onChange={(e) => setOtp(e.target.value)} placeholder="OTP" className="border border-gray-300 outline-0 rounded-sm px-4 py-2 w-full" />
                                 <button type='submit' className="bg-[#ff8f9c] my-5 py-2 rounded-sm w-full text-white font-semibold mt-5">Send OTP</button>
+                                <p className="text-sm cursor-pointer text-center " onClick={() => setSelect("login")}>Back to login page</p>
                             </form>
-                        </div>
+                        </div>  
                     </div>
                 </>)</>
             )}
@@ -58,6 +61,7 @@ const Forgotpassword = () => {
                                 <input   type="email" value={email} onChange={(e) => setEmail(e.target.value)}  placeholder="Email" className="border border-gray-300 outline-0 rounded-sm px-4 py-2 w-full" />
                                 <input  type="password" value={password}  onChange={(e) => setpassword(e.target.value)} placeholder="Password" className="border border-gray-300 outline-0 rounded-sm px-4 py-2 w-full" />
                                 <button type='submit' className="bg-[#ff8f9c] my-5 py-2 rounded-sm w-full text-white font-semibold mt-5">Update</button>
+                                <p className="text-sm cursor-pointer text-center" onClick={() => setSelect("login")}>Back to login page</p>
                             </form>
                         </div>
                     </div>

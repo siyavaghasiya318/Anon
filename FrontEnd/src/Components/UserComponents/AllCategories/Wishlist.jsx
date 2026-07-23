@@ -14,7 +14,7 @@ const Wishlist = () => {
             (item) => item.productid._id === productId
         );
     };
-    // console.log(wishlist);
+    console.log("wishlist",wishlist);
 
     return (
         <div className="px-4 sm:px-10 lg:px-20 py-10">
@@ -34,15 +34,17 @@ const Wishlist = () => {
                         {wishlist?.map((item) => {
                             return (
                                 <>
-                                    <div className="group shadow-sm   rounded-2xl  ">
+                                    <Link
+                                        to={`/productdetail/${item.productid._id}`}
+                                        onClick={() => window.scrollTo(0, 0)} className="group shadow-sm   rounded-2xl ">
                                         <div className="group-hover:shadow-2xl h-full rounded-2xl  group-duration-300 transition-all">
                                             <div className="">
                                                 <div className="relative overflow-hidden flex flex-col justify-between">
                                                     <div className="group-hover:hidden  w-full aspect-square flex flex-col justify-center items-center m-auto "><img src={item?.productid.images[0]} className="object-cover w-full h-full rounded-lg" alt="" /></div>
                                                     <div className="hidden group-hover:block w-full aspect-square  flex flex-col justify-center items-center m-auto"><img src={item?.productid.images[1]} className="object-cover w-full h-full rounded-lg" alt="" /></div>
-                                                    <div className="absolute top-2 flex flex-col gap-1 right-[-50px] group-hover:right-[5px] transition-all duration-500">
+                                                    <div className="absolute top-2 right-2 flex text-lg flex-col gap-1 lg:right-[-50px] lg:group-hover:right-[5px] transition-all duration-500">
 
-                                                        <p className="border border-gray-200 bg-white p-1 text- rounded-sm shadow-2xl">
+                                                        <p className="border border-gray-200 bg-white flex text-[16px] flex-col justify-center items-center p-1 text- rounded-sm shadow-2xl">
                                                             {isWishlisted(item.productid._id) ? (
                                                                 <FaHeart
                                                                     className="text-red-500  cursor-pointer"
@@ -55,8 +57,8 @@ const Wishlist = () => {
                                                             }
                                                         </p>
 
-                                                        <Link to={`/productdetail/${item.productid._id}`} className="border border-gray-200 bg-white p-1 text-[16px] sm:text-[18px] rounded-sm shadow-2xl "><IoEyeOutline /></Link>
-                                                        <p onClick={() => CartProduct(item.productid._id, selectedSize)} className="border border-gray-200 cursor-pointer bg-white p-1 text-[16px] sm:text-[18px] rounded-sm shadow-2xl"><IoBagAddOutline /></p>
+                                                        <Link to={`/productdetail/${item.productid._id}`} className="border border-gray-200 flex flex-col justify-center items-center bg-white p-1  rounded-sm shadow-2xl "><IoEyeOutline /></Link>
+                                                        <p onClick={() => CartProduct(item.productid._id, selectedSize)} className="border flex flex-col justify-center items-center border-gray-200 cursor-pointer bg-white p-1  rounded-sm shadow-2xl"><IoBagAddOutline /></p>
                                                     </div>
                                                 </div>
 
@@ -76,7 +78,7 @@ const Wishlist = () => {
 
                                             </div>
                                         </div>
-                                    </div>
+                                    </Link>
                                     {/* <div className="rounded-2xl shadow border relative border-gray-200 overflow-hidden">
                                         <div className="w-full h-60 cursor-pointer"><img src={item.productid.images[0]} className="w-full h-full object-cover" alt="" /></div>
 

@@ -11,7 +11,6 @@ function ProductDetail() {
     const { id } = useParams();
     const { getProducts, CartProduct, setselectedSize, selectedSize, WishlistItem, wishlist } = useContext(UserContext)
     const [img, setImg] = useState(0)
-    console.log(wishlist);
 
     const productitem = getProducts.find((data) => data._id == id)
 
@@ -137,20 +136,20 @@ function ProductDetail() {
                     <div className="flex flex-col gap-4 my-30 ">
                         <div className="md:text-[22px] text-[18px] font-semibold ">Product description</div>
                         <hr className="text-gray-200  w-50" />
-                        <p className="font-semibold text-gray-500 md:text-md text-sm">{productitem?.metatitle}</p>
-                        <p className="w-[90%] md:text-md text-sm text-gray-500 font-semibold">{productitem?.metadescription}</p>
+                        <p className="md:font-semibold text-gray-500 md:text-[16px] text-sm">{productitem?.metatitle}</p>
+                        <p className="w-[90%] md:text-[16px] text-sm text-gray-500 md:font-semibold">{productitem?.metadescription}</p>
 
 
                         <div className="md:text-[22px] text-[18px] font-semibold mt-3 md:mt-4">Product Specification</div>
                         <hr className="text-gray-200 w-50" />
 
                         <div className="md:text-[22px] text-[18px] font-semibold mt-3 md:mt-5">Block Description</div>
-                        <p className="font-semibold text-gray-500 md:text-md text-sm">{productitem?.blocktitle}</p>
-                        <p className="w-[90%] md:text-md text-sm text-gray-500 font-semibold">{productitem?.description}</p>
+                        <p className="md:font-semibold text-gray-500 md:text-[16px] text-sm">{productitem?.blocktitle}</p>
+                        <p className="w-[90%] md:text-[16px] text-sm text-gray-500 md:font-semibold">{productitem?.description}</p>
 
 
                         <div className="md:text-[22px] text-[18px] font-semibold mt-3 md:mt-5">Image Description</div>
-                        <p className="font-semibold text-gray-500 md:text-md text-sm">{productitem?.imgtitle}</p>
+                        <p className="md:font-semibold text-gray-500 md:text-[16px] text-sm">{productitem?.imgtitle}</p>
                         <div className="md:w-[90%] md:my-10 my-5 m-auto"><img src={productitem?.descimage[0]} className="w-full h-full object-cover rounded-2xl" alt="" /></div>
                     </div>
                 </>

@@ -22,7 +22,7 @@ function USerRegister() {
               <p className="text-end text-[#ff8f9c]">Forgot Password</p>
             </form>
 
-            <p className="text-sm text-center mt-4 cursor-pointer">Don't have an account? <span onClick={() => setSelect("login")} className="text-[#ff8f9c] hover:underline cursor-pointer">Sign Up</span></p>
+            <p className="text-sm text-center mt-4 cursor-pointer">Don't have an account? <span onClick={() => setSelect("login")} className="text-[#ff8f9c] hover:underline cursor-pointer">Sign In</span></p>
           
           </div>
         </div>

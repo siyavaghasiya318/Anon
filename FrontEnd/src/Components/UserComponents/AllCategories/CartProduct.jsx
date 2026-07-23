@@ -41,9 +41,9 @@ const CartProduct = () => {
                   {fetchCart.map((item) => {
                     return (
                       <>
-                        <div className="bg-white flex text-gray-700 shadow-sm rounded-xl overflow-hidden md:p-3 lg:p-5 p-2  gap-6">
-                          <Link to={`/productdetail/${item._id}`}  className="lg:w-28 md:w-24 md:h-27 sm:w-21 sm:h-22 xs:w-18 xs:h-19 w-15  h-16 flex flex-col justify-center m-auto"><img src={item.images[0]} className="w-full h-full object-cover border border-gray-100 rounded-lg" alt="" /></Link>
-                          <div className="flex flex-col xs:gap-1 w-full">
+                        <div className="bg-white flex text-gray-700 shadow-sm rounded-xl overflow-hidden md:p-3 lg:p-5 p-3  gap-6">
+                          <Link to={`/productdetail/${item._id}`}  className="lg:w-28 md:w-24 md:h-27 sm:w-21 sm:h-22 w-18 h-19  flex flex-col justify-center m-auto"><img src={item.images[0]} className="w-full h-full object-cover border border-gray-100 rounded-lg" alt="" /></Link>
+                          <div className="flex flex-col gap-1 w-full">
 
                             <div className="flex  justify-between items-center">
                               <p className="font-bold lg:text-md md:text-sm sm:text-sm text-xs truncate w-30 xs:w-45 sm:w-55">{item.title}</p>
@@ -74,7 +74,7 @@ const CartProduct = () => {
 
 
             <div className="lg:w-[30%] w-full  text-gray-700">
-              <div className="bg-white lg:mt-30 mt-20 p-6 flex flex-col gap-3 shadow-sm rounded-2xl">
+              <div className="bg-white lg:mt-30 md:mt-20 mt-10 p-6 flex flex-col gap-3 shadow-sm rounded-2xl">
                 <p className="text-gray-700  font-bold text-[25px] text-shadow-2xs">Order Summary </p>
 
                 <div className="flex items-center justify-between">

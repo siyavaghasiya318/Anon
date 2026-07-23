@@ -12,7 +12,7 @@ import UserLogin from './Components/UserComponents/LogIn/UserLogin';
 import USerRegister from './Components/UserComponents/LogIn/USerRegister';
 import { Link } from 'react-router-dom';
 import { UserContext } from './Context/UserContext';
-import { beautycategory, menscategory, navbarIcones, womenscategory } from './assets/CategoryList';
+import { beautycategory, menfootwear, menscategory, navbarIcones, womenfootwear, womenscategory } from './assets/CategoryList';
 import Forgotpassword from './Components/UserComponents/LogIn/Forgotpassword';
 
 function UserNavbar() {
@@ -160,12 +160,24 @@ function UserNavbar() {
           </div>
 
           <div className="group">
-            <p className="font-semibold border-b-2 border-transparent hover:border-[#ff8f9c] hover:text-[#ff8f9c] cursor-pointer">Clothes</p>
-            <div className="hidden group-hover:block ms-[-40px] w-50 capitalize px-5 py-5 absolute bg-white text-black rounded-xl shadow-xl">
-              <p>jacket</p>
-              <p>Party-Wear</p>
-              <p>Shirt & T-shirt</p>
-              <p>Shorts And jeans</p>
+            <p className="font-semibold hover:border-b-2 hover:text-[#ff8f9c] cursor-pointer">Footwear</p>
+            <div className="hidden group-hover:block ms-[-100px] absolute bg-white text-black rounded-xl shadow-lg">
+              <div className="grid lg:grid-cols-2 w-75 gap-8 px-5 py-5 text-gray-700 capitalize">
+                <div>
+                  <p className="text-[18px] font-semibold">Men's</p>
+                  <hr className="my-2" />
+                  {menfootwear.map((item) => (
+                    <Link key={item.name} to={`/category/footwear/men/${item.name.toLowerCase()}`} className="flex flex-col cursor-pointer">{item.name}</Link>
+                  ))}
+                </div>
+                <div>
+                  <p className="text-[18px] font-semibold">women's</p>
+                  <hr className="my-2" />
+                  {womenfootwear.map((item) => (
+                    <Link key={item.name} to={`/category/footwear/women/${item.name.toLowerCase()}`} className="flex flex-col cursor-pointer">{item.name}</Link>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
 
@@ -203,15 +215,15 @@ function UserNavbar() {
         <div className="flex flex-col px-5 py-4 text-gray-700 uppercase text-sm gap-1">
           <Link to="/" onClick={() => setMobileMenuOpen(false)} className="py-3 border-b border-gray-100 font-semibold">Home</Link>
 
-          <div className="border-b border-gray-100">
-            <button onClick={() => toggleMobileAccordion('categories')} className="w-full flex items-center justify-between py-3 font-semibold">
+          <div className="border-b border-gray-100 ">
+            <button onClick={() => toggleMobileAccordion('categories')} className="w-full  flex items-center justify-between py-3 font-semibold">
               Categories
               {mobileAccordion === 'categories' ? <FiMinus /> : <FiPlus />}
             </button>
             {mobileAccordion === 'categories' && (
-              <div className="pb-3 pl-2 grid grid-cols-2 gap-4 normal-case">
+              <div className="pb-3 pl-2 grid grid-cols cursor-pointer gap-4 normal-case">
                 <div>
-                  <p className="text-[13px] font-semibold uppercase text-gray-500 mb-1">Men's</p>
+                  <p className="text-[13px] font-bold  uppercase text-gray-700 mb-1">Men's</p>
                   {menscategory.map((item) => (
                     <Link key={item.name} to={`/category/clothes/men/${item.name.toLowerCase()}`} onClick={() => setMobileMenuOpen(false)} className="flex flex-col py-1 text-gray-600 hover:text-pink-500">
                       {item.name}
@@ -219,7 +231,7 @@ function UserNavbar() {
                   ))}
                 </div>
                 <div>
-                  <p className="text-[13px] font-semibold uppercase text-gray-500 mb-1">Women's</p>
+                  <p className="text-[13px] font-bold uppercase text-gray-700 mb-1">Women's</p>
                   {womenscategory.map((item) => (
                     <Link key={item.name} to={`/category/clothes/women/${item.name.toLowerCase()}`} onClick={() => setMobileMenuOpen(false)} className="flex flex-col py-1 text-gray-600 hover:text-pink-500">
                       {item.name}
@@ -231,6 +243,33 @@ function UserNavbar() {
           </div>
 
           <div className="border-b border-gray-100">
+            <button onClick={() => toggleMobileAccordion('footwear')} className="w-full flex items-center justify-between py-3 font-semibold">
+              Footwear
+              {mobileAccordion === 'footwear' ? <FiMinus /> : <FiPlus />}
+            </button>
+            {mobileAccordion === 'footwear' && (
+              <div className="pb-3 pl-2 grid lg:grid-cols-2 gap-4 normal-case">
+                <div>
+                  <p className="text-[13px] font-bold lg:font-semibold uppercase lg:text-gray-500 mb-1">Men's</p>
+                  {menfootwear.map((item) => (
+                    <Link key={item.name} to={`/category/footwear/men/${item.name.toLowerCase()}`} onClick={() => setMobileMenuOpen(false)} className="flex flex-col py-1 text-gray-600 hover:text-pink-500">
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
+                <div>
+                  <p className="text-[13px] font-bold lg:font-semibold uppercase lg:text-gray-500 mb-1">Women's</p>
+                  {womenfootwear.map((item) => (
+                    <Link key={item.name} to={`/category/footwear/women/${item.name.toLowerCase()}`} onClick={() => setMobileMenuOpen(false)} className="flex flex-col py-1 text-gray-600 hover:text-pink-500">
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* <div className="border-b border-gray-100">
             <button onClick={() => toggleMobileAccordion('clothes')} className="w-full flex items-center justify-between py-3 font-semibold">
               Clothes
               {mobileAccordion === 'clothes' ? <FiMinus /> : <FiPlus />}
@@ -243,7 +282,7 @@ function UserNavbar() {
                 <p className="py-1">Shorts And jeans</p>
               </div>
             )}
-          </div>
+          </div> */}
 
           <div className="border-b border-gray-100">
             <button onClick={() => toggleMobileAccordion('beauty')} className="w-full flex items-center justify-between py-3 font-semibold">

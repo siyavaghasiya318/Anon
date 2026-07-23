@@ -14,8 +14,8 @@ function Category() {
     <div className="px-3 sm:px-5 md:px-10 lg:px-20">
         <Image/>
 
-        <div className=" md:flex gap-10 mt-20">
-          {search ? (""): (<div className="w-[22%] "><ProductFilter/></div>)}
+        <div className="md:flex gap-10 lg:mt-20 mt-10">
+          {search ? (""): (<div className="lg:w-[22%] w-60 sm:w-70"><ProductFilter/></div>)}
           <div className=" w-full"><UserProducts category={category} gender={gender}/></div>
         </div>
     </div>
