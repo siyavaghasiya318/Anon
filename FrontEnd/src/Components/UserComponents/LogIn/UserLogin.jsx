@@ -17,7 +17,7 @@ function UserLogin() {
               <button type='submit'  className="bg-[#ff8f9c] py-2 rounded-sm w-full text-white font-semibold mt-5">Login</button>
               <p onClick={() => setSelect("otpSend")} className="text-end text-[#ff8f9c] cursor-pointer">Forgot Password</p>
             </form>
-            <p className="text-sm text-center mt-4 cursor-pointer">Don't have an account? <span onClick={() => setSelect("register")} className="text-[#ff8f9c] hover:underline">Sign Up</span></p>
+            <p className="text-sm text-center mt-4 cursor-pointer">Don't have an account? <span onClick={() => {setSelect("register"),Setislogin("register")}} className="text-[#ff8f9c] hover:underline">Sign Up</span></p>
           </div>
         </div>
     </>

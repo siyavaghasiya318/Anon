@@ -15,6 +15,7 @@ function USerRegister() {
             </div>
 
             <form action="" onSubmit={FromSubmit} className="px-6 pt-5 flex flex-col gap-3">
+              
               <input name='name' value={UserForm.name} onChange={Handlechange} type="text" placeholder="Name" className="border border-gray-200 outline-0 rounded-sm px-4 py-1 w-full" />
               <input name='email' value={UserForm.email} onChange={Handlechange} type="email" placeholder="Email" className="border border-gray-200 outline-0 rounded-sm px-4 py-1 w-full" />
               <input type="password" name='password' value={UserForm.password} onChange={Handlechange} placeholder="Password" className="border border-gray-200 outline-0 rounded-sm px-4 py-1 w-full" />
@@ -22,7 +23,7 @@ function USerRegister() {
               <p className="text-end text-[#ff8f9c]">Forgot Password</p>
             </form>
 
-            <p className="text-sm text-center mt-4 cursor-pointer">Don't have an account? <span onClick={() => setSelect("login")} className="text-[#ff8f9c] hover:underline cursor-pointer">Sign In</span></p>
+            <p className="text-sm text-center mt-4 cursor-pointer">Don't have an account? <span onClick={() => {setSelect("login"),Setislogin("login")}} className="text-[#ff8f9c] hover:underline cursor-pointer">Sign In</span></p>
           
           </div>
         </div>
