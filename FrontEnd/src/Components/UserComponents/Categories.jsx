@@ -2,13 +2,14 @@ import React, { useState } from 'react'
 import { FiMinus, FiPlus } from "react-icons/fi";
 import { categories } from '../../assets/CategoryList';
 import { Link } from 'react-router-dom';
+import { motion } from "framer-motion";
 
 function Categories() {
     const [toggleCategory, setToggleCategory] = useState(0)
 
     return (
         <>
-            <div className="border p-4 sm:p-5 border-gray-200 text-gray-700 rounded-lg">
+            <motion.div initial={{ y: 100 }} whileInView={{ y: 0 }} transition={{ duration: 0.5 }}  className="border p-4 sm:p-5 border-gray-200 text-gray-700 rounded-lg">
                 <div className="text-[16px] sm:text-[18px] uppercase font-semibold">Category</div>
                 {categories.map((item, index) => (
                     <div key={item.category}>
@@ -42,7 +43,7 @@ function Categories() {
                         )}
                     </div>
                 ))}
-            </div>
+            </motion.div>
         </>
     )
 }

@@ -1,11 +1,12 @@
 import React from 'react'
 import { products } from '../../assets/CategoryList'
 import { FiStar } from "react-icons/fi";
+import { motion } from "framer-motion";
 
 function BestSeller() {
   return (
     <div className="mt-8">
-        <div>
+        <motion.div initial={{opacity:0}} whileInView={{ opacity:1 }} transition={{ duration: 0.8 }}>
             <div className="text-[14px] sm:text-[16px] uppercase font-bold text-gray-700">Best Seller</div>
             <div className="mt-5 flex flex-col gap-5">
                 {products.slice(0, 4).map((item) => (
@@ -28,7 +29,7 @@ function BestSeller() {
                     </div>
                 ))}
             </div>
-        </div>
+        </motion.div>
     </div>
   )
 }

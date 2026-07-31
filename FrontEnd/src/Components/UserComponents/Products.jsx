@@ -2,14 +2,15 @@ import React, { useContext } from 'react'
 import { products } from '../../assets/CategoryList'
 import { UserContext } from '../../Context/UserContext'
 import { Link } from 'react-router-dom'
+import { motion } from "framer-motion";
 
 function Products() {
-  const { getProducts, search, setsearch } = useContext(UserContext)
+  const { getProducts, } = useContext(UserContext)
 
   return (
     <>
       <div className="text-[20px] font-bold text-gray-400 mb-4">All Products</div>
-      <div className="grid xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 sm:gap-5 w-full">
+      <div  className="grid xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 sm:gap-5 w-full">
         {getProducts?.map((item) => {
           return (
             <Link
@@ -17,7 +18,7 @@ function Products() {
               to={`/productdetail/${item._id}`}
               onClick={() => window.scrollTo(0, 0)}
             >
-              <div className="w-full h-full overflow-hidden hover:shadow-lg shadow-sm border border-gray-200 rounded-md transition-shadow duration-200">
+              <motion.div initial={{ y: 100 ,opacity:0}} whileInView={{ y: 0,opacity:1 }} transition={{ duration: 0.5 }} className="w-full  h-full overflow-hidden hover:shadow-lg shadow-sm border border-gray-200 rounded-md transition-shadow duration-200">
                 <div className="flex gap-3 w-full h-full items-center bg-[#f5f4ef94] p-2">
                   <div className="xs:w-20 w-25 h-30 xs:h-full sm:w-24 flex-shrink-0 aspect-square">
                     <img
@@ -43,7 +44,7 @@ function Products() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </Link>
           )
         })}

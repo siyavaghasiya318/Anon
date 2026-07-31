@@ -315,7 +315,8 @@ export const DeleteUser = async (req, res) => {
 export const forgorPassword = async (req, res) => {
     try {
         const { email } = req.body;
-
+        
+        
 
         if (!email) {
             return res.status(404).json({
@@ -325,7 +326,7 @@ export const forgorPassword = async (req, res) => {
         }
 
         const user = await User.findOne({ email });
-
+                
 
         if (!user) {
             return res.status(404).json({
@@ -337,7 +338,7 @@ export const forgorPassword = async (req, res) => {
 
         const otp = Math.floor(100000 + Math.random() * 900000).toString()
 
-
+        
         user.resetOtp = otp;
 
         user.expireOtp = Date.now() + 5 * 60 * 1000;

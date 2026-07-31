@@ -4,13 +4,14 @@ import { IoRocketOutline } from "react-icons/io5";
 import { IoCallOutline } from "react-icons/io5";
 import { FiCornerUpLeft } from "react-icons/fi";
 import { RiCoupon3Line } from "react-icons/ri";
+import { motion } from "framer-motion";
 
 
 function Service() {
   return (
-    <div className="w-full">
-      <div className="border leading-12 border-b-gray-200  text-gray-700 border-t-0 border-x-0  font-bold text-[22px]">Our Services</div>
-      <div className="border flex flex-col gap-5 border-gray-200 rounded-lg px-6 py-5 mt-5">
+    <div className="w-full overflow-hidden">
+      <motion.div initial={{ x: 100 }}  whileInView={{ x: 0 }} transition={{ duration: 0.5 }}  className="border leading-12 border-b-gray-200  text-gray-700 border-t-0 border-x-0  font-bold text-[22px]">Our Services</motion.div>
+      <motion.div initial={{ x: 100 }} whileInView={{ x: 0 }} transition={{ duration: 0.5 }} className="border flex flex-col gap-5 border-gray-200 rounded-lg px-6 py-5 mt-5">
 
         <div className="flex items-center gap-8 ">
           <p className="text-[#FF8F9C] text-[30px]"><GrDeliver /></p>
@@ -53,7 +54,7 @@ function Service() {
         </div>
 
 
-      </div>
+      </motion.div>
     </div>
   )
 }

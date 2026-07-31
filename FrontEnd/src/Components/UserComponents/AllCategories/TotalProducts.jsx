@@ -1,10 +1,11 @@
 import React from "react";
 import { categories } from "../../../assets/CategoryList";
 import { Link } from "react-router-dom";
+  import { motion } from "framer-motion";
 
 const TotalProducts = () => {
   return (
-    <div className="flex gap-6 overflow-x-auto py-4 no-scrollbar w-[95%] m-auto sm:w-[100%]">
+    <motion.div  initial={{ y: 50 }} whileInView={{ y: 0 }} transition={{ duration: 0.5 }} className="flex gap-6 overflow-x-auto py-4 no-scrollbar w-[95%] m-auto sm:w-[100%]">
       {categories.map((item) => (
         <Link
           to={`/category/${item.category}/${item.gender}`}
@@ -37,7 +38,7 @@ const TotalProducts = () => {
           </div>
         </Link>
       ))}
-    </div>
+    </motion.div>
   );
 };
 

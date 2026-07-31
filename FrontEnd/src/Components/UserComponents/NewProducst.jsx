@@ -3,7 +3,7 @@ import { FiStar } from "react-icons/fi";
 import { products } from '../../assets/CategoryList';
 import { UserContext } from '../../Context/UserContext';
 import { Link } from 'react-router-dom';
-
+import { motion } from "framer-motion";
 
 function NewProducst() {
     const { getProducts } = useContext(UserContext)
@@ -17,10 +17,12 @@ function NewProducst() {
                 New Products
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5 mt-5">
+            <div className="grid grid-cols-2  sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5 mt-5">
                 {latestProducts.map((item) => {
                     return (
-                        <Link
+                        <motion.div initial={{ y: 100,opacity:0 }} whileInView={{ y: 0 ,opacity:1}} transition={{ duration: 0.5 }}>
+                        <Link 
+                            
                             key={item._id}
                             to={`/productdetail/${item._id}`}
                             onClick={() => window.scrollTo(0, 0)}
@@ -61,6 +63,7 @@ function NewProducst() {
                                 </div>
                             </div>
                         </Link>
+                        </motion.div>
                     )
                 })}
             </div>

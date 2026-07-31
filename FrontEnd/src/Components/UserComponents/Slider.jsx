@@ -1,8 +1,9 @@
 import React from 'react'
+import { motion, scale } from "framer-motion";
 
 function Slider() {
   return (
-    <div className="">
+    <motion.div  initial={{opacity:0}} whileInView={{ opacity:1 }} transition={{ duration: 1.2 }} className="mt-5 lg:mt-0">
         <div className='bg-[url(https://res.cloudinary.com/do98lw5ja/image/upload/v1769879838/banners/peoiz4odc99of7br7hg4.jpg)] bg-center overflow-hidden bg-cover w-full m-auto h-50 sm:h-70 md:h-100 lg:h-120 xl:130'>
 
           <div className="grid grid-cols-2 sm:grid-cols-2 px-6 sm:px-12 md:px-10 py-16 sm:py-20  md:py-25 lg:py-35">
@@ -16,7 +17,7 @@ function Slider() {
           </div>
 
         </div>
-    </div>
+    </motion.div>
   )
 }
 

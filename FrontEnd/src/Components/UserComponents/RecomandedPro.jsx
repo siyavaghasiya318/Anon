@@ -1,6 +1,7 @@
 import React from 'react'
 import { products } from '../../assets/CategoryList'
 import { FiStar } from "react-icons/fi";
+import { motion } from "framer-motion";
 
 function RecomandedPro() {
   return (
@@ -12,7 +13,8 @@ function RecomandedPro() {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5 mt-5">
           {products.slice(0, 4).map((item, index) => {
             return (
-              <div
+              <motion.div
+                initial={{ y: 100,opacity:0 }} whileInView={{ y: 0,opacity:1 }} transition={{ duration: 0.5 }}
                 key={item.id || index}
                 className="border border-gray-200 rounded-lg shadow-gray-300 hover:shadow-lg px-2 sm:px-3 pb-3"
               >
@@ -39,7 +41,7 @@ function RecomandedPro() {
                   <p>₹{item.price.toFixed(2)}</p>
                   <p className="line-through text-gray-400 text-xs sm:text-sm">₹{item.oldPrice}</p>
                 </div>
-              </div>
+              </motion.div>
             )
           })}
         </div>

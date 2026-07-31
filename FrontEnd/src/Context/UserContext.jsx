@@ -10,8 +10,8 @@ export const UserContext = createContext()
 export const UserProvider = ({ children }) => {
 
 
-    const API = 'https://anon-ksvj.onrender.com/api'
-    // const API = 'http://localhost:5000/api'
+    // const API = 'https://anon-ksvj.onrender.com/api'
+    const API = 'http://localhost:5000/api'
 
 
 
@@ -161,6 +161,7 @@ export const UserProvider = ({ children }) => {
             if (data.success) {
                 toast.success(data.message)
                 setSelect("login")
+                navigate("/")
             }
             toast.success(data.message)
         } catch (error) {
@@ -556,7 +557,6 @@ export const UserProvider = ({ children }) => {
 
         } catch (error) {
             console.log("getproducts error", error);
-
         }
     }
 

@@ -1,5 +1,6 @@
 import React from 'react'
 import { blogData } from '../../../assets/CategoryList'
+import { motion, scale } from "framer-motion";
 
 const FashionCard = () => {
   return (
@@ -7,7 +8,7 @@ const FashionCard = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mt-10 w-[95%] m-auto sm:w-[100%]">
         {blogData.map((item, index) => {
           return (
-            <div key={item.id || index} className="">
+            <motion.div initial={{opacity:0}} whileInView={{ opacity:1 }} transition={{ duration: 0.8 }} key={item.id || index} className="">
               <div className="w-full h-60">
                 <img src={item.image} className="w-full rounded-xl h-full object-cover" alt={item.title} />
               </div>
@@ -16,7 +17,7 @@ const FashionCard = () => {
               <div className="text-gray-500 flex gap-2 items-center flex-wrap text-xs sm:text-sm">
                 By {item.author} / {item.date}
               </div>
-            </div>
+            </motion.div>
           )
         })}
       </div>
