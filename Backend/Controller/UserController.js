@@ -161,11 +161,9 @@ export const UpdateUser = async (req, res) => {
                 success: false
             })
         }
-        console.log(name, email, password);
 
 
         const userid = await User.findById(req.user.id)
-        console.log(userid);
 
         const user = await User.findByIdAndUpdate(userid, { name, email, password })
         user.save()

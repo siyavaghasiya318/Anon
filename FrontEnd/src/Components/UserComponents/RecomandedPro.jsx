@@ -38,7 +38,7 @@ function RecomandedPro() {
                   <FiStar /><FiStar /><FiStar /><FiStar /><FiStar />
                 </div>
                 <div className="flex font-semibold items-center gap-2 text-sm sm:text-base">
-                  <p>₹{item.price.toFixed(2)}</p>
+                  <p>₹₹{Number(item.price ?? 0).toFixed(2)}</p>
                   <p className="line-through text-gray-400 text-xs sm:text-sm">₹{item.oldPrice}</p>
                 </div>
               </motion.div>

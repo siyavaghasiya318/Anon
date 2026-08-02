@@ -7,7 +7,7 @@ export const ProductSchema = new mongoose.Schema({
         ref: "seller",
         required: true
     },
-    
+
     title: { type: String, required: true },
     category: String,
     subcategory: String,
@@ -87,7 +87,16 @@ export const ProductSchema = new mongoose.Schema({
     metadescription: String,
 
     // Review
-
+    specifications: [
+        {
+            name: {
+                type: String
+            },
+            value: {
+                type: String
+            }
+        }
+    ],
     reviwes: [{
         user: {
             type: mongoose.Schema.Types.ObjectId,

@@ -74,7 +74,7 @@ function UserProducts({ category, gender }) {
                                         <div className="text-gray-700 truncate text-sm sm:text-md font-semibold my-1">{item?.title}</div>
                                         <div className="flex items-center text-yellow-400 my-2 text-sm sm:text-md"><FiStar /><FiStar /><FiStar /><FiStar /><FiStar /></div>
                                         <div className="flex font-semibold text-sm text-md items-center gap-2">
-                                            <p >₹{item.price.toFixed(2)}</p>
+                                            <p >₹₹{Number(item.price ?? 0).toFixed(2)}</p>
                                             <p className="line-through text-gray-400 text-sm">₹5678</p>
                                         </div>
                                     </div>

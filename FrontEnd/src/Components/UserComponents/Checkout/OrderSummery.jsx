@@ -5,7 +5,7 @@ import { UserContext } from '../../../Context/UserContext'
 const OrderSummery = () => {
   const { fetchCart,calculate,Checkoutdata } = useContext(UserContext)
   const total = fetchCart.reduce((acc, total) => acc + total.price, 0)
-  const tax = (total * 0.05).toFixed(2)
+  const tax = (total * 0.05)
   const Total = total + tax
 
 

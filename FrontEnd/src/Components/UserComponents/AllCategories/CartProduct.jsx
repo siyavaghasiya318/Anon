@@ -52,7 +52,7 @@ const CartProduct = () => {
 
                             <p className="text-gray-500 lg:px-3 px-2 lg:py-1  w-fit bg-gray-100 rounded-full font-semibold text-[10px] sm:text-[12px] md:text-[13px] lg:text-sm">size : <span className="text-[10px] uppercase">{item.size}</span></p>
 
-                            <p className="text-[#FF8F9C] md:text-md sm:text-sm text-xs lg:text-[18px] font-extrabold ">₹ {item.totalPrice.toFixed(2)}</p>
+                            <p className="text-[#FF8F9C] md:text-md sm:text-sm text-xs lg:text-[18px] font-extrabold ">₹{Number(item.totalPrice ?? 0).toFixed(2)}</p>
 
 
 
@@ -79,12 +79,12 @@ const CartProduct = () => {
 
                 <div className="flex items-center justify-between">
                   <p className="w-20">Subtotal ({fetchCart.length} items)</p>
-                  <p>₹ {subtotal.toFixed(2)}</p>
+                  <p>₹ {Number(subtotal ?? 0).toFixed(2)}</p>
                 </div>
 
                 <div className="flex items-center justify-between">
                   <p className="w-20">Tax(5%)</p>
-                  <p>₹ {tax.toFixed(2)}</p>
+                  <p>₹ {Number(tax ?? 0).toFixed(2)}</p>
                 </div>
 
                 <div className="flex items-center justify-between">
@@ -98,7 +98,7 @@ const CartProduct = () => {
 
                 <div className="flex items-center text-xl font-bold justify-between">
                   <p className="w-20">Total </p>
-                  <p>₹ {total.toFixed(2)}</p>
+                  <p>₹ {Number(total ?? 0).toFixed(2)}</p>
                 </div>
 
                 <Link to="/checkout" className="bg-[#FF8F9C] hover:scale-104 hover:shadow transition-all overflow-hidden duration-300 hover:bg-[#fdecee] hover:text-[#FF8F9C] py-3 mt-6 rounded-2xl  text-center text-white font-bold text-lg ">Proceed to Checkout</Link>

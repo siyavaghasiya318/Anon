@@ -9,7 +9,7 @@ import { LuLoaderCircle } from "react-icons/lu";
 
 
 const AddProducts = () => {
-  const { imgref, prev, imgUpdate, ProductImg, submitLoading, setSubmitLoading, imgChange, varientSizeChange, AddTag, tag, setTag, setBadge, badge, Addbadge, HandleSizeChange, HandleColorPicker, HandleColorName, HandleColorCode, Removeimg, RemoveDesImg, RemoveVarientimg, ProductHandleChange, productFrom, ProductSubmit, DesImg, Descriptionimg } = useContext(UserContext)
+  const { imgref, prev, imgUpdate, ProductImg, AddSpecification, specification, specifications, setSpecification, submitLoading, setSubmitLoading, imgChange, varientSizeChange, AddTag, tag, setTag, setBadge, badge, Addbadge, HandleSizeChange, HandleColorPicker, HandleColorName, HandleColorCode, Removeimg, RemoveDesImg, RemoveVarientimg, ProductHandleChange, productFrom, ProductSubmit, DesImg, Descriptionimg } = useContext(UserContext)
   const [varient, SetVarient] = useState(0)
   const [description, setDescription] = useState(false)
   const [imgShow, setShowImg] = useState(false)
@@ -19,7 +19,7 @@ const AddProducts = () => {
   const size = ["s", "m", "l", "xl", "2xl", "3xl"]
   const varientsize = ["s", "m", "l", "xl", "2xl", "3xl"]
   const footsize = ["5", "6", "7", "8", "9", "10"]
-  const Jeans  = ["28","30","32","34","38","40"]
+  const Jeans = ["28", "30", "32", "34", "38", "40"]
 
 
   return (
@@ -54,7 +54,7 @@ const AddProducts = () => {
               <option value="Select">Select </option>
               <option value="clothes">Clothes</option>
               <option value="beauty">Beauty</option>
-              <option value="footwear">Footear</option> 
+              <option value="footwear">Footear</option>
             </select>
           </div>
 
@@ -64,18 +64,18 @@ const AddProducts = () => {
 
           <div className="w-full flex flex-col gap-1">
             <p className="uppercase text-[10px] font-bold text-gray-400 tracking-widest">Target Gender *</p>
-            {productFrom.category == "beauty" ? 
-            (<select placeholder="EX: Premium Leather handbag" onChange={ProductHandleChange} name="gender" value={productFrom.gender} className="outline-0 text-gray-500 border appearance-none border-gray-100 px-5 rounded-2xl bg-mauve-50 py-3" id="">
-              <option value="gender">Choose Gender </option>
-              <option value="women">Women</option>
-            </select>):
-            (<select placeholder="EX: Premium Leather handbag" onChange={ProductHandleChange} name="gender" value={productFrom.gender} className="outline-0 text-gray-500 border appearance-none border-gray-100 px-5 rounded-2xl bg-mauve-50 py-3" id="">
-              <option value="gender">Choose Gender </option>
-              <option value="men">Man</option>
-              <option value="women">Women</option>
-              <option value="unisex">Unisex</option>
-            </select>)  
-          }
+            {productFrom.category == "beauty" ?
+              (<select placeholder="EX: Premium Leather handbag" onChange={ProductHandleChange} name="gender" value={productFrom.gender} className="outline-0 text-gray-500 border appearance-none border-gray-100 px-5 rounded-2xl bg-mauve-50 py-3" id="">
+                <option value="gender">Choose Gender </option>
+                <option value="women">Women</option>
+              </select>) :
+              (<select placeholder="EX: Premium Leather handbag" onChange={ProductHandleChange} name="gender" value={productFrom.gender} className="outline-0 text-gray-500 border appearance-none border-gray-100 px-5 rounded-2xl bg-mauve-50 py-3" id="">
+                <option value="gender">Choose Gender </option>
+                <option value="men">Man</option>
+                <option value="women">Women</option>
+                <option value="unisex">Unisex</option>
+              </select>)
+            }
           </div>
 
           <div className="w-full flex flex-col gap-1">
@@ -165,7 +165,7 @@ const AddProducts = () => {
               </div>
             </div>)
             :
-            productFrom.category === "clothes" && productFrom.subcategory === "jeans" ||  productFrom.subcategory === "track"  ?
+            productFrom.category === "clothes" && productFrom.subcategory === "jeans" || productFrom.subcategory === "track" ?
               (
                 <div className="w-full bg-mauve-50 rounded-2xl p-5">
                   <p className="text-[9px] uppercase font-bold text-purple-600 tracking-widest">sizes </p>
@@ -187,28 +187,28 @@ const AddProducts = () => {
                   </div>
                 </div>
               )
-                    
-            : 
-            productFrom.category == "footwear" ?
-          (<div className="w-full bg-mauve-50 rounded-2xl p-5">
-            <p className="text-[9px] uppercase font-bold text-purple-600 tracking-widest">sizes (main)</p>
-            <div className="flex gap-2 text-[10px] mt-1 text-gray-700 font-bold items-center">
 
-              <div className="flex gap-2 text-[10px] mt-1 text-gray-700 font-bold items-center">
-                <>
-                  {footsize.map((size) => (
-                    <div
-                      key={size}
-                      className="flex gap-1 px-3 py-1 items-center justify-center uppercase border-transparent hover:border hover:border-purple-500 hover:shadow-purple-200 transition-all duration-100 bg-white rounded-full shadow-sm">
-                      <input type="checkbox" value={size} onChange={HandleSizeChange} />
-                      <p>{size}</p>
+              :
+              productFrom.category == "footwear" ?
+                (<div className="w-full bg-mauve-50 rounded-2xl p-5">
+                  <p className="text-[9px] uppercase font-bold text-purple-600 tracking-widest">sizes (main)</p>
+                  <div className="flex gap-2 text-[10px] mt-1 text-gray-700 font-bold items-center">
+
+                    <div className="flex gap-2 text-[10px] mt-1 text-gray-700 font-bold items-center">
+                      <>
+                        {footsize.map((size) => (
+                          <div
+                            key={size}
+                            className="flex gap-1 px-3 py-1 items-center justify-center uppercase border-transparent hover:border hover:border-purple-500 hover:shadow-purple-200 transition-all duration-100 bg-white rounded-full shadow-sm">
+                            <input type="checkbox" value={size} onChange={HandleSizeChange} />
+                            <p>{size}</p>
+                          </div>
+                        ))}
+                      </>
                     </div>
-                  ))}
-                </>
-              </div>
 
-            </div>
-          </div>) : ("")
+                  </div>
+                </div>) : ("")
           }
 
         </div>
@@ -362,10 +362,43 @@ const AddProducts = () => {
           <div className="text-[18px] font-bold">Specifications</div>
           <hr className="text-gray-100  my-5" />
 
-          <div className="flex gap-5">
-            <input type="text" onChange={ProductHandleChange} name="specificationname" value={productFrom.specificationname} placeholder="Material" className="outline-0 w-full border font-semibold text-[13px] border-gray-100 px-5 rounded-2xl bg-mauve-50 py-3" />
-            <input type="text" onChange={ProductHandleChange} name="specificationname" value={productFrom.specificationname} placeholder="Premium Cotton" className="outline-0 w-full border font-semibold text-[13px] border-gray-100 px-5 rounded-2xl bg-mauve-50 py-3" />
+          <div className="flex gap-5 mb-4" >
+            <input
+              type="text"
+              name="name"
+              value={specification.name}
+              onChange={(e) => setSpecification({ ...specification, name: e.target.value })}
+              placeholder="Material"
+              className="outline-0 w-full border border-gray-100 px-5 py-3 rounded-2xl"
+            />
+
+            <input
+              type="text"
+              name="value"
+              value={specification.value}
+              onChange={(e) => setSpecification({ ...specification, value: e.target.value })}
+              placeholder="Premium Cotton"
+              className="outline-0 w-full border border-gray-100 px-5 py-3 rounded-2xl"
+            />
+
+            <div className="flex gap-4 items-center">
+              {/* <input onChange={(e) => setBadge(e.target.value)} value={badge} type="text" placeholder="Top Reated, Eco-Friendly..." className="outline-0 w-full border text-sm border-gray-100 px-5 rounded-2xl bg-mauve-50 py-3" id="" /> */}
+              <p onClick={AddSpecification} className="bg-emerald-600 p-3 text-xs rounded-xl text-white"><FaPlus /></p>
+            </div>
+
+
           </div>
+
+          <div className="flex gap-2 mt-3 flex-wrap">
+            {productFrom.specifications.map((item, index) => (
+              <div className="bg-mauve-100 text-red-800 px-3 py-1 rounded-full text-xs " key={index}>
+                {item.name} : {item.value}
+              </div>
+            ))}
+            
+
+          </div>
+
 
         </div>
       </div>

@@ -53,7 +53,7 @@ function NewProducst() {
                             </div>
 
                             <div className="flex font-semibold items-center gap-2 text-sm sm:text-base">
-                                <p>₹{item.price.toFixed(2)}</p>
+                                <p>₹{item.price}</p>
                                 <p className="line-through text-gray-400 text-xs sm:text-sm">₹767</p>
                             </div>
 

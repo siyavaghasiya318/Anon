@@ -71,7 +71,7 @@ const Wishlist = () => {
                                                     <div className="text-gray-700 truncate font-semibold my-1 text-sm sm:text-base">{item.productid?.title}</div>
                                                     <div className="flex items-center text-yellow-400 my-2 text-sm sm:text-base"><FiStar /><FiStar /><FiStar /><FiStar /><FiStar /></div>
                                                     <div className="flex font-semibold items-center gap-2 text-sm sm:text-base">
-                                                        <p >₹{item.productid.price.toFixed(2)}</p>
+                                                        <p > ₹{Number(item.productid.price ?? 0).toFixed(2)}</p>
                                                         <p className="line-through text-gray-400 text-xs sm:text-sm">₹5678</p>
                                                     </div>
                                                 </div>

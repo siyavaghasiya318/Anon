@@ -10,8 +10,8 @@ export const UserContext = createContext()
 export const UserProvider = ({ children }) => {
 
 
-    // const API = 'https://anon-ksvj.onrender.com/api'
-    const API = 'http://localhost:5000/api'
+    const API = 'https://anon-ksvj.onrender.com/api'
+    // const API = 'http://localhost:5000/api'
 
 
 
@@ -37,7 +37,7 @@ export const UserProvider = ({ children }) => {
     const [selectedPage, SetSelectedPage] = useState("dashboard")
     // navbar
     const [search, setsearch] = useState("")
-    
+
 
     const [Profile, SetProfile] = useState(null)
 
@@ -81,14 +81,18 @@ export const UserProvider = ({ children }) => {
     const [selectedSize, setselectedSize] = useState(null)
 
     // wishlist
-     const[wishlist,setWishlist] = useState([])
+    const [wishlist, setWishlist] = useState([])
 
     // checkout
     const [paymentMethod, setPaymentMethod] = useState("cod")
     const [selectedAddressid, setSelectedAddress] = useState(null)
     const [showAddressModal, setShowAddressModal] = useState(false);
 
-
+    // specificationsstate
+    const [specification, setSpecification] = useState({
+        name: "",
+        value: "",
+    });
 
     // orders
     const [fetchOrder, setfetchOrder] = useState([])
@@ -98,14 +102,14 @@ export const UserProvider = ({ children }) => {
     const searchHandleChange = (e) => {
         const value = e.target.value;
         setsearch(value);
-            if (value.trim() === "") {
-              navigate("/");
-                return
-            }
-            else {
-              navigate("/category")
-            }
-      }
+        if (value.trim() === "") {
+            navigate("/");
+            return
+        }
+        else {
+            navigate("/category")
+        }
+    }
 
     const navigate = useNavigate()
 
@@ -202,10 +206,9 @@ export const UserProvider = ({ children }) => {
         badges: [],
 
 
-        // specifications: [],
-        // specification
-        specificationname: "",
-        specificationvalue: "",
+        // specifications add
+
+        specifications: [],
 
         // varient
         color: "",
@@ -227,6 +230,9 @@ export const UserProvider = ({ children }) => {
         metadescription: ""
 
     })
+    // console.log("specifications", productFrom.specifications);
+
+
 
     // User Address
 
@@ -310,6 +316,27 @@ export const UserProvider = ({ children }) => {
 
 
     }
+
+
+
+    const AddSpecification = () => {
+
+        if (!specification.name || !specification.value) return;
+
+        setProductForm({
+            ...productFrom,
+            specifications: [
+                ...productFrom.specifications,
+                specification
+            ]
+        });
+
+        setSpecification({
+            name: "",
+            value: ""
+        });
+    }
+
     const HandleSizeChange = (e) => {
         const { value, checked } = e.target;
 
@@ -397,7 +424,25 @@ export const UserProvider = ({ children }) => {
     //         tags: prev.tags.filter((_, i) => i !== index)
     //     }));
     // };
+    const [editId, setEditId] = useState("")
 
+    const EditProduct = (product) => {
+        setEditId(product._id);
+
+        setProductForm(product);
+
+        SetProductImg(product.images || []);          // Preview
+        SetProductBackendImg([]);                     // Naye files abhi nahi hain
+
+        Setprev(product.verimage || []);
+        SetBackendPrevImg([]);
+
+        setDescriptionimg(product.descimage || []);
+        setDesBackendImg([]);
+        navigate("seller/products/add")
+    }
+
+    // console.log("pro", productFrom.originaldiscountprice);
 
     const ProductSubmit = async (e) => {
         e.preventDefault()
@@ -408,10 +453,20 @@ export const UserProvider = ({ children }) => {
 
 
         Object.entries(productFrom).forEach(([key, value]) => {
-            if (key !== "size") {
-                ProductData.append(key, value)
+
+            if (
+                ![
+                    "size",
+                    "tags",
+                    "badges",
+                    "specifications",
+                    "varients"
+                ].includes(key)
+            ) {
+                ProductData.append(key, value);
             }
-        })
+
+        });
 
 
         productFrom.tags.forEach((item) => {
@@ -421,6 +476,16 @@ export const UserProvider = ({ children }) => {
         productFrom.badges.forEach((item) => {
             ProductData.append("badges", item)
         })
+
+        ProductData.append(
+            "specifications",
+            JSON.stringify(productFrom.specifications)
+        );
+
+        ProductData.append(
+            "varients",
+            JSON.stringify(productFrom.varients)
+        );
 
 
         productFrom.size.forEach((item) => {
@@ -438,6 +503,7 @@ export const UserProvider = ({ children }) => {
         ProductBackendImg.map((img) => {
             ProductData.append("images", img)
         })
+
 
         try {
 
@@ -498,11 +564,62 @@ export const UserProvider = ({ children }) => {
 
     }
 
+    // const ProductUpdate = async (productid) => {
+
+    //     const ProductData = new FormData();
+
+    //     ProductData.append("productid", productid);
+
+    //     Object.entries(productFrom).forEach(([key, value]) => {
+    //         if (!["size", "tags", "badges", "specifications"].includes(key)) { ProductData.append(key, value); }
+    //     });
+
+    //     productFrom.tags.forEach((item) => {
+    //         ProductData.append("tags", item);
+    //     });
+
+    //     productFrom.badges.forEach((item) => {
+    //         ProductData.append("badges", item);
+    //     });
+
+    //     ProductData.append(
+    //         "specifications",
+    //         JSON.stringify(productFrom.specifications)
+    //     );
+
+    //     productFrom.size.forEach((item) => {
+    //         ProductData.append("size", item);
+    //     });
+
+    //     backendPrevImg.forEach((img) => {
+    //         ProductData.append("verimage", img);
+    //     });
+
+    //     DesBackendImg.forEach((img) => {
+    //         ProductData.append("descimage", img);
+    //     });
+
+    //     ProductBackendImg.forEach((img) => {
+    //         ProductData.append("images", img);
+    //     });
+
+    //     for (let pair of ProductData.entries()) {
+    //         console.log(pair[0], pair[1]);
+    //     }
+
+    //     const { data } = await axios.put(`${API}/product/updateproduct`, ProductData, { withCredentials: true, headers: { "Content-Type": "multipart/form-data" } });
+
+    //     if(data.success){
+    //         navigate("seller/products/add")
+    //     }
+    // };
 
 
 
     // img upload
     // varient img
+
+
     const imgUpdate = (e) => {
 
         const file = e.target.files[0]
@@ -854,7 +971,7 @@ export const UserProvider = ({ children }) => {
 
             GetCartProduct()
             if (data.success) {
-                GetCartProduct()    
+                GetCartProduct()
                 navigate("/cart")
                 setselectedSize(null)
             }
@@ -895,7 +1012,7 @@ export const UserProvider = ({ children }) => {
     //     }
     // }
 
-    
+
 
     const DecQuentity = async (productid, size) => {
         try {
@@ -916,8 +1033,8 @@ export const UserProvider = ({ children }) => {
     const Checkoutdata = async () => {
         console.log("Function called");
         try {
-            
-            
+
+
             const { data } = await axios.post(`${API}/order/checkout`, { addressId: selectedAddressid, paymentMethod, }, { withCredentials: true })
             if (data.success) {
                 GetMyOrderItem()
@@ -978,33 +1095,33 @@ export const UserProvider = ({ children }) => {
         }
     }
 
-    const WishlistItem = async(productid) => {
+    const WishlistItem = async (productid) => {
         try {
-            const{data} = await axios.post(`${API}/wishlist/wishlistitem/${productid}`, {} ,{ withCredentials: true })   
+            const { data } = await axios.post(`${API}/wishlist/wishlistitem/${productid}`, {}, { withCredentials: true })
             Getwishlist()
             toast.success(data.message)
         } catch (error) {
             console.log("WishlistItem error", error?.response?.data?.message)
         }
     }
-    const[heart,setHeart] = useState("")
+    const [heart, setHeart] = useState("")
 
-    const Getwishlist = async() => {
+    const Getwishlist = async () => {
         try {
-            const{data} = await axios.get(`${API}/wishlist/getwishlist`, { withCredentials: true })
+            const { data } = await axios.get(`${API}/wishlist/getwishlist`, { withCredentials: true })
             setWishlist(data.wishlistitem)
         } catch (error) {
             console.log("GetWishlistItem error", error?.response?.data?.message)
         }
     }
-   
 
-    
-    
+
+
+
 
     useEffect(() => {
         GetProfile()
-        
+
         GetSellerdetails()
         GetAllOrders()
         GetSellerProducts()
@@ -1031,9 +1148,9 @@ export const UserProvider = ({ children }) => {
             ProductSubmit, tag,
             setTag,
             badge,
-            setBadge,selectedPage, SetSelectedPage,
+            setBadge, selectedPage, SetSelectedPage,
             // navbar
-            search, setsearch,searchHandleChange,
+            search, setsearch, searchHandleChange,
             // Reset(NewPassword)
             HandlePassword, passwordData, setPasswordData, NewPassword,
             // OTP
@@ -1045,15 +1162,20 @@ export const UserProvider = ({ children }) => {
             // cart
             setselectedSize, selectedSize,
             // wishlist
-            wishlist,setWishlist,
+            wishlist, setWishlist,
             // checkout
             paymentMethod, setPaymentMethod, setSelectedAddress, Checkoutdata, showAddressModal, setShowAddressModal,
             // order
             fetchOrder, showAllOrders, UpdateOrderStatus,
             // seller
             getSellerProducts, setGetSellerProducts,
+            // specificationas
+            AddSpecification, specification, setSpecification,
             // admin
             allSellers, SetAllSellers,
+            // add product 
+            // ProductUpdate, 
+            EditProduct,
             AddTag, imgref, fetchCart, Setisaddress, isaddress, DecQuentity, calculate, getProducts, CartProduct, GetCartProduct, CartProduct, DesImg, Addbadge, submitLoading, setSubmitLoading, HandleSizeChange, varientSizeChange, HandleColorName, HandleColorPicker, HandleColorCode, GetSellerdata, RemoveDesImg, Descriptionimg, ProductHandleChange, productFrom, Profile, prev, Removeimg, RemoveVarientimg, ProductImg, imgUpdate, imgChange, imgref, AllUsers, Userdelete, UpdateUser, navigate, UserLogout, SetIsopen, SetProfile, Isopen, UserForm, Handlechange, FromSubmit, islogin, Setislogin, HandleSeller, Seller, SellerSubmit
         }}>
             {children}

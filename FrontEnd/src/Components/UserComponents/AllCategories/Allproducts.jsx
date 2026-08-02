@@ -17,6 +17,7 @@ function Allproducts() {
         return wishlist.some((item) => item.productid._id === productid)
     }
     console.log("filtered pro...", filteredProducts);
+    console.log("filteredProducts",filteredProducts);
     
   return (
     <>
@@ -64,7 +65,7 @@ function Allproducts() {
                         <div className="text-gray-700 truncate font-semibold my-1">{item?.title}</div>
                         <div className="flex items-center text-yellow-400 my-2"><FiStar /><FiStar /><FiStar /><FiStar /><FiStar /></div>
                         <div className="flex font-semibold items-center gap-2">
-                          <p >₹{item.price.toFixed(2)}</p>
+                          <p >₹₹{Number(item.price ?? 0).toFixed(2)}</p>
                           <p className="line-through text-gray-400 text-sm">₹5678</p>
                         </div>
                       </div>

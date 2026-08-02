@@ -18,6 +18,9 @@ function ProductDetail() {
         return wishlist.some((item) => item.productid._id === productid)
     }
 
+    // console.log("getProductssssssssss",getProducts);
+    
+
     return (
         <div className="lg:px-20 my-10 px-2 sm:px-5 md:px-12">
             <div>
@@ -72,7 +75,7 @@ function ProductDetail() {
 
                                 <div className="flex items-center gap-5">
                                     <div className="flex items-center gap-5">
-                                        <div className="text-[#ff8f9c] font-bold text-[22px] xs:text-[22px] md:text-[23px] lg:text-[30px] my-2">₹ {productitem?.price.toFixed(2)}</div>
+                                        <div className="text-[#ff8f9c] font-bold text-[22px] xs:text-[22px] md:text-[23px] lg:text-[30px] my-2">₹ {productitem?.price}</div>
                                         <div className="text-gray-400 text-md lg:text-[18px] line-through">₹ 34567</div>
                                     </div>
                                     <div className="flex gap-2 items-center  text-yellow-300 text-sm md:text-md border-gray-300 border-s-1px ps-3">

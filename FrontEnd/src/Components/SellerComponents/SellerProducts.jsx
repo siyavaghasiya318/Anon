@@ -9,7 +9,7 @@ import { RiDeleteBin6Line } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 
 const SellerProducts = () => {
-    const { navigate, getSellerProducts, setGetSellerProducts } = useContext(UserContext)
+    const { navigate, getSellerProducts, setGetSellerProducts,ProductUpdate ,EditProduct} = useContext(UserContext)
 
     const[categoryFilter,setCategoryFilter] = useState("select")
     const thclass = "py-5 px-7"
@@ -23,6 +23,7 @@ const SellerProducts = () => {
             categoryFilter === "select" || product.category === categoryFilter
             return matchorder
     })
+    
 
     return (
         <div className="">
@@ -153,7 +154,7 @@ const SellerProducts = () => {
                                             <td className={tdclass}>
                                                 <div className="flex items-center gap-2">
                                                     <button
-                                                        onClick={() => navigate(`/seller/products/edit/${item.id}`)}
+                                                        onClick={() =>  EditProduct(item) }
                                                         className="w-9 h-9 flex items-center justify-center rounded-lg bg-blue-50 text-blue-500 hover:bg-blue-100 transition">
 
                                                         <FiEdit2 className="text-[15px]" />

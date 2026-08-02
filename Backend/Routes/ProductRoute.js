@@ -11,5 +11,6 @@ const ProductRoute = express.Router();
 ProductRoute.post('/addproduct', SellerAuth,  uploadProduct.any(), AddProduct)
 ProductRoute.get('/getproducts', Getproducts)
 ProductRoute.get('/products',SellerAuth, GetSellerProducts)
+// ProductRoute.put('/updateproduct',SellerAuth,uploadProduct.any(), UpdateProduct)
 
 export default ProductRoute
