@@ -5,10 +5,20 @@ import { Link } from 'react-router-dom'
 import { motion } from "framer-motion";
 
 function Products() {
-  const { getProducts, } = useContext(UserContext)
-
+  const { getProducts,loading } = useContext(UserContext)
+  if (loading) {
+  return (
+    <div className="flex items-center justify-center h-screen">
+      <div className="text-center">
+        <div className="w-12 h-12 border-4 border-pink-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+        <p className="mt-4 text-gray-600">Loading products...</p>
+      </div>
+    </div>
+  );
+}
   return (
     <>
+    
       <div className="text-[20px] font-bold text-gray-400 mb-4">All Products</div>
       <div  className="grid xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 sm:gap-5 w-full">
         {getProducts?.map((item) => {

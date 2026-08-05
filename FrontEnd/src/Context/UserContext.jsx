@@ -666,14 +666,19 @@ export const UserProvider = ({ children }) => {
         newarr.splice(index, 1)
         setDescriptionimg(newarr)
     }
+    const [loading, setLoading] = useState(true);
 
     const GetProducts = async () => {
         try {
+            setLoading(true);
             const { data } = await axios.get(`${API}/product/getproducts`, { withCredentials: true })
             setGetProducts(data.product)
 
         } catch (error) {
             console.log("getproducts error", error);
+        }
+        finally {
+            setLoading(false);
         }
     }
 
@@ -1175,7 +1180,7 @@ export const UserProvider = ({ children }) => {
             allSellers, SetAllSellers,
             // add product 
             // ProductUpdate, 
-            EditProduct,
+            EditProduct,loading,
             AddTag, imgref, fetchCart, Setisaddress, isaddress, DecQuentity, calculate, getProducts, CartProduct, GetCartProduct, CartProduct, DesImg, Addbadge, submitLoading, setSubmitLoading, HandleSizeChange, varientSizeChange, HandleColorName, HandleColorPicker, HandleColorCode, GetSellerdata, RemoveDesImg, Descriptionimg, ProductHandleChange, productFrom, Profile, prev, Removeimg, RemoveVarientimg, ProductImg, imgUpdate, imgChange, imgref, AllUsers, Userdelete, UpdateUser, navigate, UserLogout, SetIsopen, SetProfile, Isopen, UserForm, Handlechange, FromSubmit, islogin, Setislogin, HandleSeller, Seller, SellerSubmit
         }}>
             {children}
