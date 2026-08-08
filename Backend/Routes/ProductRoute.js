@@ -1,5 +1,5 @@
 import express from 'express';
-import { AddProduct, Getproducts, GetSellerProducts } from '../Controller/ProductController.js';
+import { AddProduct, Getproducts, GetSellerProducts, UpdateProduct } from '../Controller/ProductController.js';
 import { uploadProduct } from '../MIddleware/Multer.js';
 import SellerAuth from '../MIddleware/SellerAuth.js';
 import AuthUser from '../MIddleware/UserAuth.js';
@@ -11,6 +11,6 @@ const ProductRoute = express.Router();
 ProductRoute.post('/addproduct', SellerAuth,  uploadProduct.any(), AddProduct)
 ProductRoute.get('/getproducts', Getproducts)
 ProductRoute.get('/products',SellerAuth, GetSellerProducts)
-// ProductRoute.put('/updateproduct',SellerAuth,uploadProduct.any(), UpdateProduct)
+ProductRoute.put('/updateproduct/:productid',SellerAuth,uploadProduct.any(), UpdateProduct)
 
 export default ProductRoute

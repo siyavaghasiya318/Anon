@@ -55,12 +55,6 @@ export const ProductSchema = new mongoose.Schema({
     tags: [String],
     badges: [String],
 
-    varients: [
-        {
-            key: String,
-            value: String
-        }
-    ],
 
     // varient
 

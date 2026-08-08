@@ -5,39 +5,79 @@ import Seller from "../Model/SellereModel.js";
 export const AddProduct = async (req, res) => {
     try {
 
+        const {
+            title,
+            category,
+            subcategory,
+            brand,
+            size,
+            varientsize,
+            gender,
+            price,
+            stock,
+            livestock,
+            tags,
+            badges,
+            specificationvalue,
+            color,
+            blocktitle,
+            imgtitle,
+            description,
+            shortdescription,
+            warrenty,
+            deliverytime,
+            metatitle,
+            metadescription
+        } = req.body;
+        console.log(req.body);
 
-        const { title, category, subcategory, brand, size, varientsize, gender, price, discountprice, originaldiscountprice, stock, livestock, tags, badges, specificationvalue, color, blocktitle, imgtitle, description, shortdescription, warrenty, deliverytime, metatitle, metadescription } = req.body
         let specifications = [];
-
         if (req.body.specifications) {
             specifications = JSON.parse(req.body.specifications);
         }
-        console.log(req.body.specifications);
+
+
 
         let varients = [];
 
-        if (req.body.varients) {
-            varients = JSON.parse(req.body.varients);
+        if (
+            req.body.varients &&
+            req.body.varients !== "undefined" &&
+            req.body.varients !== "null"
+        ) {
+            try {
+                varients = JSON.parse(req.body.varients);
+            } catch (error) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Invalid variants JSON"
+                });
+            }
         }
 
-        if (!title || !category || !gender || !price || !livestock || !shortdescription || !deliverytime) {
-            return res.status(404).json({
-                message: "Please fill in all required fields before adding the product.",
+        if (
+            !title ||
+            !category ||
+            !gender ||
+            !price ||
+            !livestock ||
+            !shortdescription ||
+            !deliverytime
+        ) {
+            return res.status(400).json({
+                message: "Please fill all required fields.",
                 success: false
-            })
+            });
         }
 
-
-        const seller = await Seller.findOne({ user: req.user.id })
+        const seller = await Seller.findOne({ user: req.user.id });
 
         if (!seller) {
             return res.status(400).json({
                 message: "Seller not found",
                 success: false
-            })
+            });
         }
-
-        // console.log("size",size);
 
         let images = [];
         let verimage = [];
@@ -62,37 +102,83 @@ export const AddProduct = async (req, res) => {
                     .filter(file => file.fieldname === "descimage")
                     .map(file => UploadImg(file.path))
             );
-
         }
 
+        // Number conversion
+        const finalDiscountPrice =
+            req.body.discountprice === "" ||
+                req.body.discountprice === "null" ||
+                req.body.discountprice == null
+                ? 0
+                : Number(req.body.discountprice);
+
         const finalOriginalDiscountPrice =
-            req.body.originaldiscountprice === "null" ||
-                req.body.originaldiscountprice === ""
+            req.body.originaldiscountprice === "" ||
+                req.body.originaldiscountprice === "null" ||
+                req.body.originaldiscountprice == null
                 ? 0
                 : Number(req.body.originaldiscountprice);
 
-
         const product = await Products.create({
-            images, verimage, descimage, title, category, size, subcategory, brand, varientsize, gender, price, seller, discountprice, originaldiscountprice: finalOriginalDiscountPrice, stock, livestock, tags, badges, specifications, specificationvalue, varients, color, blocktitle, imgtitle, description, shortdescription, warrenty, deliverytime, metatitle, metadescription
-        })
+            seller: seller._id,
 
+            title,
+            category,
+            subcategory,
+            brand,
+            gender,
+
+            size,
+
+            price: Number(price),
+            discountprice: finalDiscountPrice,
+            originaldiscountprice: finalOriginalDiscountPrice,
+            livestock: Number(livestock),
+            stock: Number(stock),
+
+            images,
+            descimage,
+            verimage,
+
+            tags,
+            badges,
+
+            specifications,
+            specificationvalue,
+            varients,
+
+            color,
+            varientsize,
+
+            blocktitle,
+            imgtitle,
+            description,
+            shortdescription,
+
+            warrenty,
+            deliverytime,
+
+            metatitle,
+            metadescription
+        });
 
 
 
         res.status(200).json({
-            message: "Product Addded",
-            success: true
-        })
-
+            success: true,
+            message: "Product Added Successfully",
+            product
+        });
 
     } catch (error) {
         console.log("AddProduct error", error);
-        return res.status(500).json({
-            message: "Internal Server Error",
-            success: false
-        })
+
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error"
+        });
     }
-}
+};
 
 
 export const Getproducts = async (req, res) => {
@@ -144,30 +230,108 @@ export const GetSellerProducts = async (req, res) => {
 }
 
 
-// export const UpdateProduct = async (req, res) => {
-//     try {
+export const UpdateProduct = async (req, res) => {
+    try {
 
-//         const { productid } = req.body;
-//         console.log("BODY", req.body);
-//         console.log("FILES", req.files);
+        const { productid } = req.params;
 
-//         if (req.body.specifications) {
-//             req.body.specifications = JSON.parse(req.body.specifications)
-//         }
+        console.log(req.body.specifications);
 
-//         const product = await Products.findByIdAndUpdate(productid, req.body, { new: true });
 
-//         res.status(200).json({
-//             success: true,
-//             message: "Product Updated Successfully",
-//             product
-//         });
 
-//     } catch (error) {
-//         console.log("UpdateProduct error", error);
-//         res.status(500).json({
-//             success: false,
-//             message: "Internal Server Error"
-//         });
-//     }
-// };
+        const seller = await Seller.findOne({ user: req.user.id });
+
+        if (!seller) {
+            return res.status(400).json({
+                success: false,
+                message: "Seller not found"
+            });
+        }
+
+        if (!productid) {
+            return res.status(400).json({
+                success: false,
+                message: "Product not found"
+            });
+        }
+
+        // Parse JSON
+        if (req.body.specifications) {
+            req.body.specifications = JSON.parse(req.body.specifications);
+        }
+
+        if (req.body.varients) {
+            req.body.varients = JSON.parse(req.body.varients);
+        }
+
+        // Number fields
+        if (req.body.price) req.body.price = Number(req.body.price);
+        if (req.body.livestock) req.body.livestock = Number(req.body.livestock);
+
+        req.body.discountprice =
+            req.body.discountprice === "" ||
+                req.body.discountprice === "null" ||
+                req.body.discountprice == null
+                ? 0
+                : Number(req.body.discountprice);
+
+        req.body.originaldiscountprice =
+            req.body.originaldiscountprice === "" ||
+                req.body.originaldiscountprice === "null" ||
+                req.body.originaldiscountprice == null
+                ? 0
+                : Number(req.body.originaldiscountprice);
+
+        // Upload new images
+        if (req.files && req.files.length > 0) {
+
+            const images = await Promise.all(
+                req.files
+                    .filter(file => file.fieldname === "images")
+                    .map(file => UploadImg(file.path))
+            );
+
+            const verimage = await Promise.all(
+                req.files
+                    .filter(file => file.fieldname === "verimage")
+                    .map(file => UploadImg(file.path))
+            );
+
+            const descimage = await Promise.all(
+                req.files
+                    .filter(file => file.fieldname === "descimage")
+                    .map(file => UploadImg(file.path))
+            );
+
+            if (images.length > 0) req.body.images = images;
+            if (verimage.length > 0) req.body.verimage = verimage;
+            if (descimage.length > 0) req.body.descimage = descimage;
+        }
+
+        const product = await Products.findByIdAndUpdate(
+            productid,
+            {
+                ...req.body,
+                seller: seller._id
+            },
+            {
+                new: true,
+                runValidators: true
+            }
+        );
+
+        res.status(200).json({
+            success: true,
+            message: "Product Updated Successfully",
+            product
+        });
+
+    } catch (error) {
+        console.log("UpdateProduct Error:", error);
+
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error"
+        });
+    }
+};

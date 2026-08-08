@@ -18,7 +18,7 @@ function ProductDetail() {
         return wishlist.some((item) => item.productid._id === productid)
     }
 
-    // console.log("getProductssssssssss",getProducts);
+    console.log("getProductssssssssss",getProducts);
     
 
     return (
@@ -146,6 +146,18 @@ function ProductDetail() {
                         <div className="md:text-[22px] text-[18px] font-semibold mt-3 md:mt-4">Product Specification</div>
                         <hr className="text-gray-200 w-50" />
 
+                        <div className="">{productitem?.specifications.map((item) => {
+                            return(
+                                <div className="grid-cols-1">
+                                    <div className="flex gap-5">
+                                        <p className="w-40">{item.name} :</p>
+                                        <p className="">{item.value}</p>
+                                    </div>
+                                </div>
+                            )
+                        })}</div>
+                        
+
                         <div className="md:text-[22px] text-[18px] font-semibold mt-3 md:mt-5">Block Description</div>
                         <p className="md:font-semibold text-gray-500 md:text-[16px] text-sm">{productitem?.blocktitle}</p>
                         <p className="w-[90%] md:text-[16px] text-sm text-gray-500 md:font-semibold">{productitem?.description}</p>
@@ -154,6 +166,9 @@ function ProductDetail() {
                         <div className="md:text-[22px] text-[18px] font-semibold mt-3 md:mt-5">Image Description</div>
                         <p className="md:font-semibold text-gray-500 md:text-[16px] text-sm">{productitem?.imgtitle}</p>
                         <div className="md:w-[90%] md:my-10 my-5 m-auto"><img src={productitem?.descimage[0]} className="w-full h-full object-cover rounded-2xl" alt="" /></div>
+                        <div className="md:w-[90%] md:my-10 my-5 m-auto"><img src={productitem?.descimage[1]} className="w-full h-full object-cover rounded-2xl" alt="" /></div>
+                        <div className="md:w-[90%] md:my-10 my-5 m-auto"><img src={productitem?.descimage[2]} className="w-full h-full object-cover rounded-2xl" alt="" /></div>
+                        <div className="md:w-[90%] md:my-10 my-5 m-auto"><img src={productitem?.descimage[3]} className="w-full h-full object-cover rounded-2xl" alt="" /></div>
                     </div>
                 </>
             </div>

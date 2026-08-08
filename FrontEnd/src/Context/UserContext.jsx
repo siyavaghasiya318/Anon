@@ -10,8 +10,8 @@ export const UserContext = createContext()
 export const UserProvider = ({ children }) => {
 
 
-    const API = 'https://anon-ksvj.onrender.com/api'
-    // const API = 'http://localhost:5000/api'
+    // const API = 'https://anon-ksvj.onrender.com/api'
+    const API = 'http://localhost:5000/api'
 
 
 
@@ -275,7 +275,7 @@ export const UserProvider = ({ children }) => {
 
         } catch (error) {
             console.log("Product submit error", error);
-            toast.error(error?.response?.data?.message || "Something went wrong");
+            toast.error(error?.response?.data?.message );
         }
     }
 
@@ -287,7 +287,7 @@ export const UserProvider = ({ children }) => {
             setShowAddressModal(false)
         } catch (error) {
             console.log(" GetAddress error", error);
-            toast.error(error?.response?.data?.message || "Something went wrong");
+            toast.error(error?.response?.data?.message);
         }
     }
 
@@ -424,23 +424,60 @@ export const UserProvider = ({ children }) => {
     //         tags: prev.tags.filter((_, i) => i !== index)
     //     }));
     // };
-    const [editId, setEditId] = useState("")
+    const [editId, setEditId] = useState(null)
 
-    const EditProduct = (product) => {
-        setEditId(product._id);
+   const EditProduct = (product) => {
 
-        setProductForm(product);
+    setEditId(product._id);
 
-        SetProductImg(product.images || []);          // Preview
-        SetProductBackendImg([]);                     // Naye files abhi nahi hain
+    setProductForm({
+        title: product.title || "",
+        category: product.category || "",
+        subcategory: product.subcategory || "",
+        brand: product.brand || "",
+        gender: product.gender || "",
 
-        Setprev(product.verimage || []);
-        SetBackendPrevImg([]);
+        size: product.size || [],
 
-        setDescriptionimg(product.descimage || []);
-        setDesBackendImg([]);
-        navigate("seller/products/add")
-    }
+        shortdescription: product.shortdescription || "",
+
+        price: product.price || "",
+        discountprice: product.discountprice || "",
+        originaldiscountprice: product.originaldiscountprice || "",
+        livestock: product.livestock || "",
+
+        tags: product.tags || [],
+        badges: product.badges || [],
+
+        specifications: product.specifications || [],
+
+        varients: product.varients || [],
+
+        blocktitle: product.blocktitle || "",
+        description: product.description || "",
+        imgtitle: product.imgtitle || "",
+
+        warrenty: product.warrenty || "",
+        deliverytime: product.deliverytime || "",
+
+        metatitle: product.metatitle || "",
+        metadescription: product.metadescription || "",
+
+        seller: product.seller
+    });
+
+
+    SetProductImg(product.images || []);
+    SetProductBackendImg([]);
+
+    Setprev(product.verimage || []);
+    SetBackendPrevImg([]);
+
+    setDescriptionimg(product.descimage || []);
+    setDesBackendImg([]);
+
+    navigate("seller/products/add");
+};
 
     // console.log("pro", productFrom.originaldiscountprice);
 
@@ -479,12 +516,12 @@ export const UserProvider = ({ children }) => {
 
         ProductData.append(
             "specifications",
-            JSON.stringify(productFrom.specifications)
+            JSON.stringify(productFrom.specifications || [])
         );
 
         ProductData.append(
             "varients",
-            JSON.stringify(productFrom.varients)
+            JSON.stringify(productFrom.varients || [])
         );
 
 
@@ -510,7 +547,8 @@ export const UserProvider = ({ children }) => {
             const { data } = await axios.post(`${API}/product/addproduct`, ProductData, { withCredentials: true })
             if (data.success) {
                 toast.success(data.message)
-                setSubmitLoading(flase)
+                setSubmitLoading(false)
+                setEditId(null)
             }
 
             // setProductForm({
@@ -564,55 +602,131 @@ export const UserProvider = ({ children }) => {
 
     }
 
-    // const ProductUpdate = async (productid) => {
+    const ProductUpdate = async (e) => {
+    e.preventDefault();
 
-    //     const ProductData = new FormData();
+    const ProductData = new FormData();
 
-    //     ProductData.append("productid", productid);
 
-    //     Object.entries(productFrom).forEach(([key, value]) => {
-    //         if (!["size", "tags", "badges", "specifications"].includes(key)) { ProductData.append(key, value); }
-    //     });
+    Object.entries(productFrom).forEach(([key, value]) => {
 
-    //     productFrom.tags.forEach((item) => {
-    //         ProductData.append("tags", item);
-    //     });
+        if (
+            [
+                "size",
+                "tags",
+                "badges",
+                "specifications",
+                "varients"
+            ].includes(key)
+        ) {
+            return;
+        }
 
-    //     productFrom.badges.forEach((item) => {
-    //         ProductData.append("badges", item);
-    //     });
 
-    //     ProductData.append(
-    //         "specifications",
-    //         JSON.stringify(productFrom.specifications)
-    //     );
+        if (key === "seller") {
+            ProductData.append(
+                "seller",
+                productFrom.seller?._id || productFrom.seller
+            );
+            return;
+        }
 
-    //     productFrom.size.forEach((item) => {
-    //         ProductData.append("size", item);
-    //     });
 
-    //     backendPrevImg.forEach((img) => {
-    //         ProductData.append("verimage", img);
-    //     });
+        if (
+            (key === "discountprice" ||
+             key === "originaldiscountprice") &&
+            (value === "" ||
+             value === null ||
+             value === "null")
+        ) {
+            return;
+        }
 
-    //     DesBackendImg.forEach((img) => {
-    //         ProductData.append("descimage", img);
-    //     });
 
-    //     ProductBackendImg.forEach((img) => {
-    //         ProductData.append("images", img);
-    //     });
+        ProductData.append(key, value);
+    });
 
-    //     for (let pair of ProductData.entries()) {
-    //         console.log(pair[0], pair[1]);
-    //     }
 
-    //     const { data } = await axios.put(`${API}/product/updateproduct`, ProductData, { withCredentials: true, headers: { "Content-Type": "multipart/form-data" } });
 
-    //     if(data.success){
-    //         navigate("seller/products/add")
-    //     }
-    // };
+    // Arrays
+
+    productFrom.tags.forEach((item)=>{
+        ProductData.append("tags", item);
+    });
+
+
+    productFrom.badges.forEach((item)=>{
+        ProductData.append("badges", item);
+    });
+
+
+    productFrom.size.forEach((item)=>{
+        ProductData.append("size", item);
+    });
+
+
+    ProductData.append(
+        "specifications",
+        JSON.stringify(productFrom.specifications)
+    );
+
+
+    ProductData.append(
+        "varients",
+        JSON.stringify(productFrom.varients || [])
+    );
+
+
+    // Images
+
+    ProductBackendImg.forEach((img)=>{
+        ProductData.append("images", img);
+    });
+
+
+    DesBackendImg.forEach((img)=>{
+        ProductData.append("descimage", img);
+    });
+
+
+    backendPrevImg.forEach((img)=>{
+        ProductData.append("verimage", img);
+    });
+
+
+
+    try {
+
+        const {data} = await axios.put(
+            `${API}/product/updateproduct/${editId}`,
+            ProductData,
+            {
+                withCredentials:true,
+                headers:{
+                    "Content-Type":"multipart/form-data"
+                }
+            }
+        );
+
+
+        if(data.success){
+            toast.success(data.message);
+            navigate("/seller/products");
+            setEditId(null);
+            GetSellerProducts()
+
+        }
+
+
+    } catch(error){
+        console.log("Product Update Error",error);
+        toast.error(
+            error?.response?.data?.message || 
+            "Update failed"
+        );
+    }
+
+};
 
 
 
@@ -764,7 +878,7 @@ export const UserProvider = ({ children }) => {
             })
         } catch (error) {
             console.log("handle Submit error", error);
-            toast.error(error?.response?.data?.message || "Something went wrong");
+            toast.error(error?.response?.data?.message );
         }
 
     }
@@ -917,7 +1031,7 @@ export const UserProvider = ({ children }) => {
 
         } catch (error) {
             console.log("BecomeSeller error", error);
-            toast.error(error?.response?.data?.message || "Something went wrong");
+            toast.error(error?.response?.data?.message );
         }
     }
 
@@ -1152,6 +1266,7 @@ export const UserProvider = ({ children }) => {
         <UserContext.Provider value={{
             ProductSubmit, tag,
             setTag,
+            editId,
             badge,
             setBadge, selectedPage, SetSelectedPage,
             // navbar
@@ -1180,7 +1295,7 @@ export const UserProvider = ({ children }) => {
             allSellers, SetAllSellers,
             // add product 
             // ProductUpdate, 
-            EditProduct,loading,
+            EditProduct, loading, ProductUpdate,
             AddTag, imgref, fetchCart, Setisaddress, isaddress, DecQuentity, calculate, getProducts, CartProduct, GetCartProduct, CartProduct, DesImg, Addbadge, submitLoading, setSubmitLoading, HandleSizeChange, varientSizeChange, HandleColorName, HandleColorPicker, HandleColorCode, GetSellerdata, RemoveDesImg, Descriptionimg, ProductHandleChange, productFrom, Profile, prev, Removeimg, RemoveVarientimg, ProductImg, imgUpdate, imgChange, imgref, AllUsers, Userdelete, UpdateUser, navigate, UserLogout, SetIsopen, SetProfile, Isopen, UserForm, Handlechange, FromSubmit, islogin, Setislogin, HandleSeller, Seller, SellerSubmit
         }}>
             {children}

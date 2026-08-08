@@ -9,7 +9,7 @@ import { LuLoaderCircle } from "react-icons/lu";
 
 
 const AddProducts = () => {
-  const { imgref, prev, imgUpdate, ProductImg, AddSpecification, specification, specifications, setSpecification, submitLoading, setSubmitLoading, imgChange, varientSizeChange, AddTag, tag, setTag, setBadge, badge, Addbadge, HandleSizeChange, HandleColorPicker, HandleColorName, HandleColorCode, Removeimg, RemoveDesImg, RemoveVarientimg, ProductHandleChange, productFrom, ProductSubmit, DesImg, Descriptionimg } = useContext(UserContext)
+  const { imgref, prev, imgUpdate, ProductImg, editId, ProductUpdate, AddSpecification, specification, specifications, setSpecification, submitLoading, setSubmitLoading, imgChange, varientSizeChange, AddTag, tag, setTag, setBadge, badge, Addbadge, HandleSizeChange, HandleColorPicker, HandleColorName, HandleColorCode, Removeimg, RemoveDesImg, RemoveVarientimg, ProductHandleChange, productFrom, ProductSubmit, DesImg, Descriptionimg } = useContext(UserContext)
   const [varient, SetVarient] = useState(0)
   const [description, setDescription] = useState(false)
   const [imgShow, setShowImg] = useState(false)
@@ -23,7 +23,7 @@ const AddProducts = () => {
 
 
   return (
-    <form className="pb-40" onSubmit={ProductSubmit}>
+    <form className="pb-40">
       <div className="text-purple-600 text-[30px] font-bold">Add New Product</div>
       <div className="text-gray-400 font-semibold">Fill in the details to list a new product</div>
 
@@ -623,7 +623,7 @@ const AddProducts = () => {
         <div className="flex gap-8 px-10   items-center bg-white shadow-sm w-fit rounded-[35px]  py-4 ">
           <NavLink to='/seller/products' className="text-gray-500 px-3  hover:text-gray-700 font-bold uppercase text-[10px]">Discard</NavLink>
 
-          <button type="submit" className="flex gap-3 text-white text-[11px] justify-center items-center bg-gray-900 font-bold uppercase w-110 tracking-widest  py-4 rounded-full">
+          <button onClick={ editId ? ProductUpdate : ProductSubmit} type="submit" className="flex gap-3 text-white text-[11px] justify-center items-center bg-gray-900 font-bold uppercase w-110 tracking-widest  py-4 rounded-full">
             <i className="text-white"><FaSave /></i>
             <div className="">publish product</div>
             {submitLoading ?
