@@ -877,8 +877,8 @@ export const UserProvider = ({ children }) => {
                 password: ""
             })
         } catch (error) {
-            console.log("handle Submit error", error);
-            toast.error(error?.response?.data?.message );
+            // console.log("handle Submit error", error);
+            toast.error(error?.response?.data?.message || "Something Went Wrong" );
         }
 
     }

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { motion } from "framer-motion";
 
 function Products() {
-  const { getProducts,loading } = useContext(UserContext)
+  const { getProducts,loading,navigate } = useContext(UserContext)
   if (loading) {
   return (
     <div className="flex items-center justify-center h-screen">
@@ -23,10 +23,10 @@ function Products() {
       <div  className="grid xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 sm:gap-5 w-full">
         {getProducts?.map((item) => {
           return (
-            <Link
+            <div
               key={item._id}
-              to={`/productdetail/${item._id}`}
-              onClick={() => window.scrollTo(0, 0)}
+              // to={`/productdetail/${item._id}`}
+              onClick={() => { navigate(`/productdetail/${item._id}`) ,window.scrollTo(0, 0)}}
             >
               <motion.div initial={{ y: 100 ,opacity:0}} whileInView={{ y: 0,opacity:1 }} transition={{ duration: 0.5 }} className="w-full  h-full overflow-hidden hover:shadow-lg shadow-sm border border-gray-200 rounded-md transition-shadow duration-200">
                 <div className="flex gap-3 w-full h-full items-center bg-[#f5f4ef94] p-2">
@@ -55,7 +55,7 @@ function Products() {
                   </div>
                 </div>
               </motion.div>
-            </Link>
+            </div>
           )
         })}
       </div>
