@@ -114,7 +114,7 @@ function ProductDetail() {
                                 <hr className="text-gray-100 border-3 lg:border-4 my-3 rounded-full " />
 
                                 <div className="font-semibold lg:mt-0 mt-5">Description</div>
-                                <div className="text-sm pt-2 lg:mt-3 pb-8 text-gray-600">{productitem?.description}</div>
+                                <div className="text-sm pt-2 lg:mt-3 pb-8 text-gray-600">{productitem?.shortdescription}</div>
 
                                 <div className="flex items-center gap-5 w-[70%]  md:w-[80%] lg:w-[70%]">
                                     <div className="text-white group w-1/2  hover:gap-3 hover:m-0 border-black flex items-center overflow-hidden font-semibold uppercase  cursor-pointer py-3 lg:py-4 bg-[#ff8f9c] rounded-lg">
@@ -146,12 +146,12 @@ function ProductDetail() {
                         <div className="md:text-[22px] text-[18px] font-semibold mt-3 md:mt-4">Product Specification</div>
                         <hr className="text-gray-200 w-50" />
 
-                        <div className="">{productitem?.specifications.map((item) => {
+                        <div className=" flex flex-col gap-1">{productitem?.specifications.map((item) => {
                             return(
-                                <div className="grid-cols-1">
-                                    <div className="flex gap-5">
-                                        <p className="w-40">{item.name} :</p>
-                                        <p className="">{item.value}</p>
+                                <div className="lg:text-[16px] text-sm">
+                                    <div className="flex gap-5 md:gap-10">
+                                        <p className="md:w-40  w-25">{item.name} :</p>
+                                        <p className="md:w-50 lg:w-70 w-40">{item.value}</p>
                                     </div>
                                 </div>
                             )

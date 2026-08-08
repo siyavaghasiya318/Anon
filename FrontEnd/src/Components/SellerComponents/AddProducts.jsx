@@ -144,7 +144,7 @@ const AddProducts = () => {
 
 
 
-          {productFrom.category == "clothes" && productFrom.subcategory !== "jeans" && productFrom.subcategory !== "track" ?
+          {productFrom.category == "clothes" && productFrom.subcategory !== "jeans" && productFrom.subcategory !== "formal trousers" && productFrom.subcategory !== "track" ?
             (<div className="w-full bg-mauve-50 rounded-2xl p-5">
               <p className="text-[9px] uppercase font-bold text-purple-600 tracking-widest">sizes </p>
               <div className="flex gap-2 text-[10px] mt-1 text-gray-700 font-bold items-center">
@@ -165,7 +165,7 @@ const AddProducts = () => {
               </div>
             </div>)
             :
-            productFrom.category === "clothes" && productFrom.subcategory === "jeans" || productFrom.subcategory === "track" ?
+            productFrom.category === "clothes" && productFrom.subcategory === "jeans" || productFrom.subcategory === "track" || productFrom.subcategory === "formal trousers" ?
               (
                 <div className="w-full bg-mauve-50 rounded-2xl p-5">
                   <p className="text-[9px] uppercase font-bold text-purple-600 tracking-widest">sizes </p>

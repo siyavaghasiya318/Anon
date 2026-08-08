@@ -29,7 +29,6 @@ export const AddProduct = async (req, res) => {
             metatitle,
             metadescription
         } = req.body;
-        console.log(req.body);
 
         let specifications = [];
         if (req.body.specifications) {
