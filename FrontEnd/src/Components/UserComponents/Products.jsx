@@ -45,8 +45,8 @@ function Products() {
                       {item?.subcategory}
                     </div>
                     <div className="flex items-center gap-2 flex-wrap">
-                      <div className="text-[#FF8F9C] text-[16px] sm:text-[18px] font-semibold">
-                        ₹₹{Number(item.price ?? 0).toFixed(2)}
+                      <div className="text-[#FF8F9C]  text-[16px] sm:text-[18px] font-semibold">
+                        ₹{Number(item.price ?? 0).toFixed(2)}
                       </div>
                       <div className="text-[12px] text-gray-400 line-through font-semibold">
                         ₹ 678

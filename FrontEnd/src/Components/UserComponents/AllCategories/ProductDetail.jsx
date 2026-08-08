@@ -18,7 +18,6 @@ function ProductDetail() {
         return wishlist.some((item) => item.productid._id === productid)
     }
 
-    console.log("getProductssssssssss",getProducts);
     
 
     return (
@@ -55,7 +54,7 @@ function ProductDetail() {
                                         )
                                     })}
                                 </div>
-                                <div className="absolute top-10 lg:right-5 lg:top-8 lg:text-3xl md:text-2xl md:right-4   text-3xl right-5">
+                                <div className="absolute top-10 lg:right-5 lg:top-6 lg:text-3xl md:text-2xl md:right-4   text-3xl right-5">
                                     {iswishlisted(productitem?._id) ?
                                         (<i onClick={() => WishlistItem(productitem._id)}
                                             className="  text-red-600 cursor-pointer ">

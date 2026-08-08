@@ -12,7 +12,7 @@ function Categories() {
             <motion.div initial={{ y: 100 }} whileInView={{ y: 0 }} transition={{ duration: 0.5 }}  className="border p-4 sm:p-5 border-gray-200 text-gray-700 rounded-lg">
                 <div className="text-[16px] sm:text-[18px] uppercase font-semibold">Category</div>
                 {categories.map((item, index) => (
-                    <div key={item.category}>
+                    <div >
                         <div className="flex items-center mt-5 justify-between">
                             <div className="flex items-center gap-2 font-semibold">
                                 <img src={item.img} className="w-7 sm:w-8" alt={item.name} />

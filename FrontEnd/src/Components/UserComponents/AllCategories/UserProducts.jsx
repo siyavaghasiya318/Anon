@@ -10,7 +10,6 @@ import { FaHeart, FaRegHeart } from 'react-icons/fa';
 
 
 function UserProducts({ category, gender }) {
-    console.log(gender);
 
     const { getProducts, search, setsearch, WishlistItem, wishlist,navigate } = useContext(UserContext)
 
