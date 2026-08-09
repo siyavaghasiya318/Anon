@@ -49,7 +49,7 @@ function UserProducts({ category, gender }) {
                                             <div className="hidden group-hover:block w-full h-65  py-3 flex flex-col justify-center items-center m-auto"><img src={item?.images[1]} className="object-cover w-full h-full rounded-lg" alt="" /></div>
                                             <div className="absolute top-5 right-2 flex text-lg flex-col gap-1 lg:right-[-50px] lg:group-hover:right-[5px] transition-all duration-500">
 
-                                                <p className="border border-gray-200 bg-white flex text-[16px] flex-col justify-center items-center p-1 text- rounded-sm shadow-2xl">
+                                                <p className="border border-gray-200 bg-white flex text-[16px] flex-col justify-center items-center p-1  rounded-sm shadow-2xl">
                                                     {iswishlisted(item._id) ? (
                                                         <FaHeart
                                                             className="text-red-500  cursor-pointer"

@@ -110,7 +110,7 @@ const SellerProducts = () => {
                                             {/* Item info */}
                                             <td className="px-8 py-5">
                                                 <div className="flex items-center gap-3">
-                                                    <Link to={`/productdetail/${item._id}`} onClick={() => window.scrollTo(0, 0)}   ><img src={item.images[0]} className="w-11 h-11 object-cover rounded-xl bg-gray-50" alt="img" /></Link>
+                                                    <Link to={`/productdetail/${item._id}`} onClick={() => window.scrollTo(0, 0)}  className="w-11 h-11"  ><img src={item.images[0]} className="w-full h-full object-contain rounded-xl bg-gray-50" alt="img" /></Link>
                                                     <div>
                                                         <p className="text-gray-800 text-[14px] font-bold">{item.name}</p>
                                                         <div className="flex items-center gap-1 mt-1">
@@ -154,7 +154,7 @@ const SellerProducts = () => {
                                             <td className={tdclass}>
                                                 <div className="flex items-center gap-2">
                                                     <button
-                                                        onClick={() =>  EditProduct(item) }
+                                                        onClick={() =>  {EditProduct(item), window.scrollTo(0,0)} }
                                                         className="w-9 h-9 flex items-center justify-center rounded-lg bg-blue-50 text-blue-500 hover:bg-blue-100 transition">
 
                                                         <FiEdit2 className="text-[15px]" />

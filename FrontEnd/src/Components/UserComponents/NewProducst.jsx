@@ -57,11 +57,11 @@ function NewProducst() {
                                 <p className="line-through text-gray-400 text-xs sm:text-sm">₹767</p>
                             </div>
 
-                            <div className="absolute top-4 sm:top-9 -left-5 -rotate-45">
+                            {/* <div className="absolute top-4 sm:top-9 -left-5 -rotate-45">
                                 <div className="px-6 sm:px-8 py-1 text-[9px] sm:text-[10px] font-bold text-white bg-[#ff909d] uppercase">
                                     new
                                 </div>
-                            </div>
+                            </div> */}
                         </Link>
                         </motion.div>
                     )

@@ -18,10 +18,10 @@ function ProductDetail() {
         return wishlist.some((item) => item.productid._id === productid)
     }
 
-    
+
 
     return (
-        <div className="lg:px-20 my-10 px-2 sm:px-5 md:px-12">
+        <div className="lg:px-20  px-2 sm:px-5 md:px-12">
             <div>
                 <>
                     <div className="text-gray-800">
@@ -30,25 +30,23 @@ function ProductDetail() {
                         <div className="grid md:grid-cols-2 gap-10 mb-15">
 
                             <div className="md:flex gap-7 mt-6 relative  m-auto items-center">
-                                <div className="hidden lg:block flex flex-col justify-between  py-12">
+                                <div className="hidden lg:block lg:flex flex-col justify-between gap-6  py-12">
                                     {productitem?.images.map((img, index) => {
                                         return (
-                                            <p className="border border-gray-200  rounded-md overflow-hidden" onClick={() => setImg(index)}><img src={img} className="w-20 object-cover" alt="" /></p>
+                                            <p className="border border-gray-200 w-20 h-20 rounded-md overflow-hidden" onClick={() => setImg(index)}><img src={img} className="w-full h-full object-contain " alt="" /></p>
                                         )
                                     })}
                                 </div>
-                                <div className="overflow-hidden hidden lg:block hover:border-gray-100 hover:border  rounded-lg relative">
+                                <div className="overflow-hidden hidden lg:block w-105  h-130 rounded-lg relative">
 
-                                    <img src={productitem?.images[img]} alt="" className="hover:scale-120  transition-all duration-500" />
-
-
+                                    <img src={productitem?.images[img]} alt="" className="hover:scale-120 object-contain w-full h-full transition-all duration-500" />
 
                                 </div>
 
-                                <div className="block relative lg:hidden flex overflow-x-auto snap-x  md:rounded-lg snap-mandatory gap-0 mt-5 no-scrollbar">
+                                <div className="block relative lg:hidden  flex border border-gray-300 overflow-x-auto snap-x  md:rounded-lg snap-mandatory gap-0 mt-5 no-scrollbar">
                                     {productitem?.images.map((img, index) => {
                                         return (
-                                            <div key={index} className="w-full shrink-0 snap-center relative">
+                                            <div key={index} className="w-full h-full  m-auto shrink-0 snap-center relative">
                                                 <img src={img} className="w-full h-full object-cover" alt="" />
                                             </div>
                                         )
@@ -135,7 +133,7 @@ function ProductDetail() {
                         </div>
                     </div>
 
-                    <div className="flex flex-col gap-4 my-30 ">
+                    <div className="flex flex-col gap-4 my-20 ">
                         <div className="md:text-[22px] text-[18px] font-semibold ">Product description</div>
                         <hr className="text-gray-200  w-50" />
                         <p className="md:font-semibold text-gray-500 md:text-[16px] text-sm">{productitem?.metatitle}</p>
@@ -146,7 +144,7 @@ function ProductDetail() {
                         <hr className="text-gray-200 w-50" />
 
                         <div className=" flex flex-col gap-1">{productitem?.specifications.map((item) => {
-                            return(
+                            return (
                                 <div className="lg:text-[16px] text-sm">
                                     <div className="flex gap-5 md:gap-10">
                                         <p className="md:w-40  w-25">{item.name} :</p>
@@ -155,7 +153,7 @@ function ProductDetail() {
                                 </div>
                             )
                         })}</div>
-                        
+
 
                         <div className="md:text-[22px] text-[18px] font-semibold mt-3 md:mt-5">Block Description</div>
                         <p className="md:font-semibold text-gray-500 md:text-[16px] text-sm">{productitem?.blocktitle}</p>
@@ -164,10 +162,12 @@ function ProductDetail() {
 
                         <div className="md:text-[22px] text-[18px] font-semibold mt-3 md:mt-5">Image Description</div>
                         <p className="md:font-semibold text-gray-500 md:text-[16px] text-sm">{productitem?.imgtitle}</p>
-                        <div className="md:w-[90%] md:my-10 my-5 m-auto"><img src={productitem?.descimage[0]} className="w-full h-full object-cover rounded-2xl" alt="" /></div>
-                        <div className="md:w-[90%] md:my-10 my-5 m-auto"><img src={productitem?.descimage[1]} className="w-full h-full object-cover rounded-2xl" alt="" /></div>
-                        <div className="md:w-[90%] md:my-10 my-5 m-auto"><img src={productitem?.descimage[2]} className="w-full h-full object-cover rounded-2xl" alt="" /></div>
-                        <div className="md:w-[90%] md:my-10 my-5 m-auto"><img src={productitem?.descimage[3]} className="w-full h-full object-cover rounded-2xl" alt="" /></div>
+                        <div className="flex flex-col gap-5 my-5">
+                            <div className="md:w-[90%]  m-auto"><img src={productitem?.descimage[0]} className="w-full h-full object-cover rounded-2xl" alt="" /></div>
+                            <div className="md:w-[90%]  m-auto"><img src={productitem?.descimage[1]} className="w-full h-full object-cover rounded-2xl" alt="" /></div>
+                            <div className="md:w-[90%]  m-auto"><img src={productitem?.descimage[2]} className="w-full h-full object-cover rounded-2xl" alt="" /></div>
+                            <div className="md:w-[90%]  m-auto"><img src={productitem?.descimage[3]} className="w-full h-full object-cover rounded-2xl" alt="" /></div>
+                        </div>
                     </div>
                 </>
             </div>

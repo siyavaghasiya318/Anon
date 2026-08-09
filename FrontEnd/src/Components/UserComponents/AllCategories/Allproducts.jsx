@@ -31,13 +31,13 @@ function Allproducts() {
                 <div className="group">
                   <div className="group shadow-sm   rounded-2xl  ">
                     <div className="group-hover:shadow-2xl h-full rounded-2xl  group-duration-300 transition-all">
-                      <div className=" px-3 py-2 ">
+                      <div className=" px-3 py-2 h-100">
                         <div className="relative  overflow-hidden  flex flex-col justify-between">
-                          <div className="group-hover:hidden  w-full h-65 py-3 flex flex-col justify-center items-center m-auto "><img src={item?.images[0]} className="object-cover w-full h-full rounded-lg" alt="" /></div>
-                          <div className="hidden group-hover:block w-full h-65  py-3 flex flex-col justify-center items-center m-auto"><img src={item?.images[1]} className="object-cover w-full h-full rounded-lg" alt="" /></div>
+                          <div className="group-hover:hidden  w-full h-65 py-3 flex flex-col justify-center items-center m-auto "><img src={item?.images[0]} className="object-contain w-full h-full rounded-lg" alt="" /></div>
+                          <div className="hidden  group-hover:block w-full h-65  py-3 flex flex-col justify-center items-center m-auto"><img src={item?.images[1]} className="object-contain w-full h-full rounded-lg" alt="" /></div>
 
-                          <div className="absolute  top-5 flex flex-col gap-1 right-1 md:right-[-60px] md:group-hover:right-[3px] transition-all duration-500">
-                            <p className="border border-gray-200 bg-white p-0.5 md:p-1 flex flex-col  items-center text-sm md:text-md rounded-sm shadow-2xl">
+                          <div className="absolute top-5 right-2 flex text-lg flex-col gap-1 lg:right-[-50px] lg:group-hover:right-[5px] transition-all duration-500">
+                            <p className="border border-gray-200 bg-white flex text-[16px] flex-col justify-center items-center p-1  rounded-sm shadow-2xl">
                               {iswishlisted(item._id) ?
                                 (<FaHeart
                                   className="text-red-500  cursor-pointer"
@@ -50,8 +50,8 @@ function Allproducts() {
                               }
                             </p>
 
-                            <Link to={`/productdetail/${item._id}`} onClick={() => window.scrollTo(0, 0)} className="border border-gray-200 bg-white p-0.5 text-md md:p-1 flex flex-col  items-center lg:text-[18px] rounded-sm shadow-2xl "><IoEyeOutline /></Link>
-                            <p onClick={() => CartProduct(item._id)} className="border border-gray-200 cursor-pointer bg-white p-0.5 md:p-1 flex flex-col  items-center text-md md:text-[18px] rounded-sm shadow-2xl"><IoBagAddOutline /></p>
+                            <Link to={`/productdetail/${item._id}`} onClick={() => window.scrollTo(0, 0)} className="border border-gray-200 flex flex-col justify-center items-center bg-white p-1  rounded-sm shadow-2xl "><IoEyeOutline /></Link>
+                            <p onClick={() => CartProduct(item._id)} className="border flex flex-col justify-center items-center border-gray-200 cursor-pointer bg-white p-1  rounded-sm shadow-2xl"><IoBagAddOutline /></p>
                           </div>
 
 
@@ -63,7 +63,7 @@ function Allproducts() {
                         <div className="text-gray-700 truncate font-semibold my-1">{item?.title}</div>
                         <div className="flex items-center text-yellow-400 my-2"><FiStar /><FiStar /><FiStar /><FiStar /><FiStar /></div>
                         <div className="flex font-semibold items-center gap-2">
-                          <p >₹₹{Number(item.price ?? 0).toFixed(2)}</p>
+                          <p >₹{Number(item.price ?? 0).toFixed(2)}</p>
                           <p className="line-through text-gray-400 text-sm">₹5678</p>
                         </div>
                       </div>

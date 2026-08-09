@@ -33,7 +33,7 @@ function Products() {
                   <div className="xs:w-20 w-25 h-30 xs:h-full sm:w-24 flex-shrink-0 aspect-square">
                     <img
                       src={item?.images[0]}
-                      className="w-full h-full  object-cover rounded"
+                      className="w-full h-full  object-contain rounded"
                       alt={item?.title || 'product'}
                     />
                   </div>
