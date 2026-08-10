@@ -27,7 +27,7 @@ const TotalProducts = () => {
                 </p>
 
                 <p className="text-gray-500 text-xs font-semibold shrink-0">
-                  (1000)
+                  (15)
                 </p>
               </div>
 

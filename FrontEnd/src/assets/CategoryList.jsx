@@ -205,7 +205,7 @@ export const products = [
     _id: 10,
     name: "Matte Lipstick Set",
     category: "Beauty",
-    subCategory: "Makeup",
+    subCategory: "eyemakeup",
     brand: "GlowUp",
     price: 1299,
     oldPrice: 1800,
@@ -375,7 +375,7 @@ export const categories = [
     name: "Beauty",
     gender: "women",
     category: "beauty",
-    items: ["lipstick", "makeup", "foundation", "perfume"]
+    items: ["lipstick", "eyemakeup", "facemakeup", "perfume"]
 
   },
   {
@@ -439,16 +439,16 @@ export const menscategory = [
 
 export const womenscategory =[
   {name: "Top"},
-  {name: "tshirt"},
+  {name: "Tshirt"},
   {name: "Jeans"},
-  {name: "dress"},
+  {name: "Dress"},
   {name: "Co-Ords"}
 ]
 
 export const beautycategory =[
   {name: "Lipstick"},
-  {name: "Eye-Makeup"},
-  {name: "Foundation"},
+  {name: "eyemakeup"},
+  {name: "facemakeup"},
   {name: "Perfume"},
 ]
 

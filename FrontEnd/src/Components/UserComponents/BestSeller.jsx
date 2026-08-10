@@ -22,7 +22,7 @@ function BestSeller() {
                                 </div>
                                 <div className="flex font-semibold text-[11px] sm:text-[12px] items-center gap-2">
                                     <p className="line-through">₹ ₹{Number(item.oldPrice ?? 0).toFixed(2)}</p>
-                                    <p className="text-gray-400 text-[14px] sm:text-[16px]">₹₹{Number(item.price ?? 0).toFixed(2)}</p>
+                                    <p className="text-gray-400 text-[14px] sm:text-[16px]">₹{Number(item.price ?? 0).toFixed(2)}</p>
                                 </div>
                             </div>
                         </div>

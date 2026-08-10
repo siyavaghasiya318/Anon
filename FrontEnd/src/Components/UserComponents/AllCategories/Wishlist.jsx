@@ -57,7 +57,7 @@ const Wishlist = () => {
                                                             }
                                                         </p>
 
-                                                        <Link to={`/productdetail/${item.productid._id}`} className="border border-gray-200 flex flex-col justify-center items-center bg-white p-1  rounded-sm shadow-2xl "><IoEyeOutline /></Link>
+                                                        <Link to={`/productdetail/${item.productid._id}`} onClick={() => window.scrollTo(0,0)} className="border border-gray-200 flex flex-col justify-center items-center bg-white p-1  rounded-sm shadow-2xl "><IoEyeOutline /></Link>
                                                         <p onClick={() => CartProduct(item.productid._id, selectedSize)} className="border flex flex-col justify-center items-center border-gray-200 cursor-pointer bg-white p-1  rounded-sm shadow-2xl"><IoBagAddOutline /></p>
                                                     </div>
                                                 </div>

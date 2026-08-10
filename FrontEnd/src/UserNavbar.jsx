@@ -186,7 +186,7 @@ function UserNavbar() {
             <p className="font-semibold border-b-2 border-transparent hover:border-[#ff8f9c] hover:text-[#ff8f9c] cursor-pointer">Beauty</p>
             <div className="hidden group-hover:block w-50 ms-[-40px] capitalize px-5 py-5 absolute bg-white text-black rounded-xl shadow-lg">
               {beautycategory.map((item) => (
-                <Link key={item.name} to={`/category/beauty/women/${item.name.toLowerCase()}`} className="cursor-pointer capitalize flex flex-col">{item.name}</Link>
+                <Link to={`/category/beauty/women/${item.name.toLowerCase()}`} className="cursor-pointer capitalize flex flex-col">{item.name}</Link>
               ))}
             </div>
           </div>

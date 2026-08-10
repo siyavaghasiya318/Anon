@@ -104,8 +104,8 @@ const AddProducts = () => {
                   (<select placeholder="EX: Premium Leather handbag" onChange={ProductHandleChange} name="subcategory" value={productFrom.subcategory} className="outline-0 appearance-none text-g8ay-500 border border-gray-100 px-5 rounded-2xl bg-mauve-50 py-3" id="">
                     <option value="Select">Select </option>
                     <option value="lipstick">Lipstick</option>
-                    <option value="makeup">Eye-Makeup</option>
-                    <option value="foundation">Foundation</option>
+                    <option value="eyemakeup">Eye-Makeup</option>
+                    <option value="facemakeup">Foundation</option>
                     <option value="perfume">Perfume</option>
                   </select>) :
                   productFrom.category == "footwear" && productFrom.gender == "women" ?

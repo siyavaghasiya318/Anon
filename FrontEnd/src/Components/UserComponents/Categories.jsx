@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 function Categories() {
     const [toggleCategory, setToggleCategory] = useState(0)
-
+    
     return (
         <>
             <motion.div initial={{ y: 100 }} whileInView={{ y: 0 }} transition={{ duration: 0.5 }}  className="border p-4 sm:p-5 border-gray-200 text-gray-700 rounded-lg">
