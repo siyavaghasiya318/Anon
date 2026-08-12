@@ -10,7 +10,7 @@ export const UserContext = createContext()
 export const UserProvider = ({ children }) => {
 
 
-    const API = 'https://anon-ksvj.onrender.com'
+    const API = 'https://anon-ksvj.onrender.com/api'
     // const API = 'http://localhost:5000/api'
 
 
@@ -1179,7 +1179,6 @@ export const UserProvider = ({ children }) => {
             console.log("myorders error", error?.response?.data?.message)
         }
     }
-
     const GetAllOrders = async () => {
         try {
             const { data } = await axios.get(`${API}/order/getorder`, { withCredentials: true })
