@@ -33,7 +33,7 @@ function Allproducts() {
         (<>
             {filteredProducts?.map((item) => {
               return (<>
-                <div className="group">
+                <Link to={`/productdetail/${item._id}`} onClick={() => window.scrollTo(0, 0)} className="group ">
                   <div className="group shadow-sm   rounded-2xl  ">
                     <div className="group-hover:shadow-2xl h-full rounded-2xl  group-duration-300 transition-all">
                       <div className=" px-3 py-2 h-100">
@@ -73,7 +73,7 @@ function Allproducts() {
                         </div>
                       </div>
                     </div>
-                  </div> </div>
+                  </div> </Link>
               </>
               )
             })}

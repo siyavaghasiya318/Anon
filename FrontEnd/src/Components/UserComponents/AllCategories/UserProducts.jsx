@@ -41,7 +41,7 @@ function UserProducts({ category, gender }) {
                 <div className={`grid grid-cols-2 sm:grid-cols-3 ${search ? "md:grid-cols-3 lg:grid-cols-5" : "md:grid-cols-3 lg:grid-cols-4 "}     gap-8 `}>
                     {(search ? searchProducts : filteredProducts)?.map((item) => {
                         return (
-                            <div  className="group shadow-sm   rounded-2xl  ">
+                            <Link to={`/productdetail/${item._id}`} onClick={() => window.scrollTo(0,0)}  className="group shadow-sm  rounded-2xl  ">
                                 <div className="group-hover:shadow-2xl  h-full rounded-2xl  group-duration-300 transition-all">
                                     <div className=" px-3 py-2 ">
                                         <div className="relative  overflow-hidden  flex flex-col justify-between">
@@ -78,7 +78,7 @@ function UserProducts({ category, gender }) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </Link>
                         )
                     })}
                 </div>

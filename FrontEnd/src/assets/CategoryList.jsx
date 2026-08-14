@@ -9,6 +9,27 @@ import { BsShopWindow } from "react-icons/bs";
 import { BiSolidCoupon } from "react-icons/bi";
 import { SiFacebook } from "react-icons/si";
 
+
+export const slider = [
+    {
+      img: "https://res.cloudinary.com/do98lw5ja/image/upload/v1769879838/banners/peoiz4odc99of7br7hg4.jpg",
+      title: "Trending Item",
+      name: "WOMEN'S LATEST FASHION SHOW",
+      price: "1400.00"
+    },
+    {
+      img: "https://codewithsadee.github.io/anon-ecommerce-website/assets/images/banner-2.jpg",
+      title: "Beauty Essentials",
+      name: "EVERYDAY GLOW, ELEVATED",
+      price: "2899.00"
+    },
+    {
+      img: "https://codewithsadee.github.io/anon-ecommerce-website/assets/images/banner-3.jpg",
+      title: "Trending Top's",
+      name: "NEW FATION SUMMER SALE",
+      price: "1899.00"
+    },
+  ]
 export const navbarIcones = [
   { icone: <SiFacebook /> },
   { icone: <IoLogoTwitter /> },
