@@ -67,12 +67,12 @@ function Home() {
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-10 w-[95%] m-auto sm:w-[100%]">
           <div className="w-full lg:w-[22%] xl:w-[22%] lg:sticky lg:top-4 lg:h-fit hidden lg:block">
             <Categories/>
-            <BestSeller/>
+            {/* <BestSeller/> */}
           </div>
           <div className="w-full lg:flex-1">
             <div className="w-full"><Products/></div>
             <div className="w-full"><NewProducst/></div>
-            <div className="w-full"><RecomandedPro/></div>
+            {/* <div className="w-full"><RecomandedPro/></div> */}
           </div>
         </div>
 

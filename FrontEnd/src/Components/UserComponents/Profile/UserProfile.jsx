@@ -10,9 +10,10 @@ import { FaEdit } from "react-icons/fa";
 
 import Address from './Address';
 import Order from './Order';
+import { ImSpinner8 } from 'react-icons/im';
 
 function UserProfile() {
-  const { Profile, UserLogout, selectedPage, SetSelectedPage, HandleSeller,navigate, GetSellerdata, Seller, SellerSubmit, HandlePassword, passwordData, currentpassword, newpassword, setPasswordData, NewPassword } = useContext(UserContext)
+  const { Profile, UserLogout, selectedPage,loadupdatedata, SetSelectedPage, HandleSeller,navigate, GetSellerdata, Seller, SellerSubmit, HandlePassword, passwordData, currentpassword, newpassword, setPasswordData, NewPassword } = useContext(UserContext)
   const [isOpen, setIsOpen] = useState(false)
   const [showCurrentPass, setShowCurrentPass] = useState(false);
   const [showNewPass, setShowNewPass] = useState(false);
@@ -169,7 +170,8 @@ function UserProfile() {
                   onClick={NewPassword}
                   className="bg-[#ff909d] py-2 text-center outline-0 mt-5 w-full text-white rounded-md text-[16px] sm:text-[18px]"
                 >
-                  Update Password
+                  
+                  {loadupdatedata ? (<div className="flex gap-3 justify-center items-center">Upadteing Password...<ImSpinner8  className="animate-spin" /></div>): ("Update Password")}
                 </button>
 
               </div>

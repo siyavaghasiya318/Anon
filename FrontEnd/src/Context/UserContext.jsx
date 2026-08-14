@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import axios, { create } from "axios"
 import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -14,7 +14,7 @@ export const UserProvider = ({ children }) => {
     // const API = 'http://localhost:5000/api'
 
 
- 
+
     const [Isopen, SetIsopen] = useState(false)
     const [islogin, Setislogin] = useState("login")
     const [Auth, SetAuth] = useState(false)
@@ -426,58 +426,58 @@ export const UserProvider = ({ children }) => {
     // };
     const [editId, setEditId] = useState(null)
 
-   const EditProduct = (product) => {
+    const EditProduct = (product) => {
 
-    setEditId(product._id);
+        setEditId(product._id);
 
-    setProductForm({
-        title: product.title || "",
-        category: product.category || "",
-        subcategory: product.subcategory || "",
-        brand: product.brand || "",
-        gender: product.gender || "",
+        setProductForm({
+            title: product.title || "",
+            category: product.category || "",
+            subcategory: product.subcategory || "",
+            brand: product.brand || "",
+            gender: product.gender || "",
 
-        size: product.size || [],
+            size: product.size || [],
 
-        shortdescription: product.shortdescription || "",
+            shortdescription: product.shortdescription || "",
 
-        price: product.price || "",
-        discountprice: product.discountprice || "",
-        originaldiscountprice: product.originaldiscountprice || "",
-        livestock: product.livestock || "",
+            price: product.price || "",
+            discountprice: product.discountprice || "",
+            originaldiscountprice: product.originaldiscountprice || "",
+            livestock: product.livestock || "",
 
-        tags: product.tags || [],
-        badges: product.badges || [],
+            tags: product.tags || [],
+            badges: product.badges || [],
 
-        specifications: product.specifications || [],
+            specifications: product.specifications || [],
 
-        varients: product.varients || [],
+            varients: product.varients || [],
 
-        blocktitle: product.blocktitle || "",
-        description: product.description || "",
-        imgtitle: product.imgtitle || "",
+            blocktitle: product.blocktitle || "",
+            description: product.description || "",
+            imgtitle: product.imgtitle || "",
 
-        warrenty: product.warrenty || "",
-        deliverytime: product.deliverytime || "",
+            warrenty: product.warrenty || "",
+            deliverytime: product.deliverytime || "",
 
-        metatitle: product.metatitle || "",
-        metadescription: product.metadescription || "",
+            metatitle: product.metatitle || "",
+            metadescription: product.metadescription || "",
 
-        seller: product.seller
-    });
+            seller: product.seller
+        });
 
 
-    SetProductImg(product.images || []);
-    SetProductBackendImg([]);
+        SetProductImg(product.images || []);
+        SetProductBackendImg([]);
 
-    Setprev(product.verimage || []);
-    SetBackendPrevImg([]);
+        Setprev(product.verimage || []);
+        SetBackendPrevImg([]);
 
-    setDescriptionimg(product.descimage || []);
-    setDesBackendImg([]);
+        setDescriptionimg(product.descimage || []);
+        setDesBackendImg([]);
 
-    navigate("seller/products/add");
-};
+        navigate("seller/products/add");
+    };
 
     // console.log("pro", productFrom.originaldiscountprice);
 
@@ -603,130 +603,130 @@ export const UserProvider = ({ children }) => {
     }
 
     const ProductUpdate = async (e) => {
-    e.preventDefault();
+        e.preventDefault();
 
-    const ProductData = new FormData();
-
-
-    Object.entries(productFrom).forEach(([key, value]) => {
-
-        if (
-            [
-                "size",
-                "tags",
-                "badges",
-                "specifications",
-                "varients"
-            ].includes(key)
-        ) {
-            return;
-        }
+        const ProductData = new FormData();
 
 
-        if (key === "seller") {
-            ProductData.append(
-                "seller",
-                productFrom.seller?._id || productFrom.seller
-            );
-            return;
-        }
+        Object.entries(productFrom).forEach(([key, value]) => {
 
-
-        if (
-            (key === "discountprice" ||
-             key === "originaldiscountprice") &&
-            (value === "" ||
-             value === null ||
-             value === "null")
-        ) {
-            return;
-        }
-
-
-        ProductData.append(key, value);
-    });
-
-
-
-    // Arrays
-
-    productFrom.tags.forEach((item)=>{
-        ProductData.append("tags", item);
-    });
-
-
-    productFrom.badges.forEach((item)=>{
-        ProductData.append("badges", item);
-    });
-
-
-    productFrom.size.forEach((item)=>{
-        ProductData.append("size", item);
-    });
-
-
-    ProductData.append(
-        "specifications",
-        JSON.stringify(productFrom.specifications)
-    );
-
-
-    ProductData.append(
-        "varients",
-        JSON.stringify(productFrom.varients || [])
-    );
-
-
-    // Images
-
-    ProductBackendImg.forEach((img)=>{
-        ProductData.append("images", img);
-    });
-
-
-    DesBackendImg.forEach((img)=>{
-        ProductData.append("descimage", img);
-    });
-
-
-    backendPrevImg.forEach((img)=>{
-        ProductData.append("verimage", img);
-    });
-
-
-
-    try {
-
-        const {data} = await axios.put(
-            `${API}/product/updateproduct/${editId}`,
-            ProductData,
-            {
-                withCredentials:true,
-                headers:{
-                    "Content-Type":"multipart/form-data"
-                }
+            if (
+                [
+                    "size",
+                    "tags",
+                    "badges",
+                    "specifications",
+                    "varients"
+                ].includes(key)
+            ) {
+                return;
             }
+
+
+            if (key === "seller") {
+                ProductData.append(
+                    "seller",
+                    productFrom.seller?._id || productFrom.seller
+                );
+                return;
+            }
+
+
+            if (
+                (key === "discountprice" ||
+                    key === "originaldiscountprice") &&
+                (value === "" ||
+                    value === null ||
+                    value === "null")
+            ) {
+                return;
+            }
+
+
+            ProductData.append(key, value);
+        });
+
+
+
+        // Arrays
+
+        productFrom.tags.forEach((item) => {
+            ProductData.append("tags", item);
+        });
+
+
+        productFrom.badges.forEach((item) => {
+            ProductData.append("badges", item);
+        });
+
+
+        productFrom.size.forEach((item) => {
+            ProductData.append("size", item);
+        });
+
+
+        ProductData.append(
+            "specifications",
+            JSON.stringify(productFrom.specifications)
         );
 
 
-        if(data.success){
-            toast.success(data.message);
-            navigate("/seller/products");
-            setEditId(null);
-            GetSellerProducts()
+        ProductData.append(
+            "varients",
+            JSON.stringify(productFrom.varients || [])
+        );
 
+
+        // Images
+
+        ProductBackendImg.forEach((img) => {
+            ProductData.append("images", img);
+        });
+
+
+        DesBackendImg.forEach((img) => {
+            ProductData.append("descimage", img);
+        });
+
+
+        backendPrevImg.forEach((img) => {
+            ProductData.append("verimage", img);
+        });
+
+
+
+        try {
+
+            const { data } = await axios.put(
+                `${API}/product/updateproduct/${editId}`,
+                ProductData,
+                {
+                    withCredentials: true,
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    }
+                }
+            );
+
+
+            if (data.success) {
+                toast.success(data.message);
+                navigate("/seller/products");
+                setEditId(null);
+                GetSellerProducts()
+
+            }
+
+
+        } catch (error) {
+            console.log("Product Update Error", error);
+            toast.error(
+                error?.response?.data?.message ||
+                "Update failed"
+            );
         }
 
-
-    } catch(error){
-        console.log("Product Update Error",error);
-        toast.error(
-            error?.response?.data?.message || 
-            "Update failed"
-        );
-    }
-
-};
+    };
 
 
 
@@ -781,10 +781,11 @@ export const UserProvider = ({ children }) => {
         setDescriptionimg(newarr)
     }
     const [loading, setLoading] = useState(true);
-
+    
     const GetProducts = async () => {
+        setLoading(true);
         try {
-            setLoading(true);
+            
             const { data } = await axios.get(`${API}/product/getproducts`, { withCredentials: true })
             setGetProducts(data.product)
 
@@ -809,16 +810,19 @@ export const UserProvider = ({ children }) => {
 
 
     // New Password
+
+    const[loadupdatedata,setLoadUpdateData] = useState(false)
+
     const HandlePassword = (e) => {
         setPasswordData({
             ...passwordData,
             [e.target.name]: e.target.value
         });
-        console.log(passwordData);
 
     };
 
     const NewPassword = async () => {
+        setLoadUpdateData(true)
         try {
             const { data } = await axios.put(`${API}/user/changepassword`, passwordData, { withCredentials: true })
 
@@ -834,6 +838,9 @@ export const UserProvider = ({ children }) => {
             console.log("NewPassword error", error.response.data.message);
             toast.error(error?.response?.data?.message);
         }
+        finally {
+            setLoadUpdateData(false);
+        }
     }
 
     //  userform
@@ -847,12 +854,14 @@ export const UserProvider = ({ children }) => {
         )
 
     }
+
+    const [loginLoading, setLoginLoading] = useState(false);
+
     const FromSubmit = async (e) => {
         e.preventDefault()
+        setLoginLoading(true);
 
         try {
-
-
             const { data } = await axios.post(`${API}/user/${islogin}`, UserForm, { withCredentials: true })
             // console.log(data);
 
@@ -878,7 +887,9 @@ export const UserProvider = ({ children }) => {
             })
         } catch (error) {
             // console.log("handle Submit error", error);
-            toast.error(error?.response?.data?.message || "Something Went Wrong" );
+            toast.error(error?.response?.data?.message || "Something Went Wrong");
+        } finally {
+            setLoginLoading(false);
         }
 
     }
@@ -897,9 +908,9 @@ export const UserProvider = ({ children }) => {
 
     }
 
-
-
+    
     const UpdateUser = async (item) => {
+        
         try {
             const { data } = await axios.put(`${API}/user/updateuser`, { withCredentials: true })
             // console.log(data);
@@ -910,8 +921,9 @@ export const UserProvider = ({ children }) => {
             })
 
         } catch (error) {
-            console.log("UpdateUser error", error.response.data.message);
+            console.log("UpdateUser error", error.response.data.message );
         }
+        
     }
 
 
@@ -1031,7 +1043,7 @@ export const UserProvider = ({ children }) => {
 
         } catch (error) {
             console.log("BecomeSeller error", error);
-            toast.error(error?.response?.data?.message );
+            toast.error(error?.response?.data?.message);
         }
     }
 
@@ -1266,6 +1278,7 @@ export const UserProvider = ({ children }) => {
             setTag,
             editId,
             badge,
+            loginLoading,
             setBadge, selectedPage, SetSelectedPage,
             // navbar
             search, setsearch, searchHandleChange,
@@ -1294,7 +1307,7 @@ export const UserProvider = ({ children }) => {
             // add product 
             // ProductUpdate, 
             EditProduct, loading, ProductUpdate,
-            AddTag, imgref, fetchCart, Setisaddress, isaddress, DecQuentity, calculate, getProducts, CartProduct, GetCartProduct, CartProduct, DesImg, Addbadge, submitLoading, setSubmitLoading, HandleSizeChange, varientSizeChange, HandleColorName, HandleColorPicker, HandleColorCode, GetSellerdata, RemoveDesImg, Descriptionimg, ProductHandleChange, productFrom, Profile, prev, Removeimg, RemoveVarientimg, ProductImg, imgUpdate, imgChange, imgref, AllUsers, Userdelete, UpdateUser, navigate, UserLogout, SetIsopen, SetProfile, Isopen, UserForm, Handlechange, FromSubmit, islogin, Setislogin, HandleSeller, Seller, SellerSubmit
+            loadupdatedata,AddTag, imgref, fetchCart, Setisaddress, isaddress, DecQuentity, calculate, getProducts, CartProduct, GetCartProduct, CartProduct, DesImg, Addbadge, submitLoading, setSubmitLoading, HandleSizeChange, varientSizeChange, HandleColorName, HandleColorPicker, HandleColorCode, GetSellerdata, RemoveDesImg, Descriptionimg, ProductHandleChange, productFrom, Profile, prev, Removeimg, RemoveVarientimg, ProductImg, imgUpdate, imgChange, imgref, AllUsers, Userdelete, UpdateUser, navigate, UserLogout, SetIsopen, SetProfile, Isopen, UserForm, Handlechange, FromSubmit, islogin, Setislogin, HandleSeller, Seller, SellerSubmit
         }}>
             {children}
         </UserContext.Provider>

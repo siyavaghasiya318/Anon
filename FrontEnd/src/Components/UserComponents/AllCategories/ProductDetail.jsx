@@ -15,7 +15,7 @@ function ProductDetail() {
     const productitem = getProducts.find((data) => data._id == id)
 
     const iswishlisted = (productid) => {
-        return wishlist.some((item) => item.productid._id === productid)
+        return wishlist.some((item) => item?.productid?._id === productid)
     }
 
 

@@ -10,11 +10,11 @@ function Allproducts() {
   const { category, gender, subcategory, } = useParams();
   const { WishlistItem, wishlist, CartProduct } = useContext(UserContext)
 
-  const { getProducts } = useContext(UserContext)
+  const { getProducts,loading } = useContext(UserContext)
   // const Filterdata = 
   let filteredProducts = getProducts.filter((item) => item.category == category && item.gender == gender && item.subcategory == subcategory)
   const iswishlisted = (productid) => {
-    return wishlist.some((item) => item.productid._id === productid)
+    return wishlist.some((item) => item?.productid?._id === productid)
   }
 
   return (
@@ -23,9 +23,14 @@ function Allproducts() {
       <div className="border leading-12 border-b-gray-100 border-t-0 border-x-0 mt-10 font-bold text-[22px]"></div>
 
       <div className="grid grid-cols-2  sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5  gap-5 mt-5 my-20 px-5 sm:px-10 md:px-15 lg:px-20 m-auto">
-        {filteredProducts.length == 0 ?
-          ("coming soon") :
-          (<>
+        {loading ? 
+        (<div className="col-span-full text-center py-20">
+            Loading products...
+        </div>):filteredProducts.length == 0 ?
+        (<div className="col-span-full text-center py-20">
+            Coming Soon
+        </div>):
+        (<>
             {filteredProducts?.map((item) => {
               return (<>
                 <div className="group">
@@ -73,7 +78,10 @@ function Allproducts() {
               )
             })}
           </>)
-        }
+      }
+        
+          
+        
       </div>
     </>
   )

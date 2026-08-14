@@ -11,7 +11,7 @@ const Wishlist = () => {
     const { wishlist, setWishlist, WishlistItem, CartProduct } = useContext(UserContext)
     const isWishlisted = (productId) => {
         return wishlist.some(
-            (item) => item.productid._id === productId
+            (item) => item?.productid?._id === productId
         );
     };
     console.log("wishlist",wishlist);
@@ -35,43 +35,43 @@ const Wishlist = () => {
                             return (
                                 <>
                                     <Link
-                                        to={`/productdetail/${item.productid._id}`}
+                                        to={`/productdetail/${item?.productid?._id}`}
                                         onClick={() => window.scrollTo(0, 0)} className="group shadow-sm   rounded-2xl ">
                                         <div className="group-hover:shadow-2xl h-full rounded-2xl  group-duration-300 transition-all">
                                             <div className="">
                                                 <div className="relative overflow-hidden flex flex-col justify-between">
-                                                    <div className="group-hover:hidden  w-full aspect-square flex flex-col justify-center items-center m-auto "><img src={item?.productid.images[0]} className="object-cover w-full h-full rounded-lg" alt="" /></div>
-                                                    <div className="hidden group-hover:block w-full aspect-square  flex flex-col justify-center items-center m-auto"><img src={item?.productid.images[1]} className="object-cover w-full h-full rounded-lg" alt="" /></div>
+                                                    <div className="group-hover:hidden  w-full aspect-square flex flex-col justify-center items-center m-auto "><img src={item?.productid?.images[0]} className="object-cover w-full h-full rounded-lg" alt="" /></div>
+                                                    <div className="hidden group-hover:block w-full aspect-square  flex flex-col justify-center items-center m-auto"><img src={item?.productid?.images[1]} className="object-cover w-full h-full rounded-lg" alt="" /></div>
                                                     <div className="absolute top-2 right-2 flex text-lg flex-col gap-1 lg:right-[-50px] lg:group-hover:right-[5px] transition-all duration-500">
 
                                                         <p className="border border-gray-200 bg-white flex text-[16px] flex-col justify-center items-center p-1 text- rounded-sm shadow-2xl">
-                                                            {isWishlisted(item.productid._id) ? (
+                                                            {isWishlisted(item?.productid?._id) ? (
                                                                 <FaHeart
                                                                     className="text-red-500  cursor-pointer"
-                                                                    onClick={() => WishlistItem(item.productid._id)}
+                                                                    onClick={() => WishlistItem(item?.productid?._id)}
                                                                 />) :
                                                                 (<FaRegHeart
                                                                     className=" cursor-pointer"
-                                                                    onClick={() => WishlistItem(item.productid._id)}
+                                                                    onClick={() => WishlistItem(item?.productid?._id)}
                                                                 />)
                                                             }
                                                         </p>
 
-                                                        <Link to={`/productdetail/${item.productid._id}`} onClick={() => window.scrollTo(0,0)} className="border border-gray-200 flex flex-col justify-center items-center bg-white p-1  rounded-sm shadow-2xl "><IoEyeOutline /></Link>
-                                                        <p onClick={() => CartProduct(item.productid._id, selectedSize)} className="border flex flex-col justify-center items-center border-gray-200 cursor-pointer bg-white p-1  rounded-sm shadow-2xl"><IoBagAddOutline /></p>
+                                                        <Link to={`/productdetail/${item?.productid?._id}`} onClick={() => window.scrollTo(0,0)} className="border border-gray-200 flex flex-col justify-center items-center bg-white p-1  rounded-sm shadow-2xl "><IoEyeOutline /></Link>
+                                                        <p onClick={() => CartProduct(item?.productid?._id, selectedSize)} className="border flex flex-col justify-center items-center border-gray-200 cursor-pointer bg-white p-1  rounded-sm shadow-2xl"><IoBagAddOutline /></p>
                                                     </div>
                                                 </div>
 
                                                 <div className="px-2 sm:px-3 py-3">
                                                     <div className="flex justify-between w-full font- items-center text-[11px] sm:text-[12px] gap-2 font-semibold">
-                                                        <div className="text-[#FF8F9C] truncate uppercase flex-1 min-w-0">{item.productid?.subcategory}</div>
-                                                        <div className="text-gray-500 text-[10px] sm:text-[12px] truncate  font-semibold">@{item.productid?.brand}</div>
+                                                        <div className="text-[#FF8F9C] truncate uppercase flex-1 min-w-0">{item?.productid?.subcategory}</div>
+                                                        <div className="text-gray-500 text-[10px] sm:text-[12px] truncate  font-semibold">@{item?.productid?.brand}</div>
                                                     </div>
 
-                                                    <div className="text-gray-700 truncate font-semibold my-1 text-sm sm:text-base">{item.productid?.title}</div>
+                                                    <div className="text-gray-700 truncate font-semibold my-1 text-sm sm:text-base">{item?.productid?.title}</div>
                                                     <div className="flex items-center text-yellow-400 my-2 text-sm sm:text-base"><FiStar /><FiStar /><FiStar /><FiStar /><FiStar /></div>
                                                     <div className="flex font-semibold items-center gap-2 text-sm sm:text-base">
-                                                        <p > ₹{Number(item.productid.price ?? 0).toFixed(2)}</p>
+                                                        <p > ₹{Number(item?.productid?.price ?? 0).toFixed(2)}</p>
                                                         <p className="line-through text-gray-400 text-xs sm:text-sm">₹5678</p>
                                                     </div>
                                                 </div>
@@ -80,7 +80,7 @@ const Wishlist = () => {
                                         </div>
                                     </Link>
                                     {/* <div className="rounded-2xl shadow border relative border-gray-200 overflow-hidden">
-                                        <div className="w-full h-60 cursor-pointer"><img src={item.productid.images[0]} className="w-full h-full object-cover" alt="" /></div>
+                                        <div className="w-full h-60 cursor-pointer"><img src={item?.productid?.images[0]} className="w-full h-full object-cover" alt="" /></div>
 
                                         <div className="p-3 gap-1 flex flex-col">
                                             <p className="uppercase text-[12px] font-bold text-[#FF8F9C]">{item.productid.subcategory}</p>
@@ -88,14 +88,14 @@ const Wishlist = () => {
                                             <p className="font-semibold">₹{item.productid.price}</p>
                                         </div>
                                         <div className="top-2 right-2 absolute">
-                                            {isWishlisted(item.productid._id) ? (
+                                            {isWishlisted(item?.productid?._id) ? (
                                                 <FaHeart
                                                     className="text-red-500 text-xl cursor-pointer"
-                                                    onClick={() => WishlistItem(item.productid._id)}
+                                                    onClick={() => WishlistItem(item?.productid?._id)}
                                                 />) :
                                                 (<FaRegHeart
                                                     className="text-xl cursor-pointer"
-                                                    onClick={() => WishlistItem(item.productid._id)}
+                                                    onClick={() => WishlistItem(item?.productid?._id)}
                                                 />)
                                             }
 

@@ -30,7 +30,7 @@ function UserProducts({ category, gender }) {
 
 
     const iswishlisted = (productid) => {
-        return wishlist.some((item) => item.productid._id === productid)
+        return wishlist.some((item) => item?.productid?._id === productid)
     }
 
     return (

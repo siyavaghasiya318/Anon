@@ -42,7 +42,7 @@ const CartProduct = () => {
                     return (
                       <>
                         <div className="bg-white flex text-gray-700 shadow-sm rounded-xl overflow-hidden md:p-3 lg:p-5 p-3  gap-6">
-                          <Link to={`/productdetail/${item._id}`}  className="lg:w-28 md:w-24 md:h-27 sm:w-21 sm:h-22 w-18 h-19  flex flex-col justify-center m-auto"><img src={item.images[0]} className="w-full h-full object-cover border border-gray-100 rounded-lg" alt="" /></Link>
+                          <Link to={`/productdetail/${item._id}`} onClick={() => window.scrollTo(0,0)}  className="lg:w-28 md:w-24 md:h-27 sm:w-21 sm:h-22 w-18 h-19  flex flex-col justify-center m-auto"><img src={item.images[0]} className="w-full h-full object-cover border border-gray-100 rounded-lg" alt="" /></Link>
                           <div className="flex flex-col gap-1 w-full">
 
                             <div className="flex  justify-between items-center">
@@ -101,7 +101,7 @@ const CartProduct = () => {
                   <p>₹ {Number(total ?? 0).toFixed(2)}</p>
                 </div>
 
-                <Link to="/checkout" className="bg-[#FF8F9C] hover:scale-104 hover:shadow transition-all overflow-hidden duration-300 hover:bg-[#fdecee] hover:text-[#FF8F9C] py-3 mt-6 rounded-2xl  text-center text-white font-bold text-lg ">Proceed to Checkout</Link>
+                <Link to="/checkout" onClick={() => window.scrollTo(0,0)} className="bg-[#FF8F9C] hover:scale-104 hover:shadow transition-all overflow-hidden duration-300 hover:bg-[#fdecee] hover:text-[#FF8F9C] py-3 mt-6 rounded-2xl  text-center text-white font-bold text-lg ">Proceed to Checkout</Link>
 
                 <Link to="/" onClick={() => window.scrollTo(0,0)} className="text-[#FF8F9C]  text-center">Continue Shopping</Link>
 
