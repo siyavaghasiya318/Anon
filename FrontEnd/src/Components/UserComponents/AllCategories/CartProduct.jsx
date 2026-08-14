@@ -50,7 +50,7 @@ const CartProduct = () => {
                               <i className="text-[#FF8F9C] sm:text-md lg:text-[18px] text-sm">< RiDeleteBinLine /></i>
                             </div>
 
-                            <p className="text-gray-500 lg:px-3 px-2 lg:py-1  w-fit bg-gray-100 rounded-full font-semibold text-[10px] sm:text-[12px] md:text-[13px] lg:text-sm">size : <span className="text-[10px] uppercase">{item.size}</span></p>
+                            {item.size ? (<p className="text-gray-500 lg:px-3 px-2 lg:py-1  w-fit bg-gray-100 rounded-full font-semibold text-[10px] sm:text-[12px] md:text-[13px] lg:text-sm">size : <span className="text-[10px] uppercase">{item.size}</span></p>):("")}
 
                             <p className="text-[#FF8F9C] md:text-md sm:text-sm text-xs lg:text-[18px] font-extrabold ">₹{Number(item.totalPrice ?? 0).toFixed(2)}</p>
 

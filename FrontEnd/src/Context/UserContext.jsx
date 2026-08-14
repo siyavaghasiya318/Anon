@@ -781,11 +781,11 @@ export const UserProvider = ({ children }) => {
         setDescriptionimg(newarr)
     }
     const [loading, setLoading] = useState(true);
-    
+
     const GetProducts = async () => {
         setLoading(true);
         try {
-            
+
             const { data } = await axios.get(`${API}/product/getproducts`, { withCredentials: true })
             setGetProducts(data.product)
 
@@ -811,7 +811,7 @@ export const UserProvider = ({ children }) => {
 
     // New Password
 
-    const[loadupdatedata,setLoadUpdateData] = useState(false)
+    const [loadupdatedata, setLoadUpdateData] = useState(false)
 
     const HandlePassword = (e) => {
         setPasswordData({
@@ -908,9 +908,9 @@ export const UserProvider = ({ children }) => {
 
     }
 
-    
+
     const UpdateUser = async (item) => {
-        
+
         try {
             const { data } = await axios.put(`${API}/user/updateuser`, { withCredentials: true })
             // console.log(data);
@@ -921,9 +921,9 @@ export const UserProvider = ({ children }) => {
             })
 
         } catch (error) {
-            console.log("UpdateUser error", error.response.data.message );
+            console.log("UpdateUser error", error.response.data.message);
         }
-        
+
     }
 
 
@@ -1095,7 +1095,7 @@ export const UserProvider = ({ children }) => {
 
     // }
 
-    const CartProduct = async (productid, size) => {
+    const CartProduct = async (productid, size, redirect = "/cart") => {
 
         try {
             const { data } = await axios.post(`${API}/cart/addcart`, { productid, size }, { withCredentials: true })
@@ -1103,17 +1103,14 @@ export const UserProvider = ({ children }) => {
             GetCartProduct()
             if (data.success) {
                 GetCartProduct()
-                navigate("/cart")
                 setselectedSize(null)
+                navigate(redirect);
             }
 
         } catch (error) {
-            if (!size) {
-                toast.error(error?.response?.data?.message);
-            }
-            console.log("Cartproduct error:", error.response.data.message);
+            if (!size) { toast.error(error?.response?.data?.message); } 
+            if(!Profile){ toast.error("Please login to add this product to your cart."); } 
         }
-
     }
 
     // const GetCartProduct = async() => {
@@ -1162,7 +1159,6 @@ export const UserProvider = ({ children }) => {
 
     //order  
     const Checkoutdata = async () => {
-        console.log("Function called");
         try {
 
 
@@ -1230,6 +1226,9 @@ export const UserProvider = ({ children }) => {
             Getwishlist()
             toast.success(data.message)
         } catch (error) {
+            if(!Profile){
+                toast.error("Please login to add this product to your wishlist.")
+            }
             console.log("WishlistItem error", error?.response?.data?.message)
         }
     }
@@ -1307,7 +1306,7 @@ export const UserProvider = ({ children }) => {
             // add product 
             // ProductUpdate, 
             EditProduct, loading, ProductUpdate,
-            loadupdatedata,AddTag, imgref, fetchCart, Setisaddress, isaddress, DecQuentity, calculate, getProducts, CartProduct, GetCartProduct, CartProduct, DesImg, Addbadge, submitLoading, setSubmitLoading, HandleSizeChange, varientSizeChange, HandleColorName, HandleColorPicker, HandleColorCode, GetSellerdata, RemoveDesImg, Descriptionimg, ProductHandleChange, productFrom, Profile, prev, Removeimg, RemoveVarientimg, ProductImg, imgUpdate, imgChange, imgref, AllUsers, Userdelete, UpdateUser, navigate, UserLogout, SetIsopen, SetProfile, Isopen, UserForm, Handlechange, FromSubmit, islogin, Setislogin, HandleSeller, Seller, SellerSubmit
+            loadupdatedata, AddTag, imgref, fetchCart, Setisaddress, isaddress, DecQuentity, calculate, getProducts, CartProduct, GetCartProduct, CartProduct, DesImg, Addbadge, submitLoading, setSubmitLoading, HandleSizeChange, varientSizeChange, HandleColorName, HandleColorPicker, HandleColorCode, GetSellerdata, RemoveDesImg, Descriptionimg, ProductHandleChange, productFrom, Profile, prev, Removeimg, RemoveVarientimg, ProductImg, imgUpdate, imgChange, imgref, AllUsers, Userdelete, UpdateUser, navigate, UserLogout, SetIsopen, SetProfile, Isopen, UserForm, Handlechange, FromSubmit, islogin, Setislogin, HandleSeller, Seller, SellerSubmit
         }}>
             {children}
         </UserContext.Provider>

@@ -9,7 +9,7 @@ import { UserContext } from '../../../Context/UserContext';
 
 function ProductDetail() {
     const { id } = useParams();
-    const { getProducts, CartProduct, setselectedSize, selectedSize, WishlistItem, wishlist } = useContext(UserContext)
+    const { getProducts, CartProduct,navigate, setselectedSize, selectedSize, WishlistItem, wishlist } = useContext(UserContext)
     const [img, setImg] = useState(0)
 
     const productitem = getProducts.find((data) => data._id == id)
@@ -116,14 +116,14 @@ function ProductDetail() {
                                 <div className="flex items-center gap-5 w-[70%]  md:w-[80%] lg:w-[70%]">
                                     <div className="text-white group w-1/2  hover:gap-3 hover:m-0 border-black flex items-center overflow-hidden font-semibold uppercase  cursor-pointer py-3 lg:py-4 bg-[#ff8f9c] rounded-lg">
                                         <p className="ms-[-30px] hidden group-hover:block  w-fit   group-hover:ms-5  transition-all duration-300 text-md md:text-[20px]"><BsCart3 /></p>
-                                        <div onClick={() => { CartProduct(productitem._id, selectedSize), scrollTo(0, 0) }} className="flex  flex-col justify-center m-auto group-hover:m-0 group-hover:me-[-50px] w-fit text-sm  md:text-md">add to cart</div>
+                                        <div onClick={() => { CartProduct(productitem._id, selectedSize,"/cart" ), window.scrollTo(0, 0)}} className="flex  flex-col justify-center m-auto group-hover:m-0 group-hover:me-[-50px] w-fit text-sm  md:text-md">add to cart</div>
                                     </div>
                                     <div className="bg-[#353434] w-1/2 cursor-pointer group justify-center rounded-lg  flex items-center overflow-hidden">
-                                        <div className="flex items-center gap-2 relative py-3 lg:py-4 md:text-md text-sm  md:text-md">
+                                        <div onClick={() => { CartProduct(productitem._id, selectedSize,"/checkout"), window.scrollTo(0, 0)}} className="flex items-center gap-2 relative py-3 lg:py-4 md:text-md text-sm  md:text-md">
                                             <div className="uppercase text-white font-semibold group-hover:translate-x-[0px]  transition-all duration-300 absolute translate-x-[-130px]">Now</div>
                                             {/* <div className="group-hover:translate-x-15 group-hover:translate-y-6   duration-300 group-hover:scale-250 w-10 h-10">
                                                     <img src={productitem?.images[0]} className="w-full h-full" alt="img" /></div> */}
-                                            <div className="uppercase text-white font-semibold group-hover:translate-x-28  duration-300">Buy</div>
+                                            <div  className="uppercase text-white font-semibold group-hover:translate-x-28  duration-300">Buy</div>
                                         </div>
                                     </div>
                                 </div>
