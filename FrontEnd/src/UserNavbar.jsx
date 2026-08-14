@@ -191,7 +191,6 @@ function UserNavbar() {
             </div>
           </div>
 
-          <div className="font-semibold border-b-2 border-transparent hover:border-[#ff8f9c] hover:text-[#ff8f9c] cursor-pointer">Blog</div>
         </div>
       </motion.header>
 
@@ -270,21 +269,6 @@ function UserNavbar() {
             )}
           </div>
 
-          {/* <div className="border-b border-gray-100">
-            <button onClick={() => toggleMobileAccordion('clothes')} className="w-full flex items-center justify-between py-3 font-semibold">
-              Clothes
-              {mobileAccordion === 'clothes' ? <FiMinus /> : <FiPlus />}
-            </button>
-            {mobileAccordion === 'clothes' && (
-              <div className="pb-3 pl-2 flex flex-col gap-1 normal-case text-gray-600">
-                <p className="py-1">jacket</p>
-                <p className="py-1">Party-Wear</p>
-                <p className="py-1">Shirt & T-shirt</p>
-                <p className="py-1">Shorts And jeans</p>
-              </div>
-            )}
-          </div> */}
-
           <div className="border-b border-gray-100">
             <button onClick={() => toggleMobileAccordion('beauty')} className="w-full flex items-center justify-between py-3 font-semibold">
               Beauty
@@ -301,7 +285,6 @@ function UserNavbar() {
             )}
           </div>
 
-          <div className="py-3 font-semibold">Blog</div>
         </div>
       </div>
 

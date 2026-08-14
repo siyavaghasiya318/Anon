@@ -30,7 +30,7 @@ const CartProduct = () => {
                 <p className="text-white font-extrabold text-[25px] top-11 right-10 absolute">A</p>
               </div>
               <p className="text-[#FF8F9C] font-semibold">Your Shopping Bag is Empty!!</p>
-              <button onClick={() => navigate("/")} className="text-center mt-3 animate-bounce cursor-pointer w-fit border px-6 py-3 hover:bg-[#FF8F9C] outline-0 transition-all duration-300 shadow shadow-pink-200 hover:text-white text-[#FF8F9C] rounded-xl font-bold text-[18px] border-[#FF8F9C]">Start Shopping</button>
+              <button onClick={() => {navigate("/"), window.scrollTo(0,0)}} className="text-center mt-3 animate-bounce cursor-pointer w-fit border px-6 py-3 hover:bg-[#FF8F9C] outline-0 transition-all duration-300 shadow shadow-pink-200 hover:text-white text-[#FF8F9C] rounded-xl font-bold text-[18px] border-[#FF8F9C]">Start Shopping</button>
             </div>
           </>) :
           (<>
