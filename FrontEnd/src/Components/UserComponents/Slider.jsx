@@ -50,14 +50,17 @@ function Slider() {
               <>
                 <div className='shrink-0 w-full transition-all duration-300  flex relative ' style={{ transform: `translateX(-${index * 100}%)` }} >
                   <img src={item.img} width="100%" alt="" />
-                  <div className="grid grid-cols-2 absolute sm:grid-cols-2 px-6 sm:px-12 md:px-30 py-16 sm:py-20  md:py-25 lg:py-35">
-                    <div className='m-auto text-center sm:text-left flex flex-col gap-2'>
-                      <div className='text-[#FF8F9C] font-semibold text-[16px] sm:text-[19px] md:text-[25px]'>{item.title}</div>
-                      <div className='font-bold text-[16px] md:my-0 sm:text-[28px] md:text-[32px] lg:text-[40px] w-full max-w-[350px] sm:max-w-[400px] leading-6 sm:leading-9 md:leading-12'>{item.name}</div>
-                      <div className="font-bold text-gray-400 text-[16px] sm:text-[22px] lg:text-[30px] md:text-[28px]">
+                  <div className="flex  absolute w-full h-full">
+                    <div className='m-auto flex flex-col sm:gap-4 lg:gap-5 w-[60%] justify-center items-center border- h-full '>
+                      <div className='text-[#FF8F9C] font-semibold text-[16px] sm:text-[18px] md:text-[20px]'>{item.title}</div>
+                      <div className='font-bold text-[16px] md:my-0 sm:text-[28px]  md:text-[28px] lg:text-[40px] w-full max-w-[350px] sm:max-w-[300px] md:max-w-[300px] text-center leading-6 sm:leading-9 md:leading-10'>{item.name}</div>
+                      <div className="font-bold text-gray-400 text-[14px] sm:text-[20px] lg:text-[30px] md:text-[23px]">
                         Starting at ₹ <span className='text-[16px] sm:text-[22px] md:text-[28px] lg:text-[33px]'>{item.price}</span>
                       </div>
                     </div>
+
+                    <div className="w-[40%]"></div>
+
                   </div>
                 </div>
 
