@@ -1096,7 +1096,6 @@ export const UserProvider = ({ children }) => {
     // }
 
     const CartProduct = async (productid, size, redirect = "/cart") => {
-
         try {
             const { data } = await axios.post(`${API}/cart/addcart`, { productid, size }, { withCredentials: true })
 
@@ -1108,8 +1107,11 @@ export const UserProvider = ({ children }) => {
             }
 
         } catch (error) {
-            if (!size) { toast.error(error?.response?.data?.message); } 
-            if(!Profile){ toast.error("Please login to add this product to your cart."); } 
+            if (!size) { toast.error(error?.response?.data?.message); }
+            if (!Profile) {
+                toast.error("Please login to add this product to your cart.");
+                SetIsopen(true)
+            }
         }
     }
 
@@ -1226,7 +1228,7 @@ export const UserProvider = ({ children }) => {
             Getwishlist()
             toast.success(data.message)
         } catch (error) {
-            if(!Profile){
+            if (!Profile) {
                 toast.error("Please login to add this product to your wishlist.")
             }
             console.log("WishlistItem error", error?.response?.data?.message)
