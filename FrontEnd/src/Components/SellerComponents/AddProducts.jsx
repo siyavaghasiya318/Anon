@@ -276,7 +276,6 @@ const AddProducts = () => {
           <div onClick={() => imgref.current.click()} className="border-2 rounded-2xl border-gray-300 py-10 border-dashed ">
 
 
-
             <div className=" flex flex-col items-center">
               <input type="file" onChange={imgChange} ref={imgref} hidden id="" />
               <i className=""><FaCloudArrowUp className="text-[50px]" /></i>
@@ -445,7 +444,7 @@ const AddProducts = () => {
                   <div className="flex flex-col gap-1 w-full">
                     <p className="uppercase text-[10px] font-bold text-gray-400 tracking-widest">color hex</p>
                     <div><input name="color" value={productFrom.colorcode || "#000000"} onChange={HandleColorPicker} type="color" className="h-10 w-10 " /></div>
-                    <div className="w-fit"><input type="text" placeholder="Code" value={productFrom.colorcode} onChange={HandleColorCode} name="colorcode" className="border w-20 px-2 text-sm rounded-lg" name="" id="" /></div>
+                    <div className="w-fit"><input type="text" placeholder="Code" value={productFrom.colorcode} onChange={HandleColorCode} name="colorcode" className="border w-20 px-2 text-sm rounded-lg"  id="" /></div>
                   </div>
 
 

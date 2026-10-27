@@ -130,14 +130,12 @@ function UserNavbar() {
             placeholder='Enter Your Product Name...' className='w-full py-2 outline-0 text-sm' />
           <p className='text-[18px]'><IoMdSearch /></p>
         </div>
-
       </div>
 
       {/* Desktop nav - lg and up */}
       <motion.header initial={{opacity:0}} whileInView={{ opacity:1 }} transition={{ duration: 0.8 }} className='relative hidden lg:block'>
         <div className='flex px-70 text-gray-700 uppercase my-3 justify-between'>
           <Link to="/" className="font-semibold border-b-2 border-transparent hover:border-[#ff8f9c] hover:text-[#ff8f9c]">Home</Link>
-
           <div className="group">
             <p className="font-semibold hover:border-b-2 hover:text-[#ff8f9c] cursor-pointer">Categories</p>
             <div className="hidden group-hover:block ms-[-100px] absolute bg-white z-[999] text-black rounded-xl shadow-lg">
